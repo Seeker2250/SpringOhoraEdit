@@ -1,0 +1,5 @@
+package kr.ohora.www.persistence;
+
+public interface NotUserCartMapper {
+
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:security="http://www.springframework.org/schema/security"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    <!-- 에러 : spring-security-4.2.xsd 수정. -->   
+          
+<!--
+    <security:http pattern="/static/**" security="none"></security:http>   
+    <security:http pattern="/design/**" security="none"></security:http>    -->
+    
+    <!-- css, js, image, static(정적) 등등   보안 필터 체인 X  pdf 684검색-->
+   <security:http pattern="/static/**" security="none"></security:http>   
+   <security:http pattern="/design/**" security="none"></security:http>
+   <security:http pattern="/css/**" security="none"></security:http>
+   <security:http pattern="/js/**" security="none"></security:http>
+   
+<!-- use-expressions="true"의 의미 : 표현식과 권한명을 사용하겠다 pdf 683검색 -->
+   <security:http use-expressions="true">
+   <!--   <security:csrf disabled="true"/> -->
+     <security:intercept-url pattern="/customer/noticeReg.htm" access="isAuthenticated()"/>
+     <security:intercept-url pattern="/customer/noticeDel.htm" access="hasRole('ROLE_ADMIN')"/>
+
+     <security:intercept-url pattern="/**" access="permitAll" />
+     
+     <!-- login-page="/joinus.login.htm" get 방식 -->
+     <security:form-login
+     	login-page="/joinus/login.htm"
+     	default-target-url="/index.htm"
+     	authentication-failure-url="/joinus/login.htm?error=true"
+     	authentication-success-handler-ref="customLoginSuccessHandler"
+     />  
+     <!-- hong으로 인증 받고 삭제 눌러서 403 접근 금지 오류 발생하면 특정 url로 이동 -->
+     <!-- <security:access-denied-handler error-page="/common/accessError.htm" /> -->
+     <!-- 403 접근 금지 오류 발생하면 직접 개발자가 구현한 클래스의 객체를 호출해서 처리 -->
+     <security:access-denied-handler ref="customAccessDeniedHandler" />
+     <security:logout logout-url="/joinus/logout.htm"
+     invalidate-session="true"
+     logout-success-url="/" 
+     />
+   </security:http>
+   
+   
+   <!-- PasswordEncoder -->
+   <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+   
+   <!-- Spring security 5.x부터는 PasswordEncoder를 이용해서 비밀번호 처리 -->
+   <!-- 인증을 관리하는 총괄 책임자 -->
+   <security:authentication-manager>
+   <!-- 인증을 제공하는 실무자 -->
+    <!--  <security:authentication-provider>
+     		 [1] in memory방식으로 인증처리
+     		 <security:user-service>
+      			실제 DB와 무관한 정보
+      			<security:user name="hong" authorities="ROLE_USER" password="{noop}1234"/>
+      		  <security:user name="admin" authorities="ROLE_USER, ROLE_MANAGER, ROLE_ADMIN" password="{noop}1234"/>
+    		  </security:user-service>
+   		  </security:authentication-provider> -->
+   		  
+   	<!-- [2] JDBC를 활용한 인증처리 -->
+   	<!--
+   	 <security:authentication-provider>
+   	 <security:jdbc-user-service data-source-ref="dataSource"
+   	 users-by-username-query="SELECT id AS USERNAME, pwd AS PASSWORD, 1 as enabled FROM member WHERE id = ?" 인증 쿼리
+   	 authorities-by-username-query="SELECT username, authority FROM member_authorities WHERE username = ?" 권한 가져오는 쿼리
+   	 />
+   	 <security:password-encoder ref="bCryptPasswordEncoder"></security:password-encoder>
+   	</security:authentication-provider> -->
+   	
+   	<!--3. UserDetailsService 인증처리  -->
+   	<security:authentication-provider user-service-ref="customUserDetailsService">
+      <security:password-encoder ref="bCryptPasswordEncoder" />
+    </security:authentication-provider>
+    
+   </security:authentication-manager>
+   
+   
+
+</beans>

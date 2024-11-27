@@ -1,0 +1,141 @@
+package kr.ohora.www.controller;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.ohora.www.service.NotUserCartService;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@RequestMapping(value = "/cart/*")
+@Controller
+public class NotUserCartController {
+	
+	@GetMapping("/nousercart.do")
+	 private static final int FREE_SHIPPING_THRESHOLD = 50000;
+	   private static final int SHIPPING_FEE = 3000;
+	   private static final String COOKIE_NAME = "basketItems";
+
+	   @Autowired
+	   private NotUserCartService cartService;
+
+	   @GetMapping("/not-user")
+	   public String getNotUserCart(
+	           @CookieValue(value = "basketItems", required = false) String basketItems,
+	           Model model) {
+
+	       try {
+	           Map<Integer, Integer> pdtIdsAndQuantities = getPdtIdsAndQuantities(basketItems);
+
+	           if (pdtIdsAndQuantities.isEmpty()) {
+	               setDefaultAttributes(model);
+	               return "ohora/notusercart";
+	           }
+	           
+	           ArrayList<ProductDTO> products = cartService.bringProducts(new ArrayList<>(pdtIdsAndQuantities.keySet()));
+
+	           // 총 수량 계산 
+	           int totalQuantity = 0;
+	           for (ProductDTO product : products) {
+	               int quantity = pdtIdsAndQuantities.getOrDefault(product.getPdt_id(), 1);
+	               product.setPdt_count(quantity);
+	               totalQuantity += quantity;
+	           }
+
+	           // 금액 계산
+	           int totalAmount = 0;
+	           int totalDiscount = 0;
+
+	           for (ProductDTO product : products) {
+	               totalAmount += product.getPdt_amount() * product.getPdt_count();
+	               int discountAmount = product.getPdt_amount() * product.getPdt_discount_rate() / 100;
+	               totalDiscount += discountAmount * product.getPdt_count();
+	           }
+
+	           int actualAmount = totalAmount - totalDiscount;
+	           int shippingFee = actualAmount >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+	           int remainingForFree = actualAmount >= FREE_SHIPPING_THRESHOLD ? 0 : FREE_SHIPPING_THRESHOLD - actualAmount;
+	           int finalAmount = actualAmount + shippingFee;
+
+	           // 모델에 데이터 추가
+	           model.addAttribute("cartItems", products);
+	           model.addAttribute("totalAmount", totalAmount);
+	           model.addAttribute("totalDiscount", totalDiscount);
+	           model.addAttribute("shippingFee", shippingFee);
+	           model.addAttribute("remainingForFree", remainingForFree);
+	           model.addAttribute("finalAmount", finalAmount);
+	           model.addAttribute("rewardPoints", (int)(finalAmount * 0.01));
+	           model.addAttribute("totalQuantity", totalQuantity);
+
+	           return "ohora/notusercart";
+
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	           setDefaultAttributes(model);
+	           return "ohora/notusercart";
+	       }
+	   }
+
+	   private void setDefaultAttributes(Model model) {
+	       model.addAttribute("cartItems", new ArrayList<>());
+	       model.addAttribute("totalAmount", 0);
+	       model.addAttribute("totalDiscount", 0);
+	       model.addAttribute("shippingFee", SHIPPING_FEE);
+	       model.addAttribute("remainingForFree", FREE_SHIPPING_THRESHOLD);
+	       model.addAttribute("finalAmount", 0);
+	       model.addAttribute("rewardPoints", 0);
+	       model.addAttribute("totalQuantity", 0);
+	   }
+
+	   private Map<Integer, Integer> getPdtIdsAndQuantities(String cookieValue) {
+	       Map<Integer, Integer> pdtIdsAndQuantities = new HashMap<>();
+	       if (cookieValue == null) return pdtIdsAndQuantities;
+
+	       try {
+	           String value = URLDecoder.decode(cookieValue, StandardCharsets.UTF_8);
+	           
+	           value = value.substring(1, value.length() - 1);
+	           String[] items = value.split("\\},\\{");
+	           
+	           for (String item : items) {
+	               item = item.replaceAll("^\\{|\\}$", "");
+	               String[] pairs = item.split(",");
+	               int id = -1;
+	               int quantity = -1;
+	               
+	               for (String pair : pairs) {
+	                   String[] keyValue = pair.split(":");
+	                   if (keyValue.length == 2) {
+	                       String key = keyValue[0].replaceAll("\"", "").trim();
+	                       String value2 = keyValue[1].replaceAll("\"", "").trim();
+	                       
+	                       if ("id".equals(key)) {
+	                           id = Integer.parseInt(value2);
+	                       } else if ("quantity".equals(key)) {
+	                           quantity = Integer.parseInt(value2);
+	                       }
+	                   }
+	               }
+	               
+	               if (id > 0 && quantity > 0) {
+	                   pdtIdsAndQuantities.put(id, quantity);
+	               }
+	           }
+	           
+	       } catch (Exception e) {
+	           log.error("쿠키 파싱 중 오류: ", e);
+	       }
+	       return pdtIdsAndQuantities;
+	   }
+	
+}

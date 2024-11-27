@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Noto+Sans+KR:300,400,500,700&display=swap');
+/* 폰트 */
+
+#ivStyle .SP_layoutFix {
+    width: 1050px;
+}
+#ivStyle * {
+    letter-spacing: 0px;
+}
+.login_container {
+    letter-spacing: -.3px;
+}
+.login_container {
+    width: 480px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+.SP_layoutFix {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#historyNoLoginForm {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+    unicode-bidi: isolate;
+}
+
+.login_container .xans-myshop-orderhistorynologin {
+    border: none;
+}
+.xans-myshop-orderhistorynologin {
+    position: relative;
+    border: 1px solid #d7d5d5;
+    padding: 49px 0 39px;
+    color: #2e2e2e;
+}
+
+.login_container .titleArea {
+    padding: 0 0px 50px;
+    text-align: center;
+}
+
+.login_container .titleArea p {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 29px;
+    line-height: 37px;
+    color: #000;
+}
+.login_container .xans-myshop-orderhistorynologin p {
+    margin: 0;
+}
+.xans-myshop-orderhistorynologin p {
+    width: 370px;
+    margin: 0 auto 15px;
+    color: #757575;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+strong {
+    font-weight: bold;
+}
+
+#ivStyle * {
+    letter-spacing: 0px;
+}
+.login_container .titleArea p + p {
+    line-height: 49px;
+    font-size: 23px;
+}
+.login_container .titleArea p {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 29px;
+    line-height: 37px;
+    color: #000;
+}
+.login_container .xans-myshop-orderhistorynologin p {
+    margin: 0;
+}
+.xans-myshop-orderhistorynologin p {
+    width: 370px;
+    margin: 0 auto 15px;
+    color: #757575;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+fieldset {
+    display: block;
+    min-inline-size: min-content;
+    margin-inline: 2px;
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+    padding-block: 0.35em 0.625em;
+    padding-inline: 0.75em;
+}
+
+.login_container .formBox .form.no_login > div {
+    margin-bottom: 35px;
+}
+.login_container .formBox .form > div {
+    position: relative;
+}
+
+.login_container .formBox .form span {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+}
+
+.login_container #member_id, .login_container #member_passwd, .login_container #order_name, .login_container #order_id, .login_container #order_password {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0 !important;
+    border-bottom: 1px solid #bababa !important;
+    color: #000 !important;
+    font-weight: bold;
+    height: 50px !important;
+    line-height: 50px !important;
+    font-size: 16px;
+}
+
+.xans-myshop-orderhistorynologin input[type=text], .xans-myshop-orderhistorynologin input[type=password] {
+    width: 179px;
+    height: 26px;
+}
+
+body input[type="text"] {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 15px;
+    color: #000;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    min-width: 100px;
+}
+
+input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio" i]) {
+    overflow-clip-margin: 0px !important;
+    overflow: clip !important;
+}
+
+input[type="text" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+
+input:not([type="file" i], [type="image" i], [type="checkbox" i], [type="radio" i]) {
+}
+
+input {
+    text-rendering: auto;
+    color: fieldtext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: field;
+    margin: 0em;
+    padding: 1px 0px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+
+.login_container .formBox .btnArea.type1 {
+    margin: 17px 0;
+    cursor: pointer;
+}
+
+.login_container .btnArea a.wh, .login_container .btnArea button.wh {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    font-weight: bold;
+    height: 65px !important;
+    line-height: 65px !important;
+}
+.login_container .btnArea .btnSubmit {
+    display: inline-block;
+    width: 100%;
+    height: 55px;
+    line-height: 1.2;
+    font-size: 16px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+button {
+    appearance: auto;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: buttonface;
+    margin: 0em;
+    padding-block: 1px;
+    padding-inline: 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonborder;
+    border-image: initial;
+}
+
+.login_container .formBox .btnArea.type1 {
+    margin: 17px 0;
+    cursor: pointer;
+}
+
+.login_container .formBox .btnArea.type1 a {
+    font-size: 16px;
+}
+.login_container .formBox .btnArea.type1 a, #SMS_memberJoin_Write .btnArea.type1 a {
+    display: block;
+    height: 55px;
+    line-height: 55px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    color: #000;
+    text-align: center;
+}
+.login_container .btnArea a.wh, .login_container .btnArea button.wh {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    font-weight: bold;
+    height: 65px !important;
+    line-height: 65px !important;
+}
+.login_container .btnArea a {
+    margin-bottom: 10px;
+}
+
+#ivStyle * {
+    letter-spacing: 0px;
+}
+.login_container .xans-myshop-orderhistorynologin p {
+    margin: 0;
+}
+.xans-myshop-orderhistorynologin p {
+    width: 370px;
+    margin: 0 auto 15px;
+    color: #757575;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

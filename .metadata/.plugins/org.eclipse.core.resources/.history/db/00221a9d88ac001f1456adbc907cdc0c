@@ -1,0 +1,5 @@
+package kr.ohora.www.domain;
+
+public class OptionDTO {
+
+}
