@@ -1,0 +1,25 @@
+package kr.ohora.www.controller;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Controller
+public class NotUserCartController {
+	
+	@GetMapping("/notusercart.htm")
+	public String notUserCart(@CookieValue("basketItems") String basketItems, HttpServletRequest request) throws UnsupportedEncodingException {
+		log.info("컨트롤러 들어옴!~!!!");
+		String notUserCartValue = URLDecoder.decode(basketItems, "UTF-8");
+		System.out.println("@@@@@@@@@"+notUserCartValue);
+		return "notusercart.notusercart";
+	}
+}

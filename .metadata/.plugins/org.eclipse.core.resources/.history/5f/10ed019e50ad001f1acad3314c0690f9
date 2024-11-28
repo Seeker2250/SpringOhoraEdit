@@ -1,0 +1,21 @@
+package kr.ohora.www.controller;
+
+import javax.servlet.http.Cookie;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Controller
+public class NotUserCartController {
+	
+	@GetMapping("/notusercart.htm")
+	public String notUserCart() {
+		log.info("컨트롤러 들어옴!~!!!");
+		@CookieValue("basketItems") Cookie cookie;
+		return "notusercart.notusercart";
+	}
+}

@@ -1,0 +1,10 @@
+package kr.ohora.www.service;
+
+import kr.ohora.www.domain.product.ProductDTO;
+
+public interface NotUserCartService {
+
+	public String getNotUserCart(ProductDTO products) {
+		return null;
+	}
+}
