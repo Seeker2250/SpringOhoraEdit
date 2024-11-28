@@ -1,4 +1,200 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Spring]]></title><description><![CDATA[Level up your Java code and explore what Spring can do for you.]]></description><link>https://spring.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 27 Nov 2024 01:57:19 GMT</lastBuildDate><item><title><![CDATA[HTTP/3 support in Reactor 2024.0 Release Train]]></title><link>https://spring.io/blog/2024/11/26/http3-in-reactor-2024</link><guid isPermaLink="true">https://spring.io/blog/2024/11/26/http3-in-reactor-2024</guid><dc:creator><![CDATA[violetagg]]></dc:creator><pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc9114&quot;&gt;HTTP/3&lt;/a&gt;, the latest major version of the &lt;code&gt;Hypertext Transfer Protocol&lt;/code&gt;,
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Spring]]></title><description><![CDATA[Level up your Java code and explore what Spring can do for you.]]></description><link>https://spring.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 28 Nov 2024 00:34:34 GMT</lastBuildDate><item><title><![CDATA[Spring Cloud 2023.0.4 (aka Leyton) Has Been Released]]></title><link>https://spring.io/blog/2024/11/27/spring-cloud-2023-0-4</link><guid isPermaLink="true">https://spring.io/blog/2024/11/27/spring-cloud-2023-0-4</guid><dc:creator><![CDATA[olegz]]></dc:creator><pubDate>Wed, 27 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the Spring Cloud team, I am pleased to announce that the &lt;a href=&quot;https://enterprise.spring.io/projects/spring-cloud&quot;&gt;Spring Cloud 2023.0.4 - Leyton&lt;/a&gt; Release Train is available today. The release can be found in &lt;a href=&quot;https://repo.maven.apache.org/maven2/org/springframework/cloud/&quot;&gt;https://repo.maven.apache.org/maven2/org/springframework/cloud/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;notable-changes-in-the-202304-release-train&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#notable-changes-in-the-202304-release-train&quot; aria-label=&quot;notable changes in the 202304 release train permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Notable Changes in the 2023.0.4 Release Train&lt;/h2&gt;
+&lt;p&gt;This release of Spring Cloud is based on Spring Boot 3.2.12 and 3.3.6.&lt;/p&gt;
+&lt;p&gt;The GitHub project for this release can be found &lt;a href=&quot;https://github.com/orgs/spring-cloud/projects/146&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;spring-cloud-commons&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-commons&quot; aria-label=&quot;spring cloud commons permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud Commons&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Create truststore without keystore (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-commons/pull/1394&quot;&gt;#1394&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;spring-cloud-gateway&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-gateway&quot; aria-label=&quot;spring cloud gateway permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud Gateway&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Updated to use &lt;code&gt;HttpHeaders#headerSet&lt;/code&gt; where appropriate. This change requires &lt;a href=&quot;https://github.com/spring-projects/spring-framework/issues/33823&quot;&gt;Spring Framework 6.1.15+&lt;/a&gt;, which is available in Spring Boot 3.2.12+ or 3.3.6+. (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-gateway/issues/3596&quot;&gt;3596&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;spring-cloud-circuitbreaker&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-circuitbreaker&quot; aria-label=&quot;spring cloud circuitbreaker permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud CircuitBreaker&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;TimeLimiter disable by group or instance level (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-circuitbreaker/issues/202&quot;&gt;#202&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;spring-cloud-config&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-config&quot; aria-label=&quot;spring cloud config permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud Config&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses label when searching secrets in SpringVaultEnvironmentRepository (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-config/pull/2460&quot;&gt;#2460&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Support multiple labels in JdbcEnvironmentRepository (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-config/issues/2449&quot;&gt;#2455&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Makes default-label in CredhubEnvironmentRepository configurable (&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-config/pull/2519&quot;&gt;#2519&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;spring-cloud-stream&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-stream&quot; aria-label=&quot;spring cloud stream permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud Stream&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added support for &lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-stream/commit/2517760529d2a7f5bb14e6fd6c59cd10075380ed&quot;&gt;customizing message converter behavior&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Upgrade to spring-kafka 3.3.0&lt;/li&gt;
+&lt;li&gt;Documentation improvements arond batch type conversion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;spring-cloud-function&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-cloud-function&quot; aria-label=&quot;spring cloud function permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring Cloud Function&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Enhancements to serverless web container&lt;/li&gt;
+&lt;li&gt;Logging for AWS Context&lt;/li&gt;
+&lt;li&gt;Improvements around Kotlin type resolution&lt;/li&gt;
+&lt;li&gt;Improvements around ObjectMapper registration and configuartion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following modules were updated as part of 2024.0.0-M2:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Module&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Issues&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Bus&lt;/td&gt;
+&lt;td&gt;4.1.3&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-bus/releases/tag/v4.1.3&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Contract&lt;/td&gt;
+&lt;td&gt;4.1.5&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-contract/releases/tag/v4.1.5&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Circuitbreaker&lt;/td&gt;
+&lt;td&gt;3.1.3&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-circuitbreaker/releases/tag/v3.1.3&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Zookeeper&lt;/td&gt;
+&lt;td&gt;4.1.3&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-zookeeper/releases/tag/v4.1.3&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Task&lt;/td&gt;
+&lt;td&gt;3.1.3&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-task/releases/tag/v3.1.3&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Kubernetes&lt;/td&gt;
+&lt;td&gt;3.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-kubernetes/releases/tag/v3.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Starter Build&lt;/td&gt;
+&lt;td&gt;2023.0.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-starter-build/releases/tag/v2023.0.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Netflix&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-netflix/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Openfeign&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-openfeign/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Commons&lt;/td&gt;
+&lt;td&gt;4.1.5&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-commons/releases/tag/v4.1.5&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Consul&lt;/td&gt;
+&lt;td&gt;4.1.3&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-consul/releases/tag/v4.1.3&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Config&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-config/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Vault&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-vault/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Build&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-build/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Gateway&lt;/td&gt;
+&lt;td&gt;4.1.6&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-gateway/releases/tag/v4.1.6&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Stream&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-stream/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Spring Cloud Function&lt;/td&gt;
+&lt;td&gt;4.1.4&lt;/td&gt;
+&lt;td&gt;(&lt;a href=&quot;https://github.com/spring-cloud/spring-cloud-function/releases/tag/v4.1.4&quot;&gt;issues&lt;/a&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;As always, we welcome feedback on &lt;a href=&quot;https://github.com/spring-cloud/&quot;&gt;GitHub&lt;/a&gt;, on &lt;a href=&quot;https://gitter.im/spring-cloud/spring-cloud&quot;&gt;Gitter&lt;/a&gt;, on &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-cloud&quot;&gt;Stack Overflow&lt;/a&gt;, or on &lt;a href=&quot;https://twitter.com/SpringCloud&quot;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To get started with Maven with a BOM (dependency management only):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-xml&quot;&gt;    &amp;#x3C;repositories&gt;
+        &amp;#x3C;repository&gt;
+            &amp;#x3C;id&gt;spring-milestones&amp;#x3C;/id&gt;
+            &amp;#x3C;name&gt;Spring Milestones&amp;#x3C;/name&gt;
+            &amp;#x3C;url&gt;https://repo.spring.io/milestone&amp;#x3C;/url&gt;
+            &amp;#x3C;snapshots&gt;
+                &amp;#x3C;enabled&gt;false&amp;#x3C;/enabled&gt;
+            &amp;#x3C;/snapshots&gt;
+        &amp;#x3C;/repository&gt;
+    &amp;#x3C;/repositories&gt;
+&amp;#x3C;dependencyManagement&gt;
+    &amp;#x3C;dependencies&gt;
+        &amp;#x3C;dependency&gt;
+            &amp;#x3C;groupId&gt;org.springframework.cloud&amp;#x3C;/groupId&gt;
+            &amp;#x3C;artifactId&gt;spring-cloud-dependencies&amp;#x3C;/artifactId&gt;
+            &amp;#x3C;version&gt;2023.0.4&amp;#x3C;/version&gt;
+            &amp;#x3C;type&gt;pom&amp;#x3C;/type&gt;
+            &amp;#x3C;scope&gt;import&amp;#x3C;/scope&gt;
+        &amp;#x3C;/dependency&gt;
+    &amp;#x3C;/dependencies&gt;
+&amp;#x3C;/dependencyManagement&gt;
+&amp;#x3C;dependencies&gt;
+    &amp;#x3C;dependency&gt;
+        &amp;#x3C;groupId&gt;org.springframework.cloud&amp;#x3C;/groupId&gt;
+        &amp;#x3C;artifactId&gt;spring-cloud-starter-config&amp;#x3C;/artifactId&gt;
+    &amp;#x3C;/dependency&gt;
+    &amp;#x3C;dependency&gt;
+        &amp;#x3C;groupId&gt;org.springframework.cloud&amp;#x3C;/groupId&gt;
+        &amp;#x3C;artifactId&gt;spring-cloud-starter-netflix-eureka-client&amp;#x3C;/artifactId&gt;
+    &amp;#x3C;/dependency&gt;
+    ...
+&amp;#x3C;/dependencies&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or with Gradle:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;plugins {
+  id &apos;java&apos;
+  id &apos;org.springframework.boot&apos; version &apos;3.2.11&apos;
+  id &apos;io.spring.dependency-management&apos; version &apos;1.1.6&apos;
+}
+
+repositories {
+  mavenCentral()
+  maven { url &apos;https://repo.spring.io/milestone&apos; }
+}
+
+ext {
+  set(&apos;springCloudVersion&apos;, &quot;2023.0.4&quot;)
+}
+
+dependencies {
+  implementation &apos;org.springframework.cloud:spring-cloud-starter-config&apos;
+  implementation &apos;org.springframework.cloud:spring-cloud-starter-netflix-eureka-client&apos;
+}
+
+dependencyManagement {
+  imports {
+    mavenBom &quot;org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}&quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title><![CDATA[Spring Cloud Stream Applications 2022.0.1 GA Release now available]]></title><link>https://spring.io/blog/2024/11/27/spring-cloud-stream-applications-2022-0-1-ga-release-now-available</link><guid isPermaLink="true">https://spring.io/blog/2024/11/27/spring-cloud-stream-applications-2022-0-1-ga-release-now-available</guid><dc:creator><![CDATA[corneil]]></dc:creator><pubDate>Wed, 27 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the team and everyone who has contributed, I¡¯m happy to announce that Spring Cloud Stream Applications &lt;code&gt;2022.0.1&lt;/code&gt; has been released.&lt;/p&gt;
+&lt;p&gt;This release is updates to Spring Boot &lt;code&gt;3.1.12&lt;/code&gt; and Spring Cloud &lt;code&gt;2022.0.5&lt;/code&gt; and contains some bug fixes - check out the &lt;a href=&quot;https://github.com/spring-cloud/stream-applications/releases/tag/v2022.0.1&quot;&gt;release notes&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id=&quot;stay-in-touch&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#stay-in-touch&quot; aria-label=&quot;stay in touch permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Stay in touch...&lt;/h2&gt;
+&lt;p&gt;Please continue to engage with us by creating bug reports and feature requests on &lt;a href=&quot;https://github.com/spring-cloud/stream-applications&quot;&gt;Github&lt;/a&gt; and asking questions on StackOverflow using the &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-cloud-stream&quot;&gt;spring-cloud-stream&lt;/a&gt; or &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-cloud-dataflow&quot;&gt;spring-cloud-dataflow&lt;/a&gt; tags.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[HTTP/3 support in Reactor 2024.0 Release Train]]></title><link>https://spring.io/blog/2024/11/26/http3-in-reactor-2024</link><guid isPermaLink="true">https://spring.io/blog/2024/11/26/http3-in-reactor-2024</guid><dc:creator><![CDATA[violetagg]]></dc:creator><pubDate>Tue, 26 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc9114&quot;&gt;HTTP/3&lt;/a&gt;, the latest major version of the &lt;code&gt;Hypertext Transfer Protocol&lt;/code&gt;,
 had its specification finalized in June 2022. This version is designed to enhance performance, reliability, and security.
 Unlike its predecessors, &lt;code&gt;HTTP/3&lt;/code&gt; utilizes &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc9000&quot;&gt;QUIC&lt;/a&gt; instead of &lt;code&gt;TCP&lt;/code&gt; as its transport layer.
 &lt;code&gt;QUIC&lt;/code&gt; is a &lt;code&gt;UDP&lt;/code&gt;-based, multiplexed, and secure transport protocol that includes built-in &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc8446&quot;&gt;TLS 1.3&lt;/a&gt; encryption,
@@ -317,90 +513,4 @@ class GatewayConfiguration {
 &lt;/ul&gt;
 &lt;p&gt;A ton of resources to keep you company after the turkey&apos;s started to kick in!&lt;/p&gt;
 &lt;p&gt;I am sure I speak for the entire Spring team when I say: we are thankful for you, dear reader!&lt;/p&gt;
-&lt;p&gt;Happy Thanksgiving!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Bootiful Spring Boot 3.4: Start Here]]></title><link>https://spring.io/blog/2024/11/25/bootiful-34-index</link><guid isPermaLink="true">https://spring.io/blog/2024/11/25/bootiful-34-index</guid><dc:creator><![CDATA[joshlong]]></dc:creator><pubDate>Mon, 25 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Hi, Spring fans! And happy Spring Boot 3.4 release to those who celebrate!&lt;/p&gt;
-&lt;p&gt;I know, I know what you&apos;re thinking: Josh, Spring Boot 3.4 already shipped! I know it. Spring Boot 3.4 dropped a week earlier this year! In the last couple of years, we¡¯ve  released Spring Boot on the same day as Thanksgiving Day in the USA, which is tedious for us here in the United States because it requires more preparation. This year, it¡¯s a week early! Why do I mention this? Well, I¡¯ve had some time already - before Thanksgiving, even - to explore the fantastic possibilities unlocked by using Spring Boot 3.4. While I&apos;ve also played with it plenty over the last six months, it was super satisfying to go to the &lt;a href=&quot;https://start.spring.io&quot;&gt;Spring Initializr&lt;/a&gt;, add a few dependencies, and get a working build with no modifications required to work with the versions of the dependencies. It all just comes together so nicely!  There are a ton of features, it&apos;s just absolutely brimming with them. It&apos;s &lt;em&gt;stuffed&lt;/em&gt;, you might say, like that turkey I&apos;ll be eating in a few short days!&lt;/p&gt;
-&lt;p&gt;Spring Boot delivers value on its own, of course, but it¡¯s also the premier vehicle by which to consume the rest of the Spring portfolio. As always, this release includes dependency updates, fixes for CVEs, and tons of new features. And there¡¯s an implied support timeline. Did you know that we only support open-source releases of Spring Boot for about a year? So, if you¡¯re using Spring Boot 3.2, you need to upgrade to Spring Boot 3.3 because 3.2 is now out of open-source support. If you want to know where you stand, please check &lt;a href=&quot;https://spring.io/projects/spring-boot#support&quot;&gt;each project¡¯s support pages&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;We¡¯re in the waning days of the Spring Boot 3.x and Spring Framework 6.x generation. But sometime next year, we¡¯ll see Spring Boot 4.x and Spring Framework 7.x! So make sure you¡¯re staying upgraded and handling whatever deprecations result.&lt;/p&gt;
-&lt;p&gt;When you upgrade to a new version of Spring Boot, you get all the work the entire Spring team has done over the last six months. It¡¯s a massive undertaking and integration, and we do it for you like clockwork every six months. I don&apos;t foolishly hope to give you a sense of all the new and novel features. I can¡¯t. It would take the next six months to chronicle this release effectively. So, instead, I¡¯m going to take a different tack, looking at some of the high-level features and focusing, perhaps, on one or two of them across some (but still not all!) of the new released projects in Spring Boot 3.4.&lt;/p&gt;
-&lt;p&gt;OK? OK. Let¡¯s dive right into it. We¡¯ll work our way through the stack starting at the level of Spring Framework, on top of which absolutely everything else builds, and then ultimately getting to projects like Spring Modulith and Spring AI, which build on top of Spring Boot.&lt;/p&gt;
-&lt;p&gt;Here are all the installments:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-framework&quot;&gt;Spring Framework&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-data&quot;&gt;Spring Data&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-batch&quot;&gt;Spring Batch&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-integration&quot;&gt;Spring Integration&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-security&quot;&gt;Spring Security&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-boot&quot;&gt;Spring Boot&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-modulith&quot;&gt;Spring Modulith&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2024/11/24/bootiful-34-ai&quot;&gt;Spring AI&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;spring-ai&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#spring-ai&quot; aria-label=&quot;spring ai permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Spring AI&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[Bootiful Spring Boot 3.4: Spring AI]]></title><link>https://spring.io/blog/2024/11/24/bootiful-34-ai</link><guid isPermaLink="true">https://spring.io/blog/2024/11/24/bootiful-34-ai</guid><dc:creator><![CDATA[joshlong]]></dc:creator><pubDate>Sun, 24 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I love Spring AI. It¡¯s an amazing project designed to bring the patterns and practices of AI engineering to the Spring Boot developer. It¡¯s got clean idiomatic abstractions that¡¯ll make any Sring developer feel right at home, and it has a ton of integrations with all manner of different vector stores, embedding models, transcription models, image modes, and chat models.&lt;/p&gt;
-&lt;p&gt;The new release, &lt;a href=&quot;https://spring.io/blog/2024/11/20/spring-ai-1-0-0-m4-released&quot;&gt;m4&lt;/a&gt;, builds upon Spring Boot 3.4 and adds a ton of new features. As usual, I can¡¯t hope to look at all the new features, but the release notes do an exquisite job.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;there¡¯s new Amazon Bedrock Convertse support&lt;/li&gt;
-&lt;li&gt;there¡¯s been a ton of work done to support more expressive function calling, both in Java and  Kotlin&lt;/li&gt;
-&lt;li&gt;there¡¯s the first cut of support for the ideas taking shape in the AI community around &quot;advanced and modular RAG&quot;. RAG, of course, is retrieval augmented generation and refers to using data from a system or service to inform the response generated by a chat model. These ideas are articulated in &lt;a href=&quot;https://export.arxiv.org/abs/2407.21059&quot;&gt;this paepr&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2312.10997&quot;&gt;this one&lt;/a&gt;, and the building blocks are taking root in this new release. Amazing!&lt;/li&gt;
-&lt;li&gt;updates across the board to various vector store integrations and chat models&lt;/li&gt;
-&lt;li&gt;there¡¯s&lt;a href=&quot;https://docs.spring.io/spring-ai/reference/api/chat/comparison.html&quot;&gt;aeven a comprehensive chat model comparison&lt;/a&gt; page in the documentation&lt;/li&gt;
-&lt;li&gt;vector storage and embedding improvements, including enhancements to vector stores like Azure and Milvus&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The evolving nature of the functional callback support has so enamored me. Spring AI aims to make connecting your AI models with your data and business logic easy. Remember: the name of the game here is integration. Most people aren¡¯t going to build their models. They¡¯re going to integrate existing ones into their business logic and services. And where does all that stuff live? In Spring, of course. Spring AI is a natural! And it keeps getting easier. In this release, there¡¯s new support for describing and then letting models invoke functions if they decide they¡¯ve got the need to do so.&lt;/p&gt;
-&lt;p&gt;Here¡¯s a simple example demonstrating the definition of a &lt;code&gt;FunctionCallback&lt;/code&gt;  and the Spring AI &lt;code&gt;ChatClient,&lt;/code&gt; which is your first port of call for all interactions with a Sprign AI  &lt;code&gt;ChatModel.&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package com.example.bootiful_34.ai;
-
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.model.function.FunctionCallback;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-class AiConfiguration {
-
-	@Bean
-	ChatClient chatClient(ChatClient.Builder builder, FunctionCallback weatherFunctionCallback) {
-		return builder.defaultFunctions(weatherFunctionCallback).build();
-	}
-
-	@Bean
-	FunctionCallback weatherFunctionCallback() {
-		return FunctionCallback.builder()
-			.description(&quot;returns the weather for a given city&quot;)
-			.function(&quot;getCurrentWeatherForACity&quot;,
-					(WeatherRequest wr) -&gt; new WeatherResponse(wr.city(),
-							wr.city().equalsIgnoreCase(&quot;san francisco&quot;) ? 68.0f : 72.0f))
-			.inputType(WeatherRequest.class)
-			.build();
-	}
-
-}
-
-record WeatherRequest(String city) {
-}
-
-record WeatherResponse(String city, float temperature) {
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It¡¯s a pretty trivial example: given a &lt;code&gt;WeatherRequest&lt;/code&gt; specifying a city, we make up and return some temperature. In this case, I¡¯ve got a hardcoded case for San Francisco.&lt;/p&gt;
-&lt;p&gt;We put all of this to work in the test, knowing that the model won¡¯t know the current weather in a given city, and so we will have to defer to a function that we provide. It knows about the nature of the function because we¡¯ve given it a description when we configured the FunctionCallback&lt;code&gt;. It knows that the city parameter is  &lt;/code&gt;String&lt;code&gt;and that San Francisco is a city, so it passes the string&lt;/code&gt;San Francisco` to our function, allowing us to provide the expected response. We verify as much with the test, asserting that the response is the hardcoded magic number.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;package com.example.bootiful_34.ai;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class AiConfigurationTest {
-
-	@Test
-	void functionCallbacks(@Autowired ChatClient cc) {
-		var weatherInSf = cc.prompt(&quot;give me the weather for the city of san francisco&quot;).call().content();
-		Assertions.assertNotNull(weatherInSf);
-		Assertions.assertTrue(weatherInSf.contains(&quot;68&quot;));
-	}
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And just like that, we¡¯ve given our AI model the ability to ask questions about our systems and services and to support a more agentic workflow.  Easy!&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;Happy Thanksgiving!&lt;/p&gt;</content:encoded></item></channel></rss>
