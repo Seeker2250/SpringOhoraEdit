@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.ohora.www.persistence.ProductMapper"><!-- 패키지들이랑 interface 이름 -->
+
+	<!-- ArrayList<ProductDTO> select(int currentPage, int numberPerPage) throws SQLException; -->
+		<select id="selectProducts" resultType="kr.ohora.www.domain.product.ProductDTO" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
+		    SELECT * 
+		    FROM (
+		        SELECT ROWNUM AS no, t.* 
+		        FROM (
+		            SELECT 
+		                p.pdt_id AS pdtId, 
+		                p.pdt_name AS pdtName, 
+		                p.pdt_amount AS pdtAmount, 
+		                p.pdt_discount_rate AS pdtDiscountRate, 
+		                p.pdt_img_url AS pdtImgUrl, 
+		                p.pdt_img_url2 AS pdtImgUrl2, 
+		                p.pdt_review_count AS pdtReviewCount,
+		                (CASE 
+		                    WHEN p.pdt_discount_rate != 0 
+		                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
+		                    ELSE p.pdt_amount 
+		                END) AS pdtDiscountAmount,
+		                c.cat_name AS catName
+		            FROM O_PRODUCT p
+		            LEFT JOIN O_CATEGORY c
+		            ON p.cat_id = c.cat_id
+		            <where>
+		                <if test="categoryNumber != 0">
+		                    p.cat_id = #{categoryNumber}
+		                </if>
+		            </where>
+		            ORDER BY p.pdt_id DESC
+		        ) t
+		    ) b
+		    WHERE no BETWEEN #{start} AND #{end}
+		</select>
+<!-- 	<select id="selectProducts" resultType="kr.ohora.www.domain.product.ProductDTO" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
+	    SELECT * 
+	    FROM (
+	        SELECT ROWNUM AS no, t.* 
+	        FROM (
+	            SELECT 
+	                p.pdt_id, 
+	                p.pdt_name, 
+	                p.pdt_amount, 
+	                p.pdt_discount_rate, 
+	                p.pdt_img_url, 
+	                p.pdt_img_url2, 
+	                p.pdt_review_count,
+	                (CASE 
+	                    WHEN p.pdt_discount_rate != 0 
+	                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
+	                    ELSE p.pdt_amount 
+	                END) AS pdt_discount_amount,
+	                c.cat_name
+	            FROM O_PRODUCT p
+	            LEFT JOIN O_CATEGORY c
+	            ON p.cat_id = c.cat_id
+ 	            <where>
+	                <if test="categoryNumber != 0">
+	                    p.cat_id = #{categoryNumber}
+	                </if>
+	            </where>
+	            ORDER BY p.pdt_id DESC
+	        ) t
+	    ) b
+	    WHERE no BETWEEN #{start} AND #{end};
+	</select> -->
+
+    
+    <!-- int getTotalRecords(int categoryNumber) throws SQLException; -->
+    <select id="getTotalRecords" resultType="int" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
+        SELECT COUNT(*)
+        FROM O_PRODUCT
+        <if test="categoryNumber != 0">
+            WHERE CAT_ID = #{categoryNumber}
+        </if>
+    </select>
+	
+	<!-- int hitUp(int pdtId) throws SQLException; -->
+	<update id="hitUp">
+		UPDATE o_product 
+        SET pdt_viewcount = pdt_viewcount + 1 
+        WHERE pdt_id = #{pdt_id}
+	</update>
+	
+	
+</mapper>

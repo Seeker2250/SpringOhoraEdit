@@ -16,7 +16,7 @@
 	
 		<!-- header 시작 -->
 		<tiles:insertAttribute name="header"></tiles:insertAttribute>
-		<!-- header 종료 -->
+		<!-- header 종료  깃 테스트용 주석 변경-->
 		
 		<div id="main">
 			<!-- content부분 -->

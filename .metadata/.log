@@ -1837,7 +1837,11 @@ org.eclipse.wst.xml.core.internal.document.StructuredDocumentRegionManagementExc
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 16:49:49.280
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+<<<<<<< HEAD
 !SESSION 2024-11-28 08:21:58.317 -----------------------------------------------
+=======
+!SESSION 2024-11-27 17:49:49.715 -----------------------------------------------
+>>>>>>> origin/Product
 eclipse.buildId=3.9.18.202109140905-RELEASE-e421
 java.version=11.0.23
 java.vendor=Oracle Corporation
@@ -1845,15 +1849,28 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
 Framework arguments:  -product org.springsource.sts.ide
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2024-11-28 08:22:42.129
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 08:22:42.129
+=======
+!ENTRY org.eclipse.core.resources 2 10035 2024-11-27 17:49:54.221
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jface 2 0 2024-11-27 17:49:55.374
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-27 17:49:55.374
+>>>>>>> origin/Product
 !MESSAGE A conflict occurred for CTRL+SHIFT+T:
 Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@36c5a4b7,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5e97da56,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -1861,27 +1878,48 @@ Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1bb3e150,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6e8f3b76,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2024-11-28 08:22:47.990
+=======
+!ENTRY org.eclipse.jst.jsp.core 4 4 2024-11-27 17:49:57.793
+!MESSAGE A workspace crash was detected. The previous session did not exit normally. Not using saved taglib indexes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-27 17:50:00.736
+>>>>>>> origin/Product
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2024-11-28 08:26:19.310
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 08:26:19.310
+=======
+!ENTRY org.eclipse.jface 2 0 2024-11-27 17:50:01.397
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-27 17:50:01.397
+>>>>>>> origin/Product
 !MESSAGE A conflict occurred for CTRL+D:
 Binding(CTRL+D,
 	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
 		Delete a line of text,
 		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3b0d4f43,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1e77dac0,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
@@ -1889,11 +1927,16 @@ Binding(CTRL+D,
 	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
 		,
 		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@76f0017d,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4088f5f3,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:26:21.452
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 
@@ -1930,6 +1973,26 @@ Binding(CTRL+D,
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:01:36.710
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 !SESSION 2024-11-28 11:27:17.995 -----------------------------------------------
+=======
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:09.393
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:09.401
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:11.415
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:11.428
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:12.467
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 17:50:12.488
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2024-11-27 18:07:21.233 -----------------------------------------------
+>>>>>>> origin/Product
 eclipse.buildId=3.9.18.202109140905-RELEASE-e421
 java.version=11.0.23
 java.vendor=Oracle Corporation
@@ -1937,15 +2000,25 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
 Framework arguments:  -product org.springsource.sts.ide
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2024-11-28 11:27:45.338
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 11:27:45.338
+=======
+!ENTRY org.eclipse.jface 2 0 2024-11-27 18:07:27.692
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-27 18:07:27.692
+>>>>>>> origin/Product
 !MESSAGE A conflict occurred for CTRL+SHIFT+T:
 Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
 		Open a type in a Java editor,
 		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7e305953,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1db9d253,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
@@ -1953,20 +2026,34 @@ Binding(CTRL+SHIFT+T,
 	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
 		,
 		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@59d7d574,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6f5f892c,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.contexts.window,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.jface 2 0 2024-11-28 11:27:55.625
 !MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
 !SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 11:27:55.625
+=======
+!ENTRY org.eclipse.jface 2 0 2024-11-27 18:07:32.161
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-27 18:07:32.161
+>>>>>>> origin/Product
 !MESSAGE A conflict occurred for CTRL+D:
 Binding(CTRL+D,
 	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
 		Delete a line of text,
 		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@fff6f48,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1fdedffb,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
@@ -1974,18 +2061,27 @@ Binding(CTRL+D,
 	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
 		,
 		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+<<<<<<< HEAD
 		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@36b3240f,
+=======
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@63fac644,
+>>>>>>> origin/Product
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.egit.ui 2 0 2024-11-28 11:27:55.844
+=======
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-27 18:07:32.327
+>>>>>>> origin/Product
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
+<<<<<<< HEAD
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:27:58.875
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 
@@ -2086,4 +2182,801 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:57:07.239
+=======
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 18:07:33.804
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-27 18:07:33.814
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2024-11-28 08:39:06.316 -----------------------------------------------
+eclipse.buildId=3.9.18.202109140905-RELEASE-e421
+java.version=11.0.23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 08:39:11.377
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 08:39:11.377
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7a085d02,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6cee52e2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-28 08:39:16.885
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:39:18.481
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:39:18.481
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 08:39:47.222
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 08:39:47.222
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@307e1c7b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2393b885,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:42:46.284
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:42:46.289
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:19.226
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:19.238
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:34.726
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:34.732
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:50.388
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:44:50.396
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:45:26.896
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:45:26.900
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:45:28.760
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:45:28.763
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:46:15.280
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:46:15.286
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:46:19.259
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:46:19.262
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:11.317
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:11.319
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:30.166
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:30.169
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:33.837
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:33.838
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:59.792
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:47:59.794
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:48:15.902
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:48:15.905
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:48:49.425
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:48:49.426
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:53:44.583
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:53:44.587
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:55:32.156
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:55:32.157
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:55:39.938
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:55:39.938
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:56:38.046
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:56:38.048
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:57:11.501
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 08:57:11.503
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:01.707
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:01.708
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:11.237
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:11.238
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:21.333
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 09:00:21.334
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2024-11-28 10:41:13.831 -----------------------------------------------
+eclipse.buildId=3.9.18.202109140905-RELEASE-e421
+java.version=11.0.23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 10:41:38.472
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 10:41:38.472
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@162a5c4c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5f0bf0ed,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-28 10:41:44.619
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:41:50.779
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:41:50.779
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 10:42:13.308
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 10:42:13.308
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4d760ddb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@980142a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:46:42.214
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:46:42.222
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:47:28.904
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 10:47:28.909
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:04:26.805
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:04:26.807
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:04:35.218
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:04:35.220
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:10:10.920
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:10:10.922
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:11:27.205
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:11:27.207
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:11:33.848
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:11:33.850
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:14:19.876
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:14:19.878
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:15:15.213
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:15:15.215
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:21:42.805
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:21:42.807
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:23:17.854
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:23:17.856
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:08.703
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:08.705
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:37.097
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:37.099
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:57.277
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:24:57.279
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:25:44.255
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:25:44.259
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:26:28.641
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:26:28.644
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:30:38.693
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:30:38.696
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:10.503
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:10.505
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:21.599
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:21.601
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:29.163
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:29.164
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:47.572
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:31:47.574
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:32:03.345
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:32:03.347
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:46:40.246
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:46:40.248
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:59:04.489
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 11:59:04.492
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:01:07.525
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:01:07.527
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:05:24.092
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:05:24.095
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:06:29.565
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:06:29.567
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:06:48.212
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:06:48.214
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:10:53.486
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:10:53.487
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:13:37.007
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:13:37.009
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:16:27.633
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:16:27.635
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:22:42.212
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:22:42.215
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:23:26.089
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:23:26.091
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:26:24.715
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:26:24.717
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:27:09.313
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:27:09.315
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:27:40.530
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:27:40.532
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:32:23.581
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:32:23.584
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:33:13.475
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:33:13.477
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:33:56.437
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:33:56.439
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:37:31.500
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:37:31.502
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:42:44.478
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:42:44.480
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:46:18.613
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:46:18.615
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:47:49.843
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:47:49.844
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:50:04.367
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 12:50:04.370
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:28:26.507
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:28:26.507
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:29:14.730
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:29:14.731
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:30:05.951
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:30:05.953
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:30:58.483
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:30:58.486
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:43:18.056
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:43:18.058
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:44:01.219
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 13:44:01.221
+>>>>>>> origin/Product
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2024-11-28 14:03:56.500 -----------------------------------------------
+eclipse.buildId=3.9.18.202109140905-RELEASE-e421
+java.version=11.0.23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2024-11-28 14:04:06.217
+!MESSAGE Unable to load resource file:/C:/Users/User/Desktop/SpringOhora/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/User/Desktop/SpringOhora/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/User/Desktop/SpringOhora/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.getResource(ResourceHandler.java:290)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadResource(ResourceHandler.java:266)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:169)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:371)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:247)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:573)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/C:/Users/User/Desktop/SpringOhora/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; systemId: file:/C:/Users/User/Desktop/SpringOhora/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi; lineNumber: 2; columnNumber: 2; The markup in the document preceding the root element must be well-formed.
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:204)
+	at java.xml/com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:178)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1465)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:862)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLNSDocumentScannerImpl.next(XMLNSDocumentScannerImpl.java:112)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:534)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:888)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:824)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1216)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:635)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:324)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1563)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1342)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 23 more
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2024-11-28 14:04:06.220
+!MESSAGE The persisted application model has no top-level window. Reinitializing with the default application model.
+!STACK 0
+java.lang.Exception
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:174)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:371)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:247)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:573)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:551)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:156)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:401)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 14:04:07.753
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 14:04:07.753
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@318beab4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@79a88f45,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.ui 2 2 2024-11-28 14:04:09.030
+!MESSAGE org.eclipse.jdt.junit.ResultView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2024-11-28 14:04:09.030
+!MESSAGE org.springframework.ide.eclipse.aop.ui.navigator.aopReferenceModelNavigator: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.ui 2 2 2024-11-28 14:04:09.030
+!MESSAGE org.eclipse.contribution.xref.ui.views.XReferenceView: Deprecated relationship "fast" should be converted to "stack".
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-28 14:04:16.503
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:04:33.915
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:04:33.930
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 14:07:22.325
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 14:07:22.325
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@3eca0961,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@57212116,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:07:34.468
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:07:34.468
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:07:35.487
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:07:35.487
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:09:01.246
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:09:01.246
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2024-11-28 14:03:38.417 -----------------------------------------------
+eclipse.buildId=3.9.18.202109140905-RELEASE-e421
+java.version=11.0.23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 14:10:30.612
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 14:10:30.612
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@601ca994,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1acd2a14,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.jface 2 0 2024-11-28 14:10:33.290
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-28 14:10:33.290
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@d303dc9,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@39e67fbc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-28 14:10:33.443
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\User'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:10:35.568
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:10:35.574
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:11:11.125
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2024-11-28 14:11:11.129
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
