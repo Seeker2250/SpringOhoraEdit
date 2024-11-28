@@ -204,13 +204,7 @@ input[type="checkbox"]:checked+.label_for_check .otherCheck::after {
                                        id="otherCheck_${item.pdt_id}">
                                     </div>
                                  </label> &nbsp;
-                                 <%-- <input type="checkbox" id="basket_chk_id_0" name="basket_product_normal_type_normal">
-                                     <label for="basket_chk_id_0" class="label_for_check">
-                                       <div data-rate="${item.pdt_discount_rate}" data-price="${item.pdt_amount}" data-quantity="${item.pdt_count}" class="otherCheck checked" id="otherCheck_${item.pdt_id}" "></div> <!-- 개인 버튼 -->
-                                       이 위에 value="${item.clist_select}
-                                       <input type="hidden" name="clist_id" value="${item.pdt_id} "> <!-- 추가함 -->
-                                     </label>
-                                      &nbsp; --%>
+
                                  <!-- // 체크박스 -->
                                  <!-- 설명 -->
                                  <div class="description">
