@@ -1,0 +1,18 @@
+package kr.ohora.www.service;
+
+import org.springframework.stereotype.Service;
+
+import kr.ohora.www.domain.product.ProductDTO;
+
+@Service
+public class NotUserCartServiceImpl implements NotUserCartService{
+
+	@Override
+	public String getNotUserCart(int pdtid) {
+		
+		return null;
+	}
+
+
+	
+}
