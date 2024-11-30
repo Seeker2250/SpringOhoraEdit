@@ -191,7 +191,7 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
                  </form>
              </c:when>
              <c:otherwise>
-                 <form action="<%=contextPath %>/cart/nousercart.do" method="post" id="CartForm">
+                 <form action="<%=contextPath %>/notusercart.htm" method="post" id="CartForm">
                      <a href="#" id="goCart">
                          <b class="count EC-Layout-Basket-count" >0</b>
                      </a>
@@ -513,78 +513,21 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
 
   
 <script>
-//비회원 전용 장바구니 카운트 관리자
 const NonMemberCartManager = {
-    lastCookieValue: null,
-
-    // 쿠키값 가져오기
-    getBasketCookie() {
-        const cookie = document.cookie
-            .split('; ')
-            .find(row => row.startsWith('basketItems='));
-        return cookie ? cookie.split('=')[1] : null;
-    },
-
-    // 카운트 업데이트
-    updateCount() {
-        try {
-            const cookieValue = this.getBasketCookie();
-            if (cookieValue) {
-                const basketItems = JSON.parse(decodeURIComponent(cookieValue));
-                if (Array.isArray(basketItems)) {
-                    const countElement = document.querySelector('.EC-Layout-Basket-count');
-                    if (countElement) {
-                        countElement.textContent = basketItems.length;
-                    }
-                }
-            }
-        } catch (error) {
-            console.error('장바구니 쿠키 처리 오류:', error);
-        }
-    },
-
-    // 쿠키 변경 확인 및 업데이트
-    checkAndUpdate() {
-        const currentCookie = this.getBasketCookie();
-        if (currentCookie !== this.lastCookieValue) {
-            this.lastCookieValue = currentCookie;
-            this.updateCount();
-        }
-    },
-
-    // 모니터링 시작
-    startMonitoring() {
-        // 초기값 설정
-        this.lastCookieValue = this.getBasketCookie();
-        this.updateCount();
-
-        // 주기적으로 쿠키 변경 확인
-        setInterval(() => {
-            this.checkAndUpdate();
-        }, 100);
-    }
-};
-
-// 페이지 로드 시 비회원인 경우에만 모니터링 시작
-document.addEventListener('DOMContentLoaded', function() {
-    const userId = "<%= userId %>";
-    
-    // 비회원일 때만 쿠키 기반 카운트 모니터링 실행
-    if (userId === "null" || userId === "") {
-        NonMemberCartManager.startMonitoring();
-    }
-});
-
-// 장바구니 담기 버튼 클릭 시 비회원인 경우에만 즉시 업데이트 트리거
-document.querySelector('.SP_cartBtn')?.addEventListener('click', function() {
-    const userId = "<%= userId %>";
-    if (userId === "null" || userId === "") {
-        setTimeout(() => {
-            NonMemberCartManager.checkAndUpdate();
-        }, 100);
-    }
-});
+		   updateCount() {
+		       const countElement = document.querySelector('.EC-Layout-Basket-count');
+		       if(countElement) {
+		           // 카운트를 실제 상품 개수로 표시
+		           const basketCookie = document.cookie
+		               .split('; ')
+		               .find(row => row.startsWith('basketItems='));
+		           const items = basketCookie ? basketCookie.split('=')[1].split(',') : [];
+		           countElement.textContent = items.length;
+		       }
+		   }
+		};
 </script>
+
 
   </body>
 </html>

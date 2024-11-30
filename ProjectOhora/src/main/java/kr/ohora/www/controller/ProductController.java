@@ -1,10 +1,16 @@
 package kr.ohora.www.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,7 +30,26 @@ public class ProductController {
         @RequestParam(defaultValue = "1") int currentPage,
         @RequestParam(defaultValue = "12") int numberPerPage,
         @RequestParam(defaultValue = "0") int categoryNumber,
-        Model model) {
+        Model model,
+        HttpServletRequest request,
+        @CookieValue(value = "basketItems", required = false) String basketItems) throws UnsupportedEncodingException {
+    	
+    	  // 모든 쿠키 출력해보기
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                System.out.println("쿠키이름: " + cookie.getName());
+                System.out.println("쿠키값: " + cookie.getValue());
+            }
+        }
+    	
+        if (basketItems != null) {
+            String notUserCartValue = URLDecoder.decode(basketItems, "UTF-8");
+            System.out.println("쿠키값@@@@@@@@@"+notUserCartValue);
+        }else {
+        	System.out.println("쿠키가 업서~~ null이양~!!!!!!!!!!!!!!!!!!");
+        }
+    	
         // 상품 리스트와 총 레코드 수 가져오기
         List<ProductDTO> productList = productService.getProductList(currentPage, numberPerPage, categoryNumber);
         int totalRecords = productService.getTotalRecords(categoryNumber);
@@ -33,6 +58,6 @@ public class ProductController {
         model.addAttribute("list", productList);
         model.addAttribute("totalRecords", totalRecords);
 
-        return "product.prdList"; // `WEB-INF/views/product/prdList.jsp`
+        return "prdList.prdList"; // `WEB-INF/views/product/prdList.jsp`
     }
 }

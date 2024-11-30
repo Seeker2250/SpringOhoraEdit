@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.ohora.www.persistence.OrderMapper"><!-- 패키지들이랑 interface 이름 -->
+
+	 <select id="selectUserInfo" resultType="kr.ohora.www.domain.user.UserDTO">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>
+    
+    <select id="selectAddrList" resultType="kr.ohora.www.domain.addr.AddrDTO">
+        SELECT * FROM address WHERE user_id = #{userId}
+    </select>
+    
+    <select id="selectCouponList" resultType="kr.ohora.www.domain.coupon.CouponDTO">
+        SELECT * FROM coupons WHERE user_id = #{userId}
+    </select>
+    
+    <select id="selectProductList" resultType="kr.ohora.www.domain.product.ProductDTO">
+        SELECT * FROM o_product 
+        WHERE pdt_id IN 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+	
+	
+</mapper>
