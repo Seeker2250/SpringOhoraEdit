@@ -5,25 +5,126 @@
   
 <mapper namespace="kr.ohora.www.persistence.OrderMapper"><!-- 패키지들이랑 interface 이름 -->
 
-	 <select id="selectUserInfo" resultType="kr.ohora.www.domain.user.UserDTO">
-        SELECT * FROM users WHERE user_id = #{userId}
+ <!-- 주문 INSERT -->
+ <!--String insertOrder(OrderDTO order);//주문에 insert-->
+     <insert id="insertOrder" parameterType="kr.ohora.www.domain.order.OrderDTO" useGeneratedKeys="true" keyProperty="orderId">
+         INSERT INTO o_order (
+             user_id, icpn_id, ord_name, ord_address, ord_zip_code, ord_tel, ord_email, ord_pay_option, 
+             ord_total_amount, ord_cpn_discount, ord_pdt_discount, ord_usepoint, ord_delivery_fee
+         ) VALUES (
+             #{userId}, #{icpnId}, #{rname}, #{address}, #{rzipcode1}, 
+             #{phone}, #{email1}, #{addrPaymethod}, 
+             #{totalSum}, #{discountSum}, #{icpnDc}, #{inputPoint}, #{deliveryFee}
+         )
+     </insert>
+ 
+     <!-- 포인트 확인 -->
+     <!-- int checkPoint(@Param("userId") int userId);//유저 포인트 몇이여 -->
+     <select id="checkPoint" parameterType="int" resultType="int">
+         SELECT user_point FROM o_user WHERE user_id = #{userId}
+     </select>
+
+     <!-- 포인트 업데이트 -->
+     <!-- int updateUsePoint(@Param("userId") int userId, @Param("updatedPoint") int updatedPoint);//포인트 업뎃 -->
+     <update id="updateUsePoint">
+         UPDATE o_user SET user_point = #{updatedPoint} WHERE user_id = #{userId}
+     </update>
+
+     <!-- 주문 상세 INSERT -->
+     <!-- int insertOrderDetail(
+            @Param("orderId") String orderId,
+            @Param("pdtName") String pdtName,
+            @Param("pdtCount") int pdtCount,
+            @Param("pdtAmount") int pdtAmount,
+            @Param("pdtDcAmount") int pdtDcAmount
+    );//주문 상세를 orddetail에 넣어 -->
+     <insert id="insertOrderDetail" parameterType="map">
+         INSERT INTO o_orddetail (
+             order_id, product_name, product_count, product_amount, product_discount_amount
+         ) VALUES (
+             #{orderId}, #{pdtName}, #{pdtCount}, #{pdtAmount}, #{pdtDcAmount}
+         )
+     </insert>
+
+     <!-- 장바구니 삭제 -->
+     <delete id="deleteCart">
+         DELETE FROM o_cartlist WHERE user_id = #{userId} AND pdt_id = #{pdtId}
+     </delete>
+
+     <!-- 쿠폰 삭제 -->
+     <delete id="deleteCoupon">
+         DELETE FROM o_coupon WHERE cpn_id = #{icpnId}
+     </delete>
+    
+    <!-- 주문 조회 있으면 이거로  -->
+	 <select id="selectOrderById" parameterType="String" resultType="kr.ohora.www.domain.order.OrderDTO">
+  	  SELECT 
+	        ord_id AS orderId,
+	        user_id AS userId,
+	        icpn_id AS icpnId,
+	        ord_name AS rname,
+	        ord_address,
+	        ord_zipcode AS rzipcode1,
+	        ord_tel AS phone,
+	        ord_email AS email1,
+	        ord_pay_option AS addrPaymethod,
+	        ord_total_amount AS totalSum,
+	        ord_cpn_discount AS discountSum,
+	        ord_pdt_discount AS icpnDc,
+	        ord_usepoint AS inputPoint,
+	        ord_delivery_fee AS deliveryFee
+	    FROM 
+	        o_order
+	    WHERE 
+	        order_id = #{orderId}
+</select>
+	
+	
+	<select id="selectUserInfo" resultType="kr.ohora.www.domain.UserDTO">
+      SELECT 
+       USER_ID as userId,
+       MEM_ID as memId,
+       AUTH_ID as authId,
+       USER_LOGIN_ID as userLoginId,
+       USER_PASSWORD as userPassword,
+       USER_NAME as userName,
+       USER_EMAIL as userEmail,
+       USER_TEL as userTel,
+       USER_BIRTH as userBirth,
+       USER_POINT as userPoint,
+       USER_SMSAGREE as userSmsAgree,
+       USER_JOINDATE as userJoindate
+  	 FROM o_user 
+   	 WHERE user_id = #{userId}
     </select>
     
-    <select id="selectAddrList" resultType="kr.ohora.www.domain.addr.AddrDTO">
-        SELECT * FROM address WHERE user_id = #{userId}
-    </select>
-    
-    <select id="selectCouponList" resultType="kr.ohora.www.domain.coupon.CouponDTO">
-        SELECT * FROM coupons WHERE user_id = #{userId}
+    <select id="selectAddrList" resultType="kr.ohora.www.domain.AddrDTO">
+        SELECT 
+        	ADDR_ID as addrId,
+	        USER_ID as userId,
+	        ADDR_NICK as addrNick,
+	        ADDR_NAME as addrName,
+	        ADDR_HTEL as addrHtel,
+	        ADDR_TEL as addrTel,
+	        ADDR_ADDRESS_MAIN as addrAddressMain,
+	        ADDR_ADDRESS_DETAIL as addrAddressDetail,
+	        ADDR_ZIPCODE as addrZipcode,
+	        ADDR_MAIN as addrMain
+        FROM o_address
+        WHERE user_id = #{userId}
     </select>
     
     <select id="selectProductList" resultType="kr.ohora.www.domain.product.ProductDTO">
-        SELECT * FROM o_product 
+        SELECT  
+        	PDT_ID as pdtId,
+    	    PDT_NAME as pdtName,
+     	    PDT_AMOUNT as pdtAmount,
+     	    PDT_DISCOUNT_RATE as pdtDiscountRate,
+     	    PDT_IMG_URL as pdtImgUrl FROM o_product 
         WHERE pdt_id IN 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </select>
-	
 	
 </mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ohora.www.persistence.UserMapper">
+   
+   <!-- 로그인 시큐리티 시작 -->
+   <resultMap type="kr.ohora.www.domain.UserDTO" id="UserMap">
+      <id property="userId" column="userId" />
+      <result property="userPassword" column="userPassword" />
+      <result property="userLoginId" column="userLoginId" />
+      <collection property="authList" resultMap="authMap"></collection>
+    </resultMap>
+    <resultMap type="kr.ohora.www.domain.AuthVO" id="authMap">
+      <result property="authName" column="authName" />
+    </resultMap>
+    
+	<select id="login" resultMap="UserMap">
+	    select  a.user_id as userId
+	                ,a.user_password as userPassword
+	                , user_login_id as userLoginId
+	                , 1 as enabled
+	                , b.auth_name as authName
+		from o_user a      join o_auth b on a.auth_id = b.auth_id
+		where user_login_id = #{id}
+	</select>
+    <!-- 로그인 시큐리티 끝 -->
+    
+	   <!-- 회원가입 -->
+   <!--  
+      INSERT INTO o_user 
+   ( user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, user_emailagree ) 
+    VALUES ( O_USER_SEQ.NEXTVAL , ? , ? , ? , ? , ?, ? , ?, ? ,? ,? ,? ,? ) 
+   -->
+   
+   <insert id="join">
+   <!--
+   <selectKey keyProperty="userId" resultType="int" order="AFTER">
+        SELECT O_USER_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    -->
+    INSERT INTO o_user
+    (user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, user_emailagree)
+    VALUES (O_USER_SEQ.NEXTVAL, 1, 2, #{userLoginId}, #{userPassword}, #{userName}, #{userEmail}, #{userTel}, 
+   <!-- userBirth가 null이면 NULL 삽입 -->
+     <if test="userBirth != null">
+        #{userBirth}
+     </if>
+     <if test="userBirth == null">
+        NULL
+     </if>,
+    #{userPoint}, #{userSmsAgree}, 
+    SYSDATE,
+       #{userEmailAgree})
+  </insert>
+</mapper>

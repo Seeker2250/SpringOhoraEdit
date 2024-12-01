@@ -104,14 +104,14 @@
 		<item value="org.springsource.sts:3.9.18.202109140905-RELEASE"/>
 	</list>
 	<section name="org.eclipse.text.quicksearch.internal.ui.QuickSearchDialog.DIALOG_SETTINGS">
-		<item key="LAST_QUERY" value="basketItems"/>
+		<item key="LAST_QUERY" value="&lt;context:component-scan base-package"/>
 		<item key="PATH_FILTER" value=""/>
 		<item key="CASE_SENSITIVE" value="true"/>
 		<item key="KEEP_OPEN" value="false"/>
 		<list key="COLUMN_WIDTHS">
 			<item value="40"/>
 			<item value="400"/>
-			<item value="593"/>
+			<item value="610"/>
 		</list>
 		<list key="SASH_WEIGHTS">
 			<item value="714"/>

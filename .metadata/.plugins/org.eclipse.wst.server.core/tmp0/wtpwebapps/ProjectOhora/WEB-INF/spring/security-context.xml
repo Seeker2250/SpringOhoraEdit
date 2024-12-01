@@ -5,16 +5,41 @@
    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <!-- 에러 : spring-security-4.2.xsd 수정. -->   
-          
-   <security:http pattern="/static/**" security="none"></security:http>   
-   <security:http pattern="/design/**" security="none"></security:http>   
+    <!-- 에러 : spring-security-4.2.xsd 수정. -->
    
-   <security:http> 
-      <security:form-login/>  
-   </security:http>   
+   <security:http pattern="/resources/js/**" security="none"></security:http>
+   <security:http pattern="/resources/css/**" security="none"></security:http>
    
-   <security:authentication-manager> 
+   <security:http use-expressions="true">
+   
+    <!-- 관리자 페이지 따로 설정 필요함 -->
+      <security:intercept-url pattern="/**" access="permitAll" />
+      
+      <!-- 페이지 설정 따로 필요하다. -->
+      <security:form-login
+         login-page=""
+         default-target-url=""
+         authentication-failure-url="/login.htm?login=fail"
+         authentication-success-handler-ref="customLoginSuccessHandler"
+      />
+      
+      <!-- <security:access-denied-handler ref="" /> -->
+      
+      <!-- 페이지 설정 따로 필요하다. -->
+      <security:logout
+         logout-url=""
+         invalidate-session="true"
+         logout-success-url=""
+      />
+      
+   </security:http>
+   
+   <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+   
+   <security:authentication-manager>
+      <security:authentication-provider user-service-ref="customUserDetailsService">
+         <security:password-encoder ref="bCryptPasswordEncoder" />
+      </security:authentication-provider>
    </security:authentication-manager>
-
+   
 </beans>
