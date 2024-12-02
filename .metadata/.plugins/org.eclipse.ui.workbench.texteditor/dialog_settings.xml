@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="mybatis"/>
+		<item key="selection" value="Detail"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="mybatis"/>
-			<item value="action"/>
-			<item value="form"/>
-			<item value="${"/>
-			<item value="context"/>
-			<item value="&lt;c:forEach"/>
-			<item value="OrderPage"/>
-			<item value="nouser"/>
-			<item value=".do"/>
-			<item value="cookie"/>
+			<item value="detail"/>
+			<item value="상세"/>
+			<item value="insertDe"/>
+			<item value="insertD"/>
+			<item value="ordId"/>
+			<item value="getOrdId"/>
+			<item value="orderId"/>
+			<item value="PRODUCT_DISCOUNT_AMOUNT"/>
+			<item value="pdt.pdtName"/>
+			<item value="return"/>
+			<item value="INSER"/>
+			<item value="&lt;selectKey keyProperty=&quot;ordId&quot; resultType=&quot;string&quot; order=&quot;AFTER&quot;&gt;&#x0A;        SELECT ord_id &#x0A;        FROM o_order &#x0A;        WHERE ord_pk = #{ordPk}&#x0A;    &lt;/selectKey&gt;"/>
+			<item value="insertOrder"/>
+			<item value="insertOrder."/>
+			<item value="addrList"/>
 		</list>
 		<list key="replacehistory">
+			<item value="pdtCounts"/>
+			<item value="pdtCount"/>
 			<item value="Order"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1487"/>
-		<item key="DIALOG_Y_ORIGIN" value="242"/>
+		<item key="DIALOG_X_ORIGIN" value="1626"/>
+		<item key="DIALOG_Y_ORIGIN" value="623"/>
 		<item key="DIALOG_WIDTH" value="288"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_HEIGHT" value="369"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 </section>

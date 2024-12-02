@@ -13,33 +13,33 @@
    <security:http use-expressions="true">
    
     <!-- 관리자 페이지 따로 설정 필요함 -->
-      <security:intercept-url pattern="/**" access="permitAll" />
-      
-      <!-- 페이지 설정 따로 필요하다. -->
-      <security:form-login
-         login-page=""
-         default-target-url=""
-         authentication-failure-url="/login.htm?login=fail"
-         authentication-success-handler-ref="customLoginSuccessHandler"
-      />
-      
-      <!-- <security:access-denied-handler ref="" /> -->
-      
-      <!-- 페이지 설정 따로 필요하다. -->
-      <security:logout
-         logout-url=""
-         invalidate-session="true"
-         logout-success-url=""
-      />
-      
+   	<security:intercept-url pattern="/**" access="permitAll" />
+   	
+   	<!-- 페이지 설정 따로 필요하다. -->
+   	<security:form-login
+   		login-page="/goLogin.htm"
+   		default-target-url=""
+   		authentication-failure-url="/login.htm?login=fail"
+   		authentication-success-handler-ref="customLoginSuccessHandler"
+   	/>
+   	
+   	<!-- <security:access-denied-handler ref="" /> -->
+   	
+   	<!-- 페이지 설정 따로 필요하다. / 로그아웃 성공 시 메인페이지로 보내야된다. -->
+   	<security:logout
+   		logout-url="/logout.htm"
+   		invalidate-session="true"
+   		logout-success-url="/main.htm"
+   	/>
+   	
    </security:http>
    
    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
    
    <security:authentication-manager>
-      <security:authentication-provider user-service-ref="customUserDetailsService">
-         <security:password-encoder ref="bCryptPasswordEncoder" />
-      </security:authentication-provider>
+   	<security:authentication-provider user-service-ref="customUserDetailsService">
+   		<security:password-encoder ref="bCryptPasswordEncoder" />
+   	</security:authentication-provider>
    </security:authentication-manager>
    
 </beans>

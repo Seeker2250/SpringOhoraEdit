@@ -2,13 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%
 Integer userId = (Integer) session.getAttribute("userId");
-Integer productCount = (Integer) session.getAttribute("productCount");
+Integer pdtCount = (Integer) session.getAttribute("pdtCount"); // 스프링 수정
 
 // 값 확인
 System.out.println("header userId : " + userId);
-System.out.println("header productCount : " + productCount);
+System.out.println("header pdtCount : " + pdtCount); // 스프링 수정
 
 String contextPath = request.getContextPath();
 
@@ -92,31 +93,24 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
               class="xans-element- xans-layout xans-layout-statelogoff SP_gnb_inr"
             >
             <!-- 갱신함 / 경로는 아직 안넣음 -->
-            <%
-               if ( userId == null ) {
-            %>
-                 <a href="<%= contextPath %>/ohora.do?join=signup"><span class="title">회원가입</span></a>|
-                 <a href="<%= contextPath %>/ohora.do?login=gologin" class="log"><span class="title">로그인</span></a>
-            <%      
-               } else if  ( userId == 1001 ) {
-            %>
-                <a href="<%= contextPath %>/admin/product.do"><span class="title">관리자페이지</span></a>|
-                <a href="<%=contextPath %>/logout/logout.do" class="log"><span class="title">로그아웃</span></a>
-            <%
-               } else {
-            %>
-                <a href="<%= contextPath %>/mypage/mypage.do?user_id=<%= userId %>"><span class="title">마이페이지</span></a>|
-                <a href="<%=contextPath %>/logout/logout.do" class="log"><span class="title">로그아웃</span></a>
-              <%
-               } 
-            %>
+     		<sec:authorize access="isAnonymous()">
+            	<a href="<%= contextPath %>/join.htm"><span class="title">회원가입</span></a>|
+                <a href="<%= contextPath %>/login.htm" class="log"><span class="title">로그인</span></a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+            	<a href="<%= contextPath %>/user/mypage.htm"><span class="title">마이페이지</span></a>|
+            	<form action="/logout.htm" method="post">
+                	<button class="title">로그아웃</button>
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                </form>
+            </sec:authorize>
             </div>
           </div>
         </div>
         <div class="SMS_fixed_inner">
           <div class="xans-element- xans-layout xans-layout-logotop fixed_logo">
             <a
-              href="<%= contextPath %>/product/main.do"
+              href="/main.htm"
               style="display: block; text-align: center; margin-top: 30px"
             >
               <img
@@ -130,43 +124,35 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
           <div class="gnb_menu_container">
             <ul class="gnb_menu_wrap menu_1ul">
               <li class="eng_font menu_1li submenu">
-                <a href="/projectOhora/product/list.do?sort=new" style="color:black !important;">new</a>
+                <a href="/prdList.htm?sort=new" style="color:black !important;">new</a>
               </li>
               <li class="eng_font menu_1li submenu">
-                <a href="/projectOhora/product/list.do?sort=sales" style="color:black !important;">best</a>
+                <a href="/prdList.htm?sort=sales" style="color:black !important;">best</a>
               </li>
 
               <li class="eng_font">
-                <a href="/projectOhora/product/list.do" style="color:black !important;">product</a>
+                <a href="/prdList.htm" style="color:black !important;">product</a>
 
                 <!-- 마우스 오버 시 나오는 영역(product) -->
                 <ul class="menu_2ul">
                   <li>
-                    <a href="/projectOhora/product/list.do?catno=1&currentPage=1"
-                      ><span>네일</span></a
-                    >
+                    <a href="<c:url value='/prdList.htm?pageNum=1&categoryNumber=1' />"><span>네일</span></a>
                   </li>
                   <li>
-                    <a href="/projectOhora/product/list.do?catno=2&currentPage=1"
-                      ><span>페디</span></a
-                    >
+                    <a href="<c:url value='/prdList.htm?pageNum=1&categoryNumber=2' />"><span>페디</span></a>
                   </li>
                   <li>
-                    <a href="/projectOhora/product/list.do?catno=1&currentPage=1"
-                      ><span>커스텀</span></a
-                    >
+                    <a href=#><span>커스텀</span></a>
                   </li>
                   <li>
-                    <a href="/projectOhora/product/list.do?catno=3&currentPage=1"
-                      ><span>케어 &amp; 툴</span></a
-                    >
+                    <a href="<c:url value='/prdList.htm?pageNum=1&categoryNumber=3' />"><span>케어 &amp; 툴</span></a>
                   </li>
                 </ul>
                 <!-- //마우스 오버 시 나오는 영역(product) -->
               </li>
 
               <li class="eng_font menu_1li submenu">
-                <a href="/projectOhora/product/list.do?sort=outlet" style="color:black !important;" onclick="checkLogin(event)">outlet</a>
+                <a href="/outlet.htm?pageNum=1" style="color:black !important;" onclick="checkLogin(event)">outlet</a>
               </li>
               <li class="eng_font"><a href="<%= contextPath %>/ohora.do?event=event" style="color:black !important;">event</a></li>
               <li class="eng_font">
@@ -182,22 +168,24 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
               class="xans-element- xans-layout xans-layout-orderbasketcount small_icon m_cart common_cart"
             >
               <!-- 고정 값 0 을 어떻게 동적으로 바꾸는가 -->
-              <c:choose>
-             <c:when test="${userId != null}">
-                 <form action="<%=contextPath %>/cart/useriscart.do" method="post" id="CartForm">
-                     <a href="#" id="goCart">
-                         <b class="count EC-Layout-Basket-count">${productCount}</b>
-                     </a>
-                 </form>
-             </c:when>
-             <c:otherwise>
-                 <form action="<%=contextPath %>/notusercart.htm" method="post" id="CartForm">
+             
+             <sec:authorize access="isAnonymous()">
+            	<form action="<%=contextPath %>/cart/nousercart.do" method="post" id="CartForm">
                      <a href="#" id="goCart">
                          <b class="count EC-Layout-Basket-count" >0</b>
                      </a>
                  </form>
-             </c:otherwise>
-         </c:choose>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+            	<form action="<%=contextPath %>/userCart/select.htm"  method="get" id="CartForm">
+                     <a href="#" id="goCart">
+                         <b class="count EC-Layout-Basket-count">${pdtCount}</b> <!-- ${productCount} -->
+                     </a>
+                     <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
+                 </form>
+            </sec:authorize>
+             
+             
             </div>
             <div class="small_icon m_menu"><a class="SMS_menu"></a></div>
           </div>
@@ -210,7 +198,7 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
           <form
             id="searchBarForm"
             name=""
-            action="/projectOhora/product/list.do"
+            action="/prdList.htm"
             method="get"
             target="_self"
             enctype="multipart/form-data"
@@ -280,10 +268,10 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
               <a class="eng_font big_" href="/projectOhora/product/list.do?sort=sales">
                 <span>best</span>
               </a>
-              <a href="/projectOhora/product/list.do?catno=1&currentPage=1">
+              <a href="/projectOhora/product/list.do?catno=1&pageNum=1">
                 <span>네일</span>
               </a>
-              <a href="/projectOhora/product/list.do?catno=2&currentPage=1">
+              <a href="/projectOhora/product/list.do?catno=2&pageNum=1">
                 <span>페디</span>
               </a>
             </div>
@@ -493,7 +481,7 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
       });
     </script>
     
-     <script>
+     <!-- <script>
       function checkLogin(event) {
           // 로그인 여부 확인
           if (!isLoggedIn) {
@@ -503,31 +491,88 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
           }
           // 로그인된 경우 링크 이동 (기본 동작)
       }
-   </script>
+   </script> -->
     
-    <script type="text/javascript">
+    <%-- <script type="text/javascript">
     // JavaScript 변수에 로그인 상태 전달
     var isLoggedIn = <%= isLoggedIn %>;
-</script>
+</script> --%>
 
 
   
-<script>
+<%-- <script>
+//비회원 전용 장바구니 카운트 관리자
 const NonMemberCartManager = {
-		   updateCount() {
-		       const countElement = document.querySelector('.EC-Layout-Basket-count');
-		       if(countElement) {
-		           // 카운트를 실제 상품 개수로 표시
-		           const basketCookie = document.cookie
-		               .split('; ')
-		               .find(row => row.startsWith('basketItems='));
-		           const items = basketCookie ? basketCookie.split('=')[1].split(',') : [];
-		           countElement.textContent = items.length;
-		       }
-		   }
-		};
-</script>
+    lastCookieValue: null,
 
+    // 쿠키값 가져오기
+    getBasketCookie() {
+        const cookie = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('basketItems='));
+        return cookie ? cookie.split('=')[1] : null;
+    },
+
+    // 카운트 업데이트
+    updateCount() {
+        try {
+            const cookieValue = this.getBasketCookie();
+            if (cookieValue) {
+                const basketItems = JSON.parse(decodeURIComponent(cookieValue));
+                if (Array.isArray(basketItems)) {
+                    const countElement = document.querySelector('.EC-Layout-Basket-count');
+                    if (countElement) {
+                        countElement.textContent = basketItems.length;
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('장바구니 쿠키 처리 오류:', error);
+        }
+    },
+
+    // 쿠키 변경 확인 및 업데이트
+    checkAndUpdate() {
+        const currentCookie = this.getBasketCookie();
+        if (currentCookie !== this.lastCookieValue) {
+            this.lastCookieValue = currentCookie;
+            this.updateCount();
+        }
+    },
+
+    // 모니터링 시작
+    startMonitoring() {
+        // 초기값 설정
+        this.lastCookieValue = this.getBasketCookie();
+        this.updateCount();
+
+        // 주기적으로 쿠키 변경 확인
+        setInterval(() => {
+            this.checkAndUpdate();
+        }, 100);
+    }
+};
+
+// 페이지 로드 시 비회원인 경우에만 모니터링 시작
+document.addEventListener('DOMContentLoaded', function() {
+    const userId = "<%= userId %>";
+    
+    // 비회원일 때만 쿠키 기반 카운트 모니터링 실행
+    if (userId === "null" || userId === "") {
+        NonMemberCartManager.startMonitoring();
+    }
+});
+
+// 장바구니 담기 버튼 클릭 시 비회원인 경우에만 즉시 업데이트 트리거
+document.querySelector('.SP_cartBtn')?.addEventListener('click', function() {
+    const userId = "<%= userId %>";
+    if (userId === "null" || userId === "") {
+        setTimeout(() => {
+            NonMemberCartManager.checkAndUpdate();
+        }, 100);
+    }
+});
+</script> --%>
 
   </body>
 </html>

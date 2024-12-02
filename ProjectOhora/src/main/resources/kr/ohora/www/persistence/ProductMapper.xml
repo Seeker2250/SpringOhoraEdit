@@ -5,88 +5,237 @@
   
 <mapper namespace="kr.ohora.www.persistence.ProductMapper"><!-- 패키지들이랑 interface 이름 -->
 
+	<select id="selectAllProducts" resultType="kr.ohora.www.domain.product.ProductDTO">
+	    SELECT 
+	        p.pdt_id AS pdtId, 
+	        p.pdt_name AS pdtName, 
+	        p.pdt_amount AS pdtAmount, 
+	        p.pdt_discount_rate AS pdtDiscountRate, 
+	        p.pdt_img_url AS pdtImgUrl, 
+	        p.pdt_img_url2 AS pdtImgUrl2, 
+	        p.pdt_review_count AS pdtReviewCount,
+	        p.pdt_adddate AS pdtAdddate,
+	        (CASE 
+	            WHEN p.pdt_discount_rate != 0 
+	            THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
+	            ELSE p.pdt_amount 
+	        END) AS pdtDiscountAmount,
+	        c.cat_name AS catName
+	    FROM O_PRODUCT p
+	    LEFT JOIN O_CATEGORY c
+	    ON p.cat_id = c.cat_id
+	    <where>
+	        <if test="categoryNumber != null and categoryNumber != 0">
+	            p.cat_id = #{categoryNumber, jdbcType=INTEGER}
+	        </if>
+	    </where>
+	    <choose>
+	        <when test="sort == 'sales'">
+	            ORDER BY p.pdt_sales_count DESC
+	        </when>
+	        <when test="sort == 'views'">
+	            ORDER BY p.pdt_viewcount DESC
+	        </when>
+	        <otherwise>
+	            ORDER BY p.pdt_adddate DESC
+	        </otherwise>
+	    </choose>
+	</select>
+
+	
+
+
+	<resultMap id="ProductWithOptionsResultMap" type="kr.ohora.www.domain.product.ProductDTO">
+	    <id property="pdtId" column="pdtId"/>
+	    <result property="pdtName" column="pdtName"/>
+	    <result property="pdtAmount" column="pdtAmount"/>
+	    <result property="pdtDiscountRate" column="pdtDiscountRate"/>
+	    <result property="pdtImgUrl" column="pdtImgUrl"/>
+	    <result property="pdtImgUrl2" column="pdtImgUrl2"/>
+	    <result property="pdtReviewCount" column="pdtReviewCount"/>
+	    <result property="pdtSalesCount" column="pdtSalesCount"/>
+	    <result property="catId" column="catId"/>
+	    <result property="pdtDescription" column="pdtDescription"/>
+	    <result property="pdtViewcount" column="pdtViewcount"/>
+	    <result property="pdtDiscountAmount" column="pdtDiscountAmount"/>
+	    <collection property="options" ofType="kr.ohora.www.domain.product.OptionDTO">
+	        <id property="optId" column="optId"/>
+	        <result property="optName" column="optName"/>
+	        <result property="optAmount" column="optAmount"/>
+	        <result property="optCount" column="optCount"/>
+	    </collection>
+	</resultMap>
+
+	<select id="selectDetailViewProduct" resultMap="ProductWithOptionsResultMap">
+	    SELECT 
+	        P.pdt_id AS pdtId,
+	        P.pdt_name AS pdtName,
+	        P.pdt_amount AS pdtAmount,
+	        P.pdt_discount_rate AS pdtDiscountRate,
+	        P.pdt_img_url AS pdtImgUrl,
+	        P.pdt_img_url2 AS pdtImgUrl2,
+	        P.pdt_review_count AS pdtReviewCount,
+	        P.pdt_sales_count AS pdtSalesCount,
+	        P.cat_id AS catId,
+	        P.pdt_description AS pdtDescription,
+	        P.pdt_viewcount AS pdtViewcount,
+	        (CASE 
+	             WHEN P.pdt_discount_rate != 0 
+	             THEN P.pdt_amount - (P.pdt_amount * (P.pdt_discount_rate / 100.0)) 
+	             ELSE P.pdt_amount 
+	         END) AS pdtDiscountAmount,
+	        O.opt_id AS optId,
+	        O.opt_name AS optName,
+	        O.opt_amount AS optAmount,
+	        O.opt_count AS optCount
+	    FROM O_PRODUCT P
+	    LEFT JOIN O_PDTOPTION O ON P.pdt_id = O.pdt_id
+	    WHERE P.pdt_id = #{productId}
+	</select>
+	
+
 	<!-- ArrayList<ProductDTO> select(int currentPage, int numberPerPage) throws SQLException; -->
-		<select id="selectProducts" resultType="kr.ohora.www.domain.product.ProductDTO" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
-		    SELECT * 
-		    FROM (
-		        SELECT ROWNUM AS no, t.* 
-		        FROM (
-		            SELECT 
-		                p.pdt_id AS pdtId, 
-		                p.pdt_name AS pdtName, 
-		                p.pdt_amount AS pdtAmount, 
-		                p.pdt_discount_rate AS pdtDiscountRate, 
-		                p.pdt_img_url AS pdtImgUrl, 
-		                p.pdt_img_url2 AS pdtImgUrl2, 
-		                p.pdt_review_count AS pdtReviewCount,
-		                (CASE 
-		                    WHEN p.pdt_discount_rate != 0 
-		                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
-		                    ELSE p.pdt_amount 
-		                END) AS pdtDiscountAmount,
-		                c.cat_name AS catName
-		            FROM O_PRODUCT p
-		            LEFT JOIN O_CATEGORY c
-		            ON p.cat_id = c.cat_id
-		            <where>
-		                <if test="categoryNumber != 0">
-		                    p.cat_id = #{categoryNumber}
-		                </if>
-		            </where>
-		            ORDER BY p.pdt_id DESC
-		        ) t
-		    ) b
-		    WHERE no BETWEEN #{start} AND #{end}
-		</select>
-<!-- 	<select id="selectProducts" resultType="kr.ohora.www.domain.product.ProductDTO" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
+	<select id="selectProducts" resultType="kr.ohora.www.domain.product.ProductDTO" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
 	    SELECT * 
 	    FROM (
 	        SELECT ROWNUM AS no, t.* 
 	        FROM (
 	            SELECT 
-	                p.pdt_id, 
-	                p.pdt_name, 
-	                p.pdt_amount, 
-	                p.pdt_discount_rate, 
-	                p.pdt_img_url, 
-	                p.pdt_img_url2, 
-	                p.pdt_review_count,
+	                p.pdt_id AS pdtId, 
+	                p.pdt_name AS pdtName, 
+	                p.pdt_amount AS pdtAmount, 
+	                p.pdt_discount_rate AS pdtDiscountRate, 
+	                p.pdt_img_url AS pdtImgUrl, 
+	                p.pdt_img_url2 AS pdtImgUrl2, 
+	                p.pdt_review_count AS pdtReviewCount,
 	                (CASE 
 	                    WHEN p.pdt_discount_rate != 0 
 	                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
 	                    ELSE p.pdt_amount 
-	                END) AS pdt_discount_amount,
-	                c.cat_name
+	                END) AS pdtDiscountAmount,
+	                c.cat_name AS catName
 	            FROM O_PRODUCT p
 	            LEFT JOIN O_CATEGORY c
 	            ON p.cat_id = c.cat_id
- 	            <where>
+	            <where>
 	                <if test="categoryNumber != 0">
 	                    p.cat_id = #{categoryNumber}
 	                </if>
+	                <if test="keyword != null and keyword != ''">
+	                    AND p.pdt_name LIKE '%' || #{keyword} || '%'
+	                </if>
 	            </where>
-	            ORDER BY p.pdt_id DESC
+	            <choose>
+	                <when test="sort == 'sales'">
+	                    ORDER BY p.pdt_sales_count DESC
+	                </when>
+	                <when test="sort == 'views'">
+	                    ORDER BY p.pdt_viewcount DESC
+	                </when>
+	                <otherwise>
+	                    ORDER BY p.pdt_adddate DESC
+	                </otherwise>
+	            </choose>
 	        ) t
 	    ) b
-	    WHERE no BETWEEN #{start} AND #{end};
-	</select> -->
+	    WHERE no BETWEEN #{start} AND #{end}
+	</select>
+
 
     
-    <!-- int getTotalRecords(int categoryNumber) throws SQLException; -->
     <select id="getTotalRecords" resultType="int" parameterType="kr.ohora.www.domain.product.ProductSearchDTO">
-        SELECT COUNT(*)
-        FROM O_PRODUCT
-        <if test="categoryNumber != 0">
-            WHERE CAT_ID = #{categoryNumber}
-        </if>
-    </select>
+	    SELECT COUNT(*)
+	    FROM O_PRODUCT p
+	    <where>
+	        <if test="categoryNumber != 0">
+	            p.cat_id = #{categoryNumber}
+	        </if>
+	        <if test="keyword != null and keyword != ''">
+	            AND p.pdt_name LIKE '%' || #{keyword} || '%'
+	        </if>
+	    </where>
+	</select>
+    
 	
 	<!-- int hitUp(int pdtId) throws SQLException; -->
 	<update id="hitUp">
 		UPDATE o_product 
         SET pdt_viewcount = pdt_viewcount + 1 
-        WHERE pdt_id = #{pdt_id}
+        WHERE pdt_id = #{productId}
 	</update>
+	
+	
+	<!-- 아울렛 상품 조회 -->
+	<select id="selectOutletProducts" resultType="kr.ohora.www.domain.product.ProductDTO">
+	    SELECT * 
+	    FROM (
+	        SELECT ROWNUM AS no, t.* 
+	        FROM (
+	            SELECT 
+	                p.pdt_id AS pdtId, 
+	                p.pdt_name AS pdtName, 
+	                p.pdt_amount AS pdtAmount, 
+	                p.pdt_discount_rate AS pdtDiscountRate, 
+	                p.pdt_img_url AS pdtImgUrl, 
+	                p.pdt_img_url2 AS pdtImgUrl2, 
+	                p.pdt_review_count AS pdtReviewCount,
+	                (CASE 
+	                    WHEN p.pdt_discount_rate != 0 
+	                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
+	                    ELSE p.pdt_amount 
+	                END) AS pdtDiscountAmount
+	            FROM O_PRODUCT p
+	            WHERE p.pdt_discount_rate >= 40
+	            ORDER BY p.pdt_adddate DESC
+	        ) t
+	    ) b
+	    WHERE no BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 아울렛 상품 총 레코드 수 -->
+	<select id="getOutletTotalRecords" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM O_PRODUCT p
+	    WHERE p.pdt_discount_rate >= 40
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="insertProduct" parameterType="kr.ohora.www.domain.product.ProductDTO">
+	    INSERT INTO O_PRODUCT (
+	        PDT_ID, 
+	        CAT_ID, 
+	        SCAT_ID, 
+	        PDT_NUMBER, 
+	        PDT_NAME, 
+	        PDT_AMOUNT, 
+	        PDT_DISCOUNT_RATE, 
+	        PDT_IMG_URL, 
+	        PDT_COUNT, 
+	        PDT_REVIEW_COUNT, 
+	        PDT_SALES_COUNT, 
+	        PDT_ADDDATE, 
+	        PDT_VIEWCOUNT, 
+	        PDT_IMG_URL2, 
+	        PDT_DESCRIPTION
+	    ) VALUES (
+	        o_pdt_seq.NEXTVAL, 
+	        #{catId, jdbcType=INTEGER}, 
+	        #{scatId, jdbcType=INTEGER}, 
+	        #{pdtNumber, jdbcType=INTEGER}, 
+	        #{pdtName, jdbcType=VARCHAR}, 
+	        #{pdtAmount, jdbcType=INTEGER}, 
+	        #{pdtDiscountRate, jdbcType=INTEGER}, 
+	        #{pdtImgUrl, jdbcType=VARCHAR}, 
+	        #{pdtCount, jdbcType=INTEGER}, 
+	        #{pdtReviewCount, jdbcType=INTEGER}, 
+	        #{pdtSalesCount, jdbcType=INTEGER}, 
+	        SYSDATE, 
+	        #{pdtViewcount, jdbcType=INTEGER}, 
+	        #{pdtImgUrl2, jdbcType=VARCHAR}, 
+	        #{pdtDescription, jdbcType=VARCHAR}
+	    )
+	</insert>
+
 	
 	
 </mapper>

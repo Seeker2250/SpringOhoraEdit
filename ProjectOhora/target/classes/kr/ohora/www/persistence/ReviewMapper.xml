@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ohora.www.persistence.ReviewMapper"><!-- 패키지들이랑 interface 이름 -->
+
+	<select id="select"
+		resultType="kr.ohora.www.domain.review.ReviewDTO">
+		SELECT * FROM (
+		SELECT
+		REV_ID AS revId ,
+		r.USER_ID AS userId,
+		ORD_PK AS ordPk ,
+		OPDT_ID AS opdtId ,
+		REV_CONTENT AS revContent ,
+		REV_WRITEDATE AS revWritedate ,
+		REV_RATING AS revRating ,
+		REV_GOOD_COUNT AS revGoodCount ,
+		REV_BAD_COUNT AS revBadCount ,
+		REV_COMMENT_COUNT revCommentCount ,
+		REV_ISRECOMMEND AS revIsrecommend ,
+		REV_ISPHOTO AS revIsphoto ,
+		REV_AGE_GROUP AS revAgeGroup ,
+		REV_OPTION AS revOption ,
+		PDT_ID AS pdtId ,
+		CASE WHEN (SYSDATE - REV_WRITEDATE) &lt; 1 THEN 'true' ELSE 'false' END AS
+		new,
+		u.USER_NAME AS userName
+		FROM o_review r
+		JOIN o_user u ON r.user_id = u.user_id
+		WHERE pdt_id = #{pdt_id}
+
+		<choose>
+			<when test="sort == 'recommend'">
+				ORDER BY
+				CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END,
+				REV_GOOD_COUNT DESC
+			</when>
+			<when test="sort == 'new'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END, REV_WRITEDATE
+				DESC
+			</when>
+			<when test="sort == 'rating'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END, REV_RATING
+				DESC
+			</when>
+			<when test="sort == 'photo'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END,
+				CASE WHEN REV_ISPHOTO = 'Y' THEN 0 ELSE 1 END
+			</when>
+		</choose>
+
+		) WHERE ROWNUM &lt; 3
+
+	</select>
+
+	<select id="midiaCount" resultType="Integer">
+		SELECT COUNT(CASE WHEN rev_isphoto='Y' THEN 1 END) mediaCnt
+		FROM o_review
+		WHERE pdt_id = #{pdt_id}
+	</select>
+
+	<select id="selectPhotos"
+		resultType="kr.ohora.www.domain.review.RevMedia">
+		SELECT u.rev_id AS revId
+		, filesystemname
+		, fileoriginalname
+		FROM o_revurl u JOIN o_review w ON u.rev_id = w.rev_id
+		WHERE pdt_id = #{pdt_id}
+	</select>
+
+	<select id="ratingAVG"
+		resultType="kr.ohora.www.domain.review.ReviewRating">
+		SELECT
+		AVG(rev_rating) AS avgRating,
+		COUNT(CASE WHEN rev_rating = 5 THEN 1 END) AS count5,
+		COUNT(CASE WHEN rev_rating = 4 THEN 1 END) AS count4,
+		COUNT(CASE WHEN rev_rating = 3 THEN 1 END) AS count3,
+		COUNT(CASE WHEN rev_rating = 2 THEN 1 END) AS count2,
+		COUNT(CASE WHEN rev_rating = 1 THEN 1 END) AS count1
+		FROM o_review
+		WHERE pdt_id = #{pdt_id}
+	</select>
+
+
+	<!-- 댓글 불러오기 -->
+
+	<select id="cmtSelect"
+		resultType="kr.ohora.www.domain.review.CommentDTO">
+		select CMT_ID AS cmtId,
+		REV_ID AS revId,
+		oc.USER_ID AS userId ,
+		CMT_WRITEDATE AS cmtWritedate,
+		CMT_CONTENT AS cmtContent,
+		USER_NAME AS userName
+		from o_comment oc JOIN o_user ou ON oc.user_id = ou.user_id
+		where rev_id = #{revId}
+		order by cmt_writedate DESC
+	</select>
+
+	<!-- 댓글 작성하기 -->
+	<insert id="insertComment">
+		INSERT INTO o_comment VALUES ( O_COMMENT_SEQ.NEXTVAL , #{revId} , #{userId}
+		, #{writedate} , #{comment} )
+	</insert>
+
+	<!-- 리뷰 댓글 숫자 업 -->
+	<update id="cmtUp">
+		UPDATE o_review SET rev_comment_count = rev_comment_count + 1 WHERE rev_id =
+		#{revId}
+	</update>
+
+	<!-- 댓글 삭제하기 -->
+	<delete id="deleteComment">
+		delete from o_comment where cmt_id = #{cmtId}
+	</delete>
+
+	<!-- 리뷰 댓글 숫자 다운 -->
+	<update id="cmtDown">
+		update o_review set rev_comment_count = rev_comment_count -1 WHERE rev_id =
+		#{revId}
+	</update>
+
+
+	<!-- 리뷰 더보기 -->
+	<select id="selectMoreReview" parameterType="map"
+		resultType="kr.ohora.www.domain.review.ReviewDTO">
+		SELECT e.*
+		FROM (
+		SELECT ROWNUM rnn, tmp.*
+		FROM (
+		SELECT ROWNUM rn,
+		REV_ID AS revId,
+		r.USER_ID AS userId,
+		ORD_PK AS ordPk,
+		OPDT_ID AS opdtId,
+		REV_CONTENT AS revContent,
+		REV_WRITEDATE AS revWritedate,
+		REV_RATING AS revRating,
+		REV_GOOD_COUNT AS revGoodCount,
+		REV_BAD_COUNT AS revBadCount,
+		REV_COMMENT_COUNT AS revCommentCount,
+		REV_ISRECOMMEND AS revIsrecommend,
+		REV_ISPHOTO AS revIsphoto,
+		REV_AGE_GROUP AS revAgeGroup,
+		REV_OPTION AS revOption,
+		PDT_ID AS pdtId,
+		CASE WHEN (SYSDATE - REV_WRITEDATE) &lt; 1 THEN 'true' ELSE 'false' END AS
+		new,
+		u.USER_NAME AS userName
+		FROM o_review r
+		JOIN o_user u ON r.user_id = u.user_id
+		WHERE pdt_id = #{pdtId}
+		<choose>
+			<when test="sort == 'recommend'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END,
+				REV_GOOD_COUNT DESC
+			</when>
+			<when test="sort == 'new'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END, REV_WRITEDATE
+				DESC
+			</when>
+			<when test="sort == 'rating'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END, REV_RATING
+				DESC
+			</when>
+			<when test="sort == 'photo'">
+				ORDER BY CASE WHEN REV_ISRECOMMEND = 'Y' THEN 0 ELSE 1 END, CASE WHEN
+				REV_ISPHOTO = 'Y' THEN 0 ELSE 1 END
+			</when>
+		</choose>
+		) tmp
+		ORDER BY rn ASC
+		) e
+		WHERE rnn &gt;= (#{currentRevPage} * 2) + 1 AND rnn &lt;=
+		(#{currentRevPage} * 2) + 2
+		ORDER BY rnn ASC
+	</select>
+
+
+	<!-- 리뷰 사진들 -->
+
+	<select id="selectPhotosByRevId"
+		resultType="kr.ohora.www.domain.review.RevMedia">
+		SELECT r.rev_id revId
+		, filesystemname
+		FROM o_review r JOIN o_revurl u ON r.rev_id = u.rev_id
+		WHERE r.rev_id =
+		#{revId}
+	</select>
+
+	<!-- 전체 리뷰 갯수 -->
+
+	<select id="getTotalRevCnt"
+		resultType="Integer">
+		select pdt_review_count as allRevCnt
+		from o_product
+		where
+		pdt_id = #{pdtId}
+	</select>
+
+
+
+</mapper>

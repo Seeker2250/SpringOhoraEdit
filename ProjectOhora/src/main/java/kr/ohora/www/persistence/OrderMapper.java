@@ -11,15 +11,21 @@ import kr.ohora.www.domain.product.ProductDTO;
 
 public interface OrderMapper {
 
-	String insertOrder(OrderDTO order);//주문에 insert
+	int insertOrder(OrderDTO order);//주문에 insert
 	int checkPoint(@Param("userId") int userId);//유저 포인트 몇이여
 	int updateUsePoint(@Param("userId") int userId, @Param("updatedPoint") int updatedPoint);//포인트 업뎃
+	
+	/*
+	 * OPDT_ID, <!-- 시퀀스 필요 --> 
+	 * ORD_PK, <!-- 주문 PK --> 
+	 * OPDT_NAME, OPDT_AMOUNT,
+	 * OPDT_DCAMOUNT, 
+	 * OPDT_COUNT, OPDT_STATE, <!-- 상태 - 기본값 '상품준비중' -->
+	 *  OPDT_CONFIRM
+	 * <!-- 구매
+	 */
 	int insertOrderDetail(
-            @Param("orderId") String orderId,
-            @Param("pdtName") String pdtName,
-            @Param("pdtCount") int pdtCount,
-            @Param("pdtAmount") int pdtAmount,
-            @Param("pdtDcAmount") int pdtDcAmount
+			OrderDTO order
     );//주문 상세를 orddetail에 넣어
 	
 	int deleteCart(

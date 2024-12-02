@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class OptionDTO {
 
 
-		private int opt_id;
-		private int pdt_id;
-		private String opt_name;
-		private int opt_amount;
-		private int opt_count;
+		private int optId;  //opt_id -> optId
+		private int pdtId;  //pdt_id  -> pdtId
+		private String optName;   // opt_name  -> optName
+		private int optAmount;  //  opt_amount  -> optAmount
+		private int optCount;    //opt_count   -> optCount
 
 	
 }

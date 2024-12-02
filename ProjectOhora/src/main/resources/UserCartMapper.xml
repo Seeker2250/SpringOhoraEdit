@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.ohora.www.persistence.UserCartMapper">
+  
+  <!-- 회원 장바구니 select -->
+  <select id="UserCartSelect" resultType="kr.ohora.www.domain.UserCartDTO">
+  	SELECT b.pdt_name, b.pdt_amount, a.clist_pdt_count, a.clist_select, a.pdt_id,
+		  		                     b.pdt_img_url, b.pdt_discount_rate, a.opt_id, a.clist_id
+		  		                     FROM o_cartlist a
+		  		                     INNER JOIN o_product b ON a.pdt_id = b.pdt_id
+		  		                     WHERE a.user_id = #{userId}
+		  		                     ORDER BY a.clist_adddate DESC
+  </select>
+  
+  <!-- 회원 장바구니 수량 감소 -->
+  <update id="userCartMinusBtn">
+  	<![CDATA[
+  	UPDATE o_cartlist
+  	SET clist_pdt_count = clist_pdt_count - 1
+  	WHERE clist_id = #{clistId} AND clist_pdt_count > 1
+  	]]>
+  </update>
+  
+  <!-- 회원 장바구니 수량 증가 -->
+  <update id="userCartPlusBtn">
+  	UPDATE o_cartlist
+  	SET clist_pdt_count = clist_pdt_count + 1
+  	WHERE clist_id = #{clistId}
+  </update>
+  
+  <!-- 회원 장바구니 상품 삭제 -->
+  <delete id="userCartDelBtn">
+  	DELETE
+  	FROM o_cartlist
+  	WHERE clist_id = #{clistId}
+  </delete>
+  
+  <!-- 회원 장바구니 check -->
+  <select id="userCartCheck" resultType="Integer">
+  	SELECT clist_pdt_count as clistPdtCount
+  	FROM o_cartlist
+  	WHERE user_id = #{userId} AND pdt_id = #{pdtId}
+  </select>
+  
+  <!-- 회원 장바구니 insert -->
+  <insert id="userCartAddCartInsert">
+  	INSERT INTO o_cartlist (clist_id, user_id, pdt_id, opt_id, clist_pdt_count, clist_adddate, clist_select)
+  	VALUES (o_addcart_seq.NEXTVAL, #{userId}, #{pdtId}, 0, 1, SYSDATE, 'Y')
+  </insert>
+  
+  <!-- 회원 장바구니 CountUp -->
+  <update id="userCartAddCartCountUp">
+  	UPDATE o_cartlist
+  	SET clist_pdt_count = clist_pdt_count + 1
+  	WHERE user_id = #{userId} AND pdt_id = #{pdtId}
+  </update>
+  
+</mapper>

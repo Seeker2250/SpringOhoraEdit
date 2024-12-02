@@ -31,13 +31,13 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		});
 		
 		if (roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect("a.jsp"); // 관리자 경우 어디로 보낼지 정해야된다.
+			response.sendRedirect("/auth.htm");
 			return;
 		} else if (roleNames.contains("ROLE_USER")) {
-			response.sendRedirect("b.jsp"); // 회원 경우 어디로 보낼지 정해야된다.
+			response.sendRedirect("/pdtCount.htm"); // 메인페이지로 바꿔야된다.
 			return;
 		} // if
 		
-	} // 
+	} //
 	
 } // class

@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} // try catch
-
+        
         return dto == null ? null : new CustomerUser(dto);
     }
 	

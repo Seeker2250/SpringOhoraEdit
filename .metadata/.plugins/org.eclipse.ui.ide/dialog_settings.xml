@@ -104,7 +104,7 @@
 		<item value="org.springsource.sts:3.9.18.202109140905-RELEASE"/>
 	</list>
 	<section name="org.eclipse.text.quicksearch.internal.ui.QuickSearchDialog.DIALOG_SETTINGS">
-		<item key="LAST_QUERY" value="&lt;context:component-scan base-package"/>
+		<item key="LAST_QUERY" value="insertOrderDetail"/>
 		<item key="PATH_FILTER" value=""/>
 		<item key="CASE_SENSITIVE" value="true"/>
 		<item key="KEEP_OPEN" value="false"/>
@@ -118,10 +118,10 @@
 			<item value="285"/>
 		</list>
 		<section name="DialogBoundsSettings">
-			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_HEIGHT" value="756"/>
 			<item key="DIALOG_WIDTH" value="1092"/>
-			<item key="DIALOG_X_ORIGIN" value="212"/>
-			<item key="DIALOG_Y_ORIGIN" value="43"/>
+			<item key="DIALOG_X_ORIGIN" value="383"/>
+			<item key="DIALOG_Y_ORIGIN" value="180"/>
 			<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 		</section>
 	</section>
@@ -134,6 +134,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\User\Desktop\SpringOhoraEdit\ProjectOhora"/>
 			<item value="C:\JoonWorkspace\SpringOhora\ProjectOhora"/>
 			<item value="C:\Users\dntjr\OneDrive\바탕 화면\SpringOhora\ProjectOhora"/>
 		</list>

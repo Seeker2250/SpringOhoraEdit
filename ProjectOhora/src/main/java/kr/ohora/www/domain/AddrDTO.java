@@ -17,8 +17,8 @@ public class AddrDTO {
    private String addrName;
    private String addrHtel;
    private String addrTel;         // 휴대전화
-   private String addrAddress_main; // 기본 주소
-   private String addrAddress_detail; // 나머지 주소
+   private String addrAddressMain; // 기본 주소
+   private String addrAddressDetail; // 나머지 주소
    private String addrZipcode;
    private String addrMain;       // 대표 배송지 (기본값 'N')
 }

@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700|Noto+Sans+KR:300,400,500,700&display=swap');
+
+#zzz {
+    background-color: red; /* 배경색 설정 */
+    font-size: 50px;       /* 폰트 크기 크게 설정 */
+}

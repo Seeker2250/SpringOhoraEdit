@@ -12,11 +12,13 @@ import lombok.ToString;
 @ToString
 public class Criteria {
 
-	private int pageNum; // 현재 페이지 번호
-	private int amount; // 한 페이지에 출력할 게시글 갯수
+	private int pageNum;        // 현재 페이지 번호
+    private int amount;         // 페이지당 항목 수
+    private String sort;        // 정렬 기준
+    private String keyword;     // 검색어
 	
 	 public Criteria() {
-	      this(1,10);
+	      this(1,12);
 	   }   
 
 	   public Criteria(int pageNum, int amount) {

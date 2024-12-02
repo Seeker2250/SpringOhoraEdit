@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.ohora.www.persistence.NotUserCartMapper"><!-- 패키지들이랑 interface 이름 -->
+		<!-- <select id="getTime" resultType="String"> id는 interface의 method 이름, 이 안에 ; 금지 return type이 result type -->
+	
+		<!--  List<ProductDTO> pdtsFromIds(List<Integer> productIds); -->
+		 <!-- 여러 상품 조회 -->
+	<select id="pdtsFromIds" resultType="kr.ohora.www.domain.product.ProductDTO">
+	<![CDATA[
+	      SELECT 
+            p.pdt_id as pdtId,
+	        p.pdt_name as pdtName,
+	        p.pdt_amount as pdtAmount,
+	        p.pdt_discount_rate as pdtDiscountRate,
+	        p.pdt_img_url as pdtImgUrl,
+	        p.pdt_img_url2 as pdtImgUrl2,
+	        p.pdt_review_count as pdtReviewCount,
+	        p.pdt_sales_count as pdtSalesCount,
+	        p.cat_id as catId,
+	        p.pdt_description as pdtDescription,
+	        (CASE 
+	            WHEN p.pdt_discount_rate != 0 
+	            THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
+	            ELSE p.pdt_amount 
+	        END) AS pdtDiscountAmount,
+	        p.pdt_viewcount as pdtViewcount,
+	        p.scat_id as scatId,
+	        p.pdt_number as pdtNumber,
+	        p.pdt_count as pdtCount,
+	        p.pdt_adddate as pdtAdddate
+        FROM 
+            o_product p
+          WHERE 
+            pdt_id IN
+             ]]>
+            <foreach collection="list" item="productId" open="(" separator="," close=")">
+                #{productId}
+            </foreach>
+	    
+	</select>
+
+</mapper>

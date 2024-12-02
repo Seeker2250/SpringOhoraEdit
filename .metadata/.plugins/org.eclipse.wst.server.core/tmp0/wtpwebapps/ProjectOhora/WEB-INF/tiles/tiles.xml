@@ -12,10 +12,17 @@
         <put-attribute name="css" value="/resources/css/{1}/{2}.css"/>
         <put-attribute name="title" value="오호라~~"/>
     </definition>
-     <definition name="review.*" template="/WEB-INF/views/inc/layout.jsp">
-        <put-attribute name="content" value="/WEB-INF/views/review/{1}.jsp" />
-        <put-attribute name="headerCss" value="/resources/css/header.css" />
-        <put-attribute name="css" value="/resources/css/review/{1}.css"/>
-        <put-attribute name="title" value="오호라~~"/>
+    
+    <definition name="reviewList.oho_review" template="/WEB-INF/views/inc/rvlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/reviewList/oho_review.jsp" />
+        <put-attribute name="css" value="/resources/css/reviewList/oho_review.css"/>
+        <put-attribute name="title" value="오호라 리뷰"/>
     </definition>
+    
+     <definition name="reviewWrite.oho_reviewWrite" template="/WEB-INF/views/inc/rvlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/reviewWrite/oho_reviewWrite.jsp" />
+        <put-attribute name="css" value="/resources/css/reviewWrite/oho_reviewWrite.css"/>
+        <put-attribute name="title" value="오호라 리뷰"/>
+    </definition>
+    
 </tiles-definitions>

@@ -7,16 +7,25 @@
 
  <!-- 주문 INSERT -->
  <!--String insertOrder(OrderDTO order);//주문에 insert-->
-     <insert id="insertOrder" parameterType="kr.ohora.www.domain.order.OrderDTO" useGeneratedKeys="true" keyProperty="orderId">
-         INSERT INTO o_order (
-             user_id, icpn_id, ord_name, ord_address, ord_zip_code, ord_tel, ord_email, ord_pay_option, 
-             ord_total_amount, ord_cpn_discount, ord_pdt_discount, ord_usepoint, ord_delivery_fee
-         ) VALUES (
-             #{userId}, #{icpnId}, #{rname}, #{address}, #{rzipcode1}, 
-             #{phone}, #{email1}, #{addrPaymethod}, 
-             #{totalSum}, #{discountSum}, #{icpnDc}, #{inputPoint}, #{deliveryFee}
-         )
-     </insert>
+ 	
+ 
+    <insert id="insertOrder" parameterType="kr.ohora.www.domain.order.OrderDTO">
+    <selectKey keyProperty="ordPk" resultType="Integer" order="BEFORE">
+        SELECT o_order_seq.NEXTVAL FROM dual
+    </selectKey>
+    
+    INSERT INTO o_order (
+        ord_pk, ord_id, user_id, icpn_id, ord_name, ord_address, ord_zipcode, 
+        ord_tel, ord_email, ord_pay_option, 
+        ord_total_amount, ord_cpn_discount, ord_pdt_discount, ord_usepoint, ord_delivery_fee
+    ) VALUES (
+        #{ordPk}, 
+        TO_CHAR(SYSDATE, 'YYYYMMDD') || '-' || LPAD(#{ordPk}, 7, '0'),
+        #{userId}, #{icpnId}, #{rname}, #{address}, #{rzipcode1}, 
+        #{phone}, #{email1}, #{addrPaymethod}, 
+        #{totalSum}, #{discountSum}, #{icpnDc}, #{inputPoint}, #{deliveryFee}
+    )
+</insert>
  
      <!-- 포인트 확인 -->
      <!-- int checkPoint(@Param("userId") int userId);//유저 포인트 몇이여 -->
@@ -38,14 +47,32 @@
             @Param("pdtAmount") int pdtAmount,
             @Param("pdtDcAmount") int pdtDcAmount
     );//주문 상세를 orddetail에 넣어 -->
-     <insert id="insertOrderDetail" parameterType="map">
-         INSERT INTO o_orddetail (
-             order_id, product_name, product_count, product_amount, product_discount_amount
-         ) VALUES (
-             #{orderId}, #{pdtName}, #{pdtCount}, #{pdtAmount}, #{pdtDcAmount}
-         )
-     </insert>
-
+    
+  <insert id="insertOrderDetail" parameterType="kr.ohora.www.domain.order.OrderDTO">
+    INSERT ALL
+    <foreach collection="pdtName" item="name" index="index" separator=" ">
+        INTO o_orddetail (
+            OPDT_ID,     
+            ORD_PK,       
+            OPDT_NAME,   
+            OPDT_AMOUNT, 
+            OPDT_DCAMOUNT, 
+            OPDT_COUNT,  
+            OPDT_STATE,
+            OPDT_CONFIRM 
+        ) VALUES (
+            o_orddetail_seq.NEXTVAL,  <!-- o_orddetail_seq.NEXTVAL 시퀀스 값으로 OPDT_ID 생성 -->
+            #{ordPk},                  <!-- 외부에서 전달된 ORD_PK -->
+            #{pdtName[${index}]},      <!-- 인덱스를 사용한 pdtName 참조 -->
+            #{pdtAmount[${index}]},    <!-- 인덱스를 사용한 pdtAmount 참조 -->
+            #{pdtDcAmount[${index}]},  <!-- 인덱스를 사용한 pdtDcAmount 참조 -->
+            #{pdtCount[${index}]},     <!-- 인덱스를 사용한 pdtCount 참조 -->
+            '상품준비중',               <!-- 기본값 설정 -->
+            'N'                         <!-- 기본값 설정 -->
+        )
+    </foreach>
+    SELECT * FROM DUAL  <!-- 마지막으로 DUAL 테이블을 통해 종료 -->
+</insert>
      <!-- 장바구니 삭제 -->
      <delete id="deleteCart">
          DELETE FROM o_cartlist WHERE user_id = #{userId} AND pdt_id = #{pdtId}
@@ -119,6 +146,11 @@
         	PDT_ID as pdtId,
     	    PDT_NAME as pdtName,
      	    PDT_AMOUNT as pdtAmount,
+     	     (CASE 
+	             WHEN pdt_discount_rate != 0 
+	             THEN pdt_amount - (pdt_amount * (pdt_discount_rate / 100.0)) 
+	             ELSE pdt_amount 
+	         END) AS pdtDiscountAmount,
      	    PDT_DISCOUNT_RATE as pdtDiscountRate,
      	    PDT_IMG_URL as pdtImgUrl FROM o_product 
         WHERE pdt_id IN 

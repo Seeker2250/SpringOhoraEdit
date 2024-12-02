@@ -4,54 +4,195 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.ohora.www.persistence.UserMapper">
-   
-   <!-- 로그인 시큐리티 시작 -->
-   <resultMap type="kr.ohora.www.domain.UserDTO" id="UserMap">
-      <id property="userId" column="userId" />
-      <result property="userPassword" column="userPassword" />
-      <result property="userLoginId" column="userLoginId" />
-      <collection property="authList" resultMap="authMap"></collection>
-    </resultMap>
-    <resultMap type="kr.ohora.www.domain.AuthVO" id="authMap">
-      <result property="authName" column="authName" />
-    </resultMap>
-    
+
+
+	<!-- 로그인 시큐리티 시작 -->
+	<resultMap type="kr.ohora.www.domain.UserDTO" id="UserMap">
+		<id property="userId" column="userId" />
+		<result property="userPassword" column="userPassword" />
+		<result property="userLoginId" column="userLoginId" />
+		<result property="userName" column="userName" />
+		<result property="userEmail" column="userEmail" />
+		<result property="userTel" column="userTel" />
+		<result property="userPoint" column="userPoint" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	<resultMap type="kr.ohora.www.domain.AuthVO" id="authMap">
+		<result property="authName" column="authName" />
+	</resultMap>
+
 	<select id="login" resultMap="UserMap">
-	    select  a.user_id as userId
-	                ,a.user_password as userPassword
-	                , user_login_id as userLoginId
-	                , 1 as enabled
-	                , b.auth_name as authName
-		from o_user a      join o_auth b on a.auth_id = b.auth_id
+		select a.user_id as userId
+		, a.user_password as userPassword
+		, user_login_id as userLoginId
+		, 1 as enabled
+		, user_name as userName
+		, user_email as userEmail
+		, user_tel as userTel
+		, user_point as userPoint
+		, b.auth_name as authName
+		from o_user a
+		join o_auth b
+		on a.auth_id =
+		b.auth_id
 		where user_login_id = #{id}
 	</select>
-    <!-- 로그인 시큐리티 끝 -->
-    
-	   <!-- 회원가입 -->
-   <!--  
-      INSERT INTO o_user 
-   ( user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, user_emailagree ) 
-    VALUES ( O_USER_SEQ.NEXTVAL , ? , ? , ? , ? , ?, ? , ?, ? ,? ,? ,? ,? ) 
-   -->
-   
-   <insert id="join">
-   <!--
-   <selectKey keyProperty="userId" resultType="int" order="AFTER">
-        SELECT O_USER_SEQ.NEXTVAL FROM DUAL
-    </selectKey>
-    -->
-    INSERT INTO o_user
-    (user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, user_emailagree)
-    VALUES (O_USER_SEQ.NEXTVAL, 1, 2, #{userLoginId}, #{userPassword}, #{userName}, #{userEmail}, #{userTel}, 
-   <!-- userBirth가 null이면 NULL 삽입 -->
-     <if test="userBirth != null">
-        #{userBirth}
-     </if>
-     <if test="userBirth == null">
-        NULL
-     </if>,
-    #{userPoint}, #{userSmsAgree}, 
-    SYSDATE,
-       #{userEmailAgree})
-  </insert>
+	<!-- 로그인 시큐리티 끝 -->
+
+	<!-- 회원가입 -->
+	<!-- INSERT INTO o_user ( user_id, mem_id, auth_id, user_login_id, user_password, 
+		user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, 
+		user_emailagree ) VALUES ( O_USER_SEQ.NEXTVAL , ? , ? , ? , ? , ?, ? , ?, 
+		? ,? ,? ,? ,? ) -->
+
+	<insert id="join">
+		<!-- <selectKey keyProperty="userId" resultType="int" order="AFTER"> SELECT 
+			O_USER_SEQ.NEXTVAL FROM DUAL </selectKey> -->
+		INSERT INTO o_user
+		(user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email,
+		user_tel, user_birth, user_point, user_smsagree, user_joindate,
+		user_emailagree)
+		VALUES (O_USER_SEQ.NEXTVAL, 1, 2, #{userLoginId}, #{userPassword},
+		#{userName}, #{userEmail}, #{userTel},
+		<!-- userBirth가 null이면 NULL 삽입 -->
+		<if test="userBirth != null">
+			#{userBirth}
+		</if>
+		<if test="userBirth == null">
+			NULL
+		</if>
+		,
+		#{userPoint}, #{userSmsAgree},
+		SYSDATE,
+		#{userEmailAgree})
+	</insert>
+
+
+	<!-- 회원 장바구니 수 -->
+	<select id="pdtCountSelect" resultType="int">
+		SELECT COUNT(DISTINCT pdt_id) AS pdtCount
+		FROM o_cartlist
+		WHERE user_id = #{userId}
+	</select>
+
+	<!-- 마이페이지 addrCount select -->
+	<select id="myPageAddrCount"
+		resultType="kr.ohora.www.domain.MyPageDTO">
+		SELECT b.opdt_state as opdtState
+		FROM o_order a
+		INNER JOIN o_orddetail b ON a.ord_pk = b.ord_pk
+		WHERE a.user_id = #{userId}
+	</select>
+
+	<!-- 마이페이지 orderList select -->
+	<select id="myPageOrdList"
+		resultType="kr.ohora.www.domain.MyPageDTO">
+		select a.ord_orderdate as ordOrderdate, b.opdt_name as opdtName
+		, b.opdt_amount as opdtAmount, b.ord_pk as ordPk, b.opdt_id as opdtId
+		from o_order a
+		inner join o_orddetail b on a.ord_pk = b.ord_pk
+		where
+		user_id = #{userId}
+		order by a.ord_orderdate desc
+	</select>
+
+	<!-- orderDetail topList -->
+	<select id="topList"
+		resultType="kr.ohora.www.domain.OrderDetailDTO">
+		select a.ord_id as ordId, a.ord_orderdate as ordOrderdate, a.ord_name as
+		ordName, b.opdt_state as opdtState
+		, a.ord_total_amount as ordTotalAmount, (a.ord_cpn_discount +
+		a.ord_pdt_discount) as discount
+		, a.ord_total_amount - (a.ord_cpn_discount + a.ord_pdt_discount) as
+		amount
+		, a.ord_pay_option as ordPayOption
+		from o_order a
+		inner join o_orddetail b on a.ord_pk = b.ord_pk
+		where user_id = #{userId} and a.ord_pk = #{ordPk}
+	</select>
+
+	<!-- orderDetail orderList -->
+	<select id="orderList"
+		resultType="kr.ohora.www.domain.OrderDetailDTO">
+		SELECT b.opdt_name as opdtName, b.opdt_count as opdtCount, b.opdt_state as
+		opdtState
+		FROM o_order a INNER JOIN o_orddetail b ON a.ord_pk = b.ord_pk
+		WHERE user_id = #{userId} AND opdt_id = #{opdtId}
+	</select>
+
+	<!-- orderDetail orderList2 -->
+	<select id="orderList2"
+		resultType="kr.ohora.www.domain.OrderDetailDTO">
+		SELECT pdt_img_url as pdtImgUrl, pdt_name as pdtName, pdt_amount as
+		pdtAmount
+		, pdt_amount * (1 - COALESCE(pdt_discount_rate, 0) / 100) as
+		discountPrice
+		FROM o_product
+		WHERE pdt_name = #{opdtName}
+	</select>
+
+	<!-- orderDetail addrList -->
+	<select id="addrList"
+		resultType="kr.ohora.www.domain.OrderDetailDTO">
+		select addr_name as addrName, addr_zipcode as addrZipcode, addr_address_main
+		as addrAddressMain
+		, addr_htel as addrHtel, addr_tel as addrTel
+		from o_address
+		where user_id = #{userId} and addr_main = 'Y'
+	</select>
+
+	<!-- 배송주소록 select -->
+	<select id="addrSelect"
+		resultType="kr.ohora.www.domain.AddressDTO">
+		SELECT addr_id as addrId
+		, addr_nick as addrNick
+		, addr_name as addrName
+		, addr_htel as addrHtel
+		, addr_tel as addrTel
+		, addr_address_main as addrAddressMain
+		, addr_address_detail as addrAddressDetail
+		, addr_zipcode as addrZipcode
+		, addr_main as addrMain
+		FROM o_address
+		WHERE user_id = #{userId}
+		ORDER BY
+		CASE
+		WHEN addr_main = 'Y' THEN 1
+		ELSE 2
+		END,
+		addr_id DESC
+	</select>
+
+	<!-- 배송지 all 변경 -->
+	<update id="allChange">
+		UPDATE o_address
+		SET addr_main = 'N'
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 배송지 메인 변경 -->
+	<update id="mainChange">
+		UPDATE o_address
+		SET addr_main = 'Y'
+		WHERE addr_id = #{addrId}
+	</update>
+
+	<delete id="addrDelete" parameterType="list">
+		DELETE
+		FROM o_address
+		WHERE addr_id IN
+		<foreach item="addrId" collection="list" open="("
+			separator="," close=")">
+			#{addrId}
+		</foreach>
+	</delete>
+
+	<!-- insertAddr (배송지 추가 -준용) -->
+	<insert id="insertAddr">
+		INSERT INTO o_address
+		VALUES ( o_addr_seq.nextval , #{userId}, #{locationName}, #{receiverName},
+		'' , #{mobile}, #{addr1}, #{addr2}, #{zipCode}, 'N')
+	</insert>
+
+
 </mapper>

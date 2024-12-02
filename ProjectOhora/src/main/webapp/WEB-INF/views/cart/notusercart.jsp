@@ -1245,11 +1245,10 @@ function deleteCartItem(pdtId) {
         const basketCookie = cookies.find(cookie => cookie.startsWith('basketItems='));
         
         if (basketCookie) {
-            // 쿠키 값 파싱
-            let basketItems = JSON.parse(decodeURIComponent(basketCookie.split('=')[1]));
+
             
             // 삭제할 상품을 제외한 나머지 상품들로 필터링
-            basketItems = basketItems.filter(item => item.id.toString() !== pdtId.toString());
+            let basketItems = basketItems.filter(item => item.id.toString() !== pdtId.toString());
 
             // 새로운 쿠키 값 설정
             if (basketItems.length > 0) {

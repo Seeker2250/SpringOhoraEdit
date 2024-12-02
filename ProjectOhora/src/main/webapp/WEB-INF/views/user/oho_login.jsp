@@ -116,7 +116,7 @@
                             fw-msg=""
                             class="inputTypeText"
                             placeholder=""
-                            value="lsh950225"
+                            value="asdf"
                             type="text"
                           />
                           <span class="reset_id"></span>
@@ -132,7 +132,7 @@
                             fw-label="패스워드"
                             fw-msg=""
                             autocomplete="off"
-                            value="qwer1234"
+                            value="asdf1234"
                             type="password"
                             placeholder=""
                           />
