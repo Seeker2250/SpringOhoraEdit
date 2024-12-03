@@ -151,7 +151,7 @@ $(document).on('input','.comment-textarea', function() {
 //댓글 서브밋
 $(document).on('submit', '.comment-write-form', function(e) {
     e.preventDefault(); // 기본 폼 제출 방지
-	alert("눌렀음!!")
+	// alert("등록하시겠습니까?")
     var $form = $(this);
     var textarea = $form.find('textarea.comment-textarea');
     var commentText = textarea.val().trim();

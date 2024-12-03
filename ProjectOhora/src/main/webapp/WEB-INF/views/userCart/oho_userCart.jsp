@@ -3,6 +3,7 @@
 
 <!-- 추가함 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <%
@@ -136,7 +137,7 @@
                                             <!-- 상품 이미지 -->
                                              <p class="prdImg">
                                                 <a href="/product/detail.html?product_no=2104&cate_no=44">
-                                                    <img loading="lazy" src="${item.pdtImgUrl}" alt width="250" height="250">
+                                                    <img loading="lazy" src="/resources/images/product_image/${item.pdtImgUrl}" alt width="250" height="250">
                                                 </a>
                                              </p>
                                              <!-- // 상품 이미지 -->
@@ -830,7 +831,7 @@ $("#buyBtn").on("click", function(event) {
             // 값이 있을 경우 배열에 추가
             if (pdtId && pdtCount) {
                 pdtIds.push("pdtId=" + encodeURIComponent(pdtId));
-                pdtCounts.push("pdtCounts=" + encodeURIComponent(pdtCount));//push 안에서 s로 바꿈
+                pdtCounts.push("pdtCounts=" + encodeURIComponent(pdtCount));
             }
         });
 

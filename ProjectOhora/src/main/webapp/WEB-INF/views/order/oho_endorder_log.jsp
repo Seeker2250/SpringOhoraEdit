@@ -24,9 +24,20 @@
     <!-- 콘텐츠 -->
 <div id="SP_order_wrap">
       <div class="SP_layoutFix">
-      	<div class="SP_Ohora_msg displaynone">
-            <span><img src="	https://www.ohora.kr/smartpc/_img/icon/icon_alertchecked.png" alt="확인완료이미지"></span>
-            <span class="main_msg">고객님의 주문이 정상적으로 완료되었습니다.</span>
+         <div class="SP_Ohora_msg displaynone">
+            <c:if test="${isSuccess}">
+        <span><img src="https://www.ohora.kr/smartpc/_img/icon/icon_alertchecked.png" alt="확인완료이미지"></span>
+        <span class="main_msg">고객님의 주문이 정상적으로 완료되었습니다.</span>
+    </c:if>
+    <c:if test="${!isSuccess}">
+        <span><img src="https://www.ohora.kr/smartpc/_img/icon/icon_alert.png" alt="실패이미지"></span>
+        <span class="main_msg error">${errorMessage}</span>
+        <div class="btn_area">
+            <div class="btn">
+                <a href="javascript:history.back()" class="retry_link">이전 페이지로 돌아가기</a>
+            </div>
+        </div>
+    </c:if>
         </div>
         <form
           id="frm_order_result"
@@ -69,7 +80,7 @@
                 <h3>주문이 완료 되었습니다.</h3>
                 <p>
                   주문내역 및 배송에 관한 안내는<br /><a
-                    href="/myshop/order/detail.html?order_id=20241104-0002037"
+                    href="<%= contextPath %>/user/mypage.htm"
                     class="myshop_link"
                     >주문조회</a
                   >를 통하여 확인 가능합니다.
@@ -79,17 +90,17 @@
                 <ul>
                   <li class="id">
                     <strong>주문번호</strong>
-                    <span class="order_id">${param.orderId}</span>
+                    <span class="order_id">${orderId}</span>
                   </li>
                   <li class="name">
                     <strong>주문일자</strong>
-                    <span>${param.orderTime}</span>
+                    <span>${orderTime}</span>
                   </li>
                 </ul>
               </div>
               <div class="btn_area">
                 <div class="btn">
-                  <a href="<%= contextPath %>/product/main.do"
+                  <a href="<%= contextPath %>/main.htm"
                     class="myshop_link"
                     >메인 페이지로 이동</a
                   >

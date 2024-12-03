@@ -92,18 +92,57 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
             <div
               class="xans-element- xans-layout xans-layout-statelogoff SP_gnb_inr"
             >
-            <!-- 갱신함 / 경로는 아직 안넣음 -->
+            
+            <!-- 인증되지 않은 사용자 (로그인 해야함) -->
      		<sec:authorize access="isAnonymous()">
-            	<a href="<%= contextPath %>/join.htm"><span class="title">회원가입</span></a>|
+            	<a href="<%= contextPath %>/goJoin1.htm"><span class="title">회원가입</span></a>|
                 <a href="<%= contextPath %>/login.htm" class="log"><span class="title">로그인</span></a>
             </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
+            
+            
+            
+            <!-- 인증된 사용자 (로그인한 사용자) -->
+            <sec:authorize access="isAuthenticated() and !hasRole('ROLE_ADMIN')">
+
             	<a href="<%= contextPath %>/user/mypage.htm"><span class="title">마이페이지</span></a>|
-            	<form action="/logout.htm" method="post">
-                	<button class="title">로그아웃</button>
-                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                </form>
+            	
+            	 <a class="log" style="cursor: pointer;"><span class="title">로그아웃</span></a>
+				<form id="logoutForm" action="/logout.htm" method="post" style="display: none;">
+				    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				</form>
+				
+				<script>
+					 $(document).ready(function(){
+						 $('.log').click(function(e){
+							  e.preventDefault(); // 기본 동작(페이지 이동)을 막음
+							      $('#logoutForm').submit(); // form 제출
+							     });
+						  });
+				</script>
             </sec:authorize>
+            
+            
+            
+             <!-- 관리자 사용자 (ROLE_ADMIN) -->
+             <sec:authorize access="hasRole('ROLE_ADMIN')">
+
+            	<a href="<%= contextPath %>/auth.htm"><span class="title">관리자페이지</span></a>|
+            	
+            	 <a class="log" style="cursor: pointer;"><span class="title">로그아웃</span></a>
+				<form id="logoutForm" action="/logout.htm" method="post" style="display: none;">
+				    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				</form>
+								
+				 <script>
+					 $(document).ready(function(){
+						 $('.log').click(function(e){
+							  e.preventDefault(); // 기본 동작(페이지 이동)을 막음
+							      $('#logoutForm').submit(); // form 제출
+							     });
+						  });
+				</script>
+            </sec:authorize>
+            
             </div>
           </div>
         </div>
@@ -150,10 +189,11 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
                 </ul>
                 <!-- //마우스 오버 시 나오는 영역(product) -->
               </li>
-
+			  
               <li class="eng_font menu_1li submenu">
                 <a href="/outlet.htm?pageNum=1" style="color:black !important;" onclick="checkLogin(event)">outlet</a>
               </li>
+              
               <li class="eng_font"><a href="<%= contextPath %>/ohora.do?event=event" style="color:black !important;">event</a></li>
               <li class="eng_font">
                 <a href="<%= contextPath %>/ohora.do?howto=howto" style="color:black !important;">how to</a>
@@ -480,6 +520,9 @@ boolean isLoggedIn = (session.getAttribute("userId") != null);
         });
       });
     </script>
+    
+    
+   
     
      <!-- <script>
       function checkLogin(event) {

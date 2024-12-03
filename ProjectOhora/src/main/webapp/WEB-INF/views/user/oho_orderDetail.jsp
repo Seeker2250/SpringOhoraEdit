@@ -2,12 +2,14 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>오호라 팀 프로젝트</title>
 <link rel="shortcut icon" type="image/x-icon" href="../resources/images/favicon.ico">
@@ -53,7 +55,8 @@
 										<tbody>
 											<tr>
 												<th scope="row">주문번호</th>
-												<td id="ordno">${topList.ordId}</td>
+												<td >${topList.ordId}</td>
+												<span  id="ordno" value=""></span>
 											</tr>
 											<tr>
 												<th scope="row">주문일자</th>
@@ -199,7 +202,7 @@
 											<tr class="xans-record-">
 												<td class="thumb"><a
 													href="/product/detail.html?product_no=2089&amp;cate_no=160"><img
-														src="${orderList2.pdtImgUrl}"
+														src="/resources/images/product_image/${orderList2.pdtImgUrl}"
 														alt=""
 														onerror="this.src='//img.echosting.cafe24.com/thumb/img_product_small.gif';"></a></td>
 												<td class="left"><strong class="name"><a
@@ -631,12 +634,22 @@
 										class="SP_cm_btn SP_btn_gray_bd displaynone">수령지정보 인쇄</a>
 								</div>
 								<div class="SP_submitBtn_right">
-								<c:forEach var="topList" items="${topList}" varStatus="topListOne">
-								<c:if test="${topList.opdtState eq '배송완료'}">								
-								<a href=""
-										class="SP_cm_btn SP_btn_gray_bd" style="margin-right:10px" id="revWrite">리뷰작성</a>
-								</c:if>
-								</c:forEach>
+							<c:forEach var="item" items="${topList}" varStatus="topListOne">
+							<c:if test="${topListOne.index == 0}">
+							    <c:choose>
+							        <c:when test="${item.opdtState eq '배송완료' && rvck == 0}">
+							            <a href="" class="SP_cm_btn SP_btn_gray_bd" style="margin-right:10px;background-color:green;" id="revWrite" >리뷰작성</a>
+							        </c:when>
+							        <c:when test="${item.opdtState != '배송완료' && rvck == 0}">
+							            <!-- 아무것도 출력하지 않음 -->
+							        </c:when>
+							        <c:otherwise>
+							            <a href="" class="SP_cm_btn SP_btn_gray_bd revDelete" style="margin-right:10px;background-color:red; text-align: center;" id="revDelete" >리뷰삭제</a>   
+							        </c:otherwise>
+							    </c:choose>
+							</c:if>
+							</c:forEach>
+
 									<a href="<%=contextPath %>/user/mypage.htm"
 										class="SP_cm_btn SP_btn_gray_bd">목록보기</a>
 								</div>
@@ -775,16 +788,15 @@
 		// 리뷰 작성 클릭시
 			
 		let popupWindow = null;
-		let ordno=$("#ordno").text();
-		//alert(ordno)
-		
+		let opdtId=${opdtId};
+		let ordPk=${ordPk};
 		$("#revWrite").on("click", function(e) {
 			//alert(status)
 		    e.preventDefault();
 		    
-		    let openUrl = "/reviewPop/"+ordno+".htm";
-		    alert(openUrl)
-		    let popOption = "width=500px, height=600px, scrollbars=yes";
+		    let openUrl = "/reviewPop/"+opdtId+"/"+ ordPk + ".htm";
+		    //alert(openUrl)
+		    let popOption = "width=485px, height=490px, scrollbars=no";
 		
 		    // 팝업이 이미 열려 있다면 focus
 		    if (popupWindow && !popupWindow.closed) {
@@ -795,6 +807,42 @@
 		});
 		
 		
+		</script>
+		
+		<script type="text/javascript">
+		// 리뷰 삭제 클릭시	
+			$("#revDelete").on("click", function(e) {
+		    e.preventDefault(); // 기본 동작을 방지 (예: 링크 클릭 시 페이지 이동 방지)
+		//alert("z")
+		 let url = "/reviewDelete/" + ${opdtId} + ".htm?" + "${_csrf.parameterName}=${_csrf.token}";
+		    if(confirm("삭제하시겠습니까?")){
+		    location.href = url;
+		    }
+			});
+		   // let opdtId = "${opdtId}";  // 삭제할 리뷰의 ID
+		   // let url = "/reviewDelete/" + ${opdtId} + ".htm?" + "${_csrf.parameterName}=${_csrf.token}";
+		  //  if(confirm("삭제?")){
+		 //   location.href = url;
+		  //  }
+		
+		    // AJAX 요청
+		    /*
+		    $.ajax({
+		        url: url,  // 요청 URL
+		        type: "DELETE",  // HTTP 메소드 지정 (DELETE)
+		        success: function(response) {
+		        	if (response == 1) {
+		        		 alert("리뷰가 삭제되었습니다.");
+				            location.href = "/user/mypage.htm";  // 삭제 후 페이지 리다이렉트
+					}
+		           
+		        },
+		        error: function(xhr, status, error) {
+		            alert("리뷰 삭제 중 오류가 발생했습니다.");
+		        }
+		    });
+		});
+		*/
 		</script>
 	</div>
 

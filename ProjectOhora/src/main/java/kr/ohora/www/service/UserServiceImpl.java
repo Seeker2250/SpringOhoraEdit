@@ -21,13 +21,40 @@ public class UserServiceImpl implements UserService {
    @Autowired
    private UserMapper userDao;
    
-   // 회원가입
+   // 회원 가입 및 회원가입 완료
    @Override
    public Integer join(UserDTO dto) throws SQLException {
       log.info("joinServiceImpl test");
       
       return this.userDao.join(dto);
    }
+   
+   // 중복 체크
+	@Override
+	public Integer jungbokCK(UserDTO dto) throws SQLException {
+		
+		return this.userDao.jungbokCK(dto);
+	}
+
+   // 아이디 찾기
+	@Override
+	public UserDTO findUser(UserDTO dto) throws SQLException {
+		
+		return this.userDao.findUser(dto);
+	}
+
+	// 비밀번호 찾기
+	@Override
+	public UserDTO findPwd(UserDTO dto) throws SQLException {
+		
+		return this.userDao.findPwd(dto);
+	}
+
+	// 비밀번호 변경
+	@Override
+	public Integer changePwd(UserDTO dto) throws SQLException {
+        return userDao.changePwd(dto);  // 비밀번호를 업데이트하는 쿼리 호출
+    }
 
    // 회원 장바구니 수 select
 	@Override
@@ -104,15 +131,6 @@ public class UserServiceImpl implements UserService {
 		log.info("addrDelete test");
 		return this.userDao.addrDelete(addrId);
 	}
-  
-   
-   // 회원가입 중복체크
-   @Override
-   public boolean jungbokCK(String id, String email, String phone) throws SQLException {
-      log.info("joinServiceImpl test");
-      
-      return false;
-   }
 	
    //주소지 등록 (준용)
 	@Override
@@ -122,7 +140,11 @@ public class UserServiceImpl implements UserService {
 		
 	} 
    
-
-   
+	// 리뷰 썼는지 체크 (준용)
+	@Override
+	public int rvck(int opdtId) {
+			int rowCount = this.userDao.rvCheck(opdtId);
+		return rowCount;
+	} 
    
 } // class

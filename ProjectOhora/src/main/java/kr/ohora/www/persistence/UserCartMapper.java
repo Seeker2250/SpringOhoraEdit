@@ -31,4 +31,13 @@ public interface UserCartMapper {
 	// 회원 장바구니 CountUp
 	public int userCartAddCartCountUp(@Param("userId") int userId, @Param("pdtId") int pdtId);
 	
+		// 회원 상세 페이지 장바구니 담기 check
+		public Integer addBtnCheck(@Param("userId") int userId, @Param("pdtId") int pdtId1);
+		
+		// 회원 상세 페이지 장바구니 담기 insert
+		public Integer addBtnInsert(@Param("userId") int userId, @Param("pdtId") Integer integer, @Param("pdtCount") Integer integer2);
+		
+		// 회원 상세 페이지 장바구니 담기 update
+		public void addBtnUpdate(@Param("userId") int userId, @Param("pdtId") Integer integer, @Param("pdtCount") Integer integer2);
+	
 } // interface

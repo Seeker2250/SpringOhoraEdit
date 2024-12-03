@@ -12,11 +12,20 @@ import kr.ohora.www.domain.UserDTO;
 
 public interface UserService {
 
-	// 회원 가입
+	// 회원 가입 및 회원가입 완료
 	public Integer join(UserDTO dto) throws SQLException;
 
-	//회원가입 페이지 아이디 이메일 폰번호 중복체크
-	public boolean jungbokCK(@Param("id") String id, @Param("email") String email, @Param("phone") String phone) throws SQLException;
+	// 중복 체크
+	public Integer jungbokCK(UserDTO dto) throws SQLException;
+
+	// 아이디 찾기
+	public UserDTO findUser(UserDTO dto) throws SQLException;
+
+	// 비밀번호 찾기
+	public UserDTO findPwd(UserDTO dto) throws SQLException;
+
+	// 비밀번호 변경
+	public Integer changePwd(UserDTO dto) throws SQLException;
 
 
 	// 회원 장바구니 수 select
@@ -62,5 +71,7 @@ public interface UserService {
 			@Param("mobile") String mobile
 			)throws SQLException;
 
-
+	// 리뷰 썼는지 여부 체크 (준용)
+	public int rvck(int opdtId);
+	
 } // interface

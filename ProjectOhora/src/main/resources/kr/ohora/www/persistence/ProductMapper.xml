@@ -15,11 +15,35 @@
 	        p.pdt_img_url2 AS pdtImgUrl2, 
 	        p.pdt_review_count AS pdtReviewCount,
 	        p.pdt_adddate AS pdtAdddate,
-	        (CASE 
-	            WHEN p.pdt_discount_rate != 0 
-	            THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
-	            ELSE p.pdt_amount 
-	        END) AS pdtDiscountAmount,
+			(CASE 
+			    WHEN p.pdt_discount_rate != 0 
+			    THEN FLOOR((p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0))) / 10) * 10
+			    ELSE FLOOR(p.pdt_amount / 10) * 10
+			END) AS pdtDiscountAmount,
+	        c.cat_name AS catName
+	    FROM O_PRODUCT p
+	    LEFT JOIN O_CATEGORY c
+	    ON p.cat_id = c.cat_id
+		ORDER BY p.pdt_adddate DESC
+
+	</select>
+	
+	<!-- 주간베스트용 -->
+	<select id="selectWeeklyBestProducts" resultType="kr.ohora.www.domain.product.ProductDTO">
+	    SELECT 
+	        p.pdt_id AS pdtId, 
+	        p.pdt_name AS pdtName, 
+	        p.pdt_amount AS pdtAmount, 
+	        p.pdt_discount_rate AS pdtDiscountRate, 
+	        p.pdt_img_url AS pdtImgUrl, 
+	        p.pdt_img_url2 AS pdtImgUrl2, 
+	        p.pdt_review_count AS pdtReviewCount,
+	        p.pdt_adddate AS pdtAdddate,
+			(CASE 
+			    WHEN p.pdt_discount_rate != 0 
+			    THEN FLOOR((p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0))) / 10) * 10
+			    ELSE FLOOR(p.pdt_amount / 10) * 10
+			END) AS pdtDiscountAmount,
 	        c.cat_name AS catName
 	    FROM O_PRODUCT p
 	    LEFT JOIN O_CATEGORY c
@@ -29,17 +53,7 @@
 	            p.cat_id = #{categoryNumber, jdbcType=INTEGER}
 	        </if>
 	    </where>
-	    <choose>
-	        <when test="sort == 'sales'">
 	            ORDER BY p.pdt_sales_count DESC
-	        </when>
-	        <when test="sort == 'views'">
-	            ORDER BY p.pdt_viewcount DESC
-	        </when>
-	        <otherwise>
-	            ORDER BY p.pdt_adddate DESC
-	        </otherwise>
-	    </choose>
 	</select>
 
 	
@@ -58,6 +72,7 @@
 	    <result property="pdtDescription" column="pdtDescription"/>
 	    <result property="pdtViewcount" column="pdtViewcount"/>
 	    <result property="pdtDiscountAmount" column="pdtDiscountAmount"/>
+	    <result property="pdtCount" column="pdtcount" />
 	    <collection property="options" ofType="kr.ohora.www.domain.product.OptionDTO">
 	        <id property="optId" column="optId"/>
 	        <result property="optName" column="optName"/>
@@ -66,6 +81,7 @@
 	    </collection>
 	</resultMap>
 
+	<!-- 상품 상세 페이지 --> 
 	<select id="selectDetailViewProduct" resultMap="ProductWithOptionsResultMap">
 	    SELECT 
 	        P.pdt_id AS pdtId,
@@ -79,11 +95,12 @@
 	        P.cat_id AS catId,
 	        P.pdt_description AS pdtDescription,
 	        P.pdt_viewcount AS pdtViewcount,
-	        (CASE 
-	             WHEN P.pdt_discount_rate != 0 
-	             THEN P.pdt_amount - (P.pdt_amount * (P.pdt_discount_rate / 100.0)) 
-	             ELSE P.pdt_amount 
-	         END) AS pdtDiscountAmount,
+	        P.pdt_count AS pdtCount,
+			(CASE 
+			    WHEN p.pdt_discount_rate != 0 
+			    THEN FLOOR((p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0))) / 10) * 10
+			    ELSE FLOOR(p.pdt_amount / 10) * 10
+			END) AS pdtDiscountAmount,
 	        O.opt_id AS optId,
 	        O.opt_name AS optName,
 	        O.opt_amount AS optAmount,
@@ -109,10 +126,10 @@
 	                p.pdt_img_url2 AS pdtImgUrl2, 
 	                p.pdt_review_count AS pdtReviewCount,
 	                (CASE 
-	                    WHEN p.pdt_discount_rate != 0 
-	                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
-	                    ELSE p.pdt_amount 
-	                END) AS pdtDiscountAmount,
+					    WHEN p.pdt_discount_rate != 0 
+					    THEN FLOOR((p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0))) / 10) * 10
+					    ELSE FLOOR(p.pdt_amount / 10) * 10
+					END) AS pdtDiscountAmount,
 	                c.cat_name AS catName
 	            FROM O_PRODUCT p
 	            LEFT JOIN O_CATEGORY c
@@ -180,10 +197,10 @@
 	                p.pdt_img_url2 AS pdtImgUrl2, 
 	                p.pdt_review_count AS pdtReviewCount,
 	                (CASE 
-	                    WHEN p.pdt_discount_rate != 0 
-	                    THEN p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0)) 
-	                    ELSE p.pdt_amount 
-	                END) AS pdtDiscountAmount
+					    WHEN p.pdt_discount_rate != 0 
+					    THEN FLOOR((p.pdt_amount - (p.pdt_amount * (p.pdt_discount_rate / 100.0))) / 10) * 10
+					    ELSE FLOOR(p.pdt_amount / 10) * 10
+					END) AS pdtDiscountAmount
 	            FROM O_PRODUCT p
 	            WHERE p.pdt_discount_rate >= 40
 	            ORDER BY p.pdt_adddate DESC
@@ -236,6 +253,37 @@
 	    )
 	</insert>
 
+	
+	<!-- 상품 수정 -->
+	<update id="updateProduct">
+	    UPDATE O_PRODUCT
+	    SET 
+	        CAT_ID = #{product.catId, jdbcType=INTEGER},
+	        SCAT_ID = #{product.scatId, jdbcType=INTEGER},
+	        PDT_NUMBER = #{product.pdtNumber, jdbcType=INTEGER},
+	        PDT_NAME = #{product.pdtName, jdbcType=VARCHAR},
+	        PDT_AMOUNT = #{product.pdtAmount, jdbcType=INTEGER},
+	        PDT_DISCOUNT_RATE = #{product.pdtDiscountRate, jdbcType=INTEGER},
+	        PDT_IMG_URL = #{product.pdtImgUrl, jdbcType=VARCHAR},
+	        PDT_IMG_URL2 = #{product.pdtImgUrl2, jdbcType=VARCHAR},
+	        PDT_COUNT = #{product.pdtCount, jdbcType=INTEGER},
+	        PDT_DESCRIPTION = #{product.pdtDescription, jdbcType=VARCHAR}
+	    WHERE PDT_ID = #{product.pdtId, jdbcType=INTEGER}
+	</update>
+	<!-- 조회수 및 리뷰수 최신화 -->
+	<update id="updateViewAndReviewCounts" parameterType="int">
+	    UPDATE O_PRODUCT
+	    SET 
+	        PDT_VIEWCOUNT = PDT_VIEWCOUNT,
+	        PDT_REVIEW_COUNT = PDT_REVIEW_COUNT
+	    WHERE PDT_ID = #{pdtId}
+	</update>
+	<!-- 상품 최신 데이터 가져오기 -->
+	<select id="getProductById" resultType="kr.ohora.www.domain.product.ProductDTO">
+	    SELECT * 
+	    FROM O_PRODUCT
+	    WHERE PDT_ID = #{pdtId}
+	</select>
 	
 	
 </mapper>

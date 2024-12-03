@@ -1,6 +1,6 @@
 package kr.ohora.www.service.order;
 
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String order(OrderDTO order) {
 	 try {
-		
 		 
 		 // 주문 INSERT
 		//  int로 결과를 받지만 DTO에는 ordId가 설정 되겠지!!!!
@@ -33,8 +32,8 @@ public class OrderServiceImpl implements OrderService {
 	        if (result != 1) {
 	            throw new RuntimeException("insertOrder하다가 터짐요");
 	        }
-	        
-        String orderId = order.getOrdId();  // selectKey로 설정된 값 사용
+	        String orderId = String.format("%tY%<tm%<td-%07d", new Date(), order.getOrdPk());
+	        order.setOrdId(orderId);
 		
         if (order.getIcpnId() != 0) {
             orderMapper.deleteCoupon(order.getIcpnId());//쿠폰 컷
@@ -48,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
                 int updatedPoint = currentPoint - order.getInputPoint();
                 int rowCount = orderMapper.updateUsePoint(order.getUserId(), updatedPoint);
                 if (rowCount != 1) {
-                    throw new RuntimeException("포인트 업데이트 하다가 조짐");
+                    throw new RuntimeException("포인트 업데이트 하다가 튕겼어요");
                 }
             } else {
                 log.warn("포인트 없는 애: " + order.getUserId());
@@ -56,22 +55,34 @@ public class OrderServiceImpl implements OrderService {
             }
         }
      // 주문 상세 insert
-        int insertDetailCount = orderMapper.insertOrderDetail(order);
+        /*int insertDetailCount = orderMapper.insertOrderDetail(order);
         if (insertDetailCount != order.getPdtId().size()) {
             throw new RuntimeException("order detail하다가 조짐");
+        }*/
+        
+        
+        // 상품마다 주문 상세 넣어
+        for (ProductDTO product : order.getProducts()) {
+            product.setOrdPk(order.getOrdPk()); // ordPk 가져와
+            orderMapper.insertOrderDetail(product);
         }
         
      /// 장바구니 삭제
-     for (Integer pdtId : order.getPdtId()) {
-         int deleteCartCount = orderMapper.deleteCart(order.getUserId(), pdtId);
-         if (deleteCartCount != 1) {
+    // for (Integer pdtId : order.getPdtId()) {
+        for (ProductDTO product : order.getProducts()) {
+        // int deleteCartCount = orderMapper.deleteCart(order.getUserId(), pdtId);
+        	Integer pdtId = product.getPdtId();
+        	 if (pdtId != null) {
+        		 int deleteCartCount = orderMapper.deleteCart(order.getUserId(), pdtId);
+        		 if (deleteCartCount != 1) {
              throw new RuntimeException("장바구니 삭제 중 오류터짐 상품 아이디 " + pdtId);
+        		 }
          }
      }
         log.info("주문 성공한 애 주문 번호는 " + orderId);
         return orderId;
 	 } catch (Exception e) {
-         log.error("주문 하다가 조짐", e);
+         log.error("주문 하다가 튕겼어요", e);
          throw new RuntimeException("걍 insert order에서 싸그리 try에서 튕겨서 던짐", e);
      }
 		

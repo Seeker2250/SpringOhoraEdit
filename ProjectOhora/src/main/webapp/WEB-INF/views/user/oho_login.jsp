@@ -1,28 +1,30 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%
-	String contextPath = request.getContextPath();
-%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@
+taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> <%@ page
+trimDirectiveWhitespaces="true" %> <% String contextPath =
+request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>오호라 팀 프로젝트</title>
-<link rel="shortcut icon" type="image/x-icon" href="http://localhost/jspPro/images/SiSt.ico">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google" content="notranslate">
-<link rel="stylesheet" href="/projectOhora/resources/cdn-main/login.css">
-<script src="http://localhost/jspPro/resources/cdn-main/example.js"></script>
-<style>
- span.material-symbols-outlined{
-    vertical-align: text-bottom;
- }  
-</style>
-</head>
-<%-- <%@include file="header.jsp" %> --%>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>오호라 팀 프로젝트</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="http://localhost/jspPro/images/SiSt.ico"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="/projectOhora/resources/cdn-main/login.css" />
+    <script src="http://localhost/jspPro/resources/cdn-main/example.js"></script>
+    <style>
+      span.material-symbols-outlined {
+        vertical-align: text-bottom;
+      }
+    </style>
+  </head>
+  <%-- <%@include file="header.jsp" %> --%>
+  <body>
     <div id="wrap" style="padding-top: 156px !important">
       <div id="container">
         <div id="contents">
@@ -30,13 +32,13 @@
             <form
               id="loginForm"
               name=""
-              action= "<%= contextPath %>/login"
+              action="<%= contextPath %>/login"
               method="post"
               target="_self"
             >
               <!-- 이것 때문에 post 가 안됨 -->
               <!-- enctype="multipart/form-data" -->
-              
+
               <input
                 id="returnUrl"
                 name="returnUrl"
@@ -116,7 +118,7 @@
                             fw-msg=""
                             class="inputTypeText"
                             placeholder=""
-                            value="asdf"
+                            value="lsh950225"
                             type="text"
                           />
                           <span class="reset_id"></span>
@@ -132,7 +134,7 @@
                             fw-label="패스워드"
                             fw-msg=""
                             autocomplete="off"
-                            value="asdf1234"
+                            value="qwer1234"
                             type="password"
                             placeholder=""
                           />
@@ -154,7 +156,7 @@
                         <button
                           type="button"
                           class="btnSubmit SMSlogin_btnTD"
-                          style="cursor: pointer;"
+                          style="cursor: pointer"
                           onclick="loginClick();"
                           id="loginBtn"
                         >
@@ -199,13 +201,13 @@
 
                       <div class="btnArea typeLogin">
                         <a
-                          href="<%= contextPath %>/ohora.do?findID=findID1"
+                          href="<%= contextPath %>/goFindId1.htm"
                           class="btnLogin SMS_login_id SMSloginID_btnTD"
                           id="aa"
                           ><b class="SMS_icon"></b>아이디 찾기</a
                         >
                         <a
-                          href="<%= contextPath %>/ohora.do?findPasswd=goFindPasswd"
+                          href="<%= contextPath %>/goPasswd1.htm"
                           class="btnLogin SMS_login_pw SMSloginPW_btnTD"
                           id="aaa"
                           ><b class="SMS_icon"></b>비밀번호 찾기</a
@@ -220,7 +222,7 @@
 
                       <div class="btnJoin btnArea type1 join_btn">
                         <a
-                          href="<%= contextPath %>/ohora.do?join=signup"
+                          href="/goJoin1.htm"
                           class="btnEm SMSjoin_btnTD wh"
                           id="aaaaa"
                           >회원가입 후 혜택받기</a
@@ -256,7 +258,11 @@
                 </div>
                 <!--//주문조회-->
               </div>
-              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+              <input
+                type="hidden"
+                name="${_csrf.parameterName}"
+                value="${_csrf.token}"
+              />
             </form>
           </div>
 
@@ -276,47 +282,69 @@
     </div>
   </body>
 
-<!-- 로그인 클릭 submit -->
-<script>
-   function loginClick() {
+  <!-- 로그인 클릭 submit -->
+  <script>
+    function loginClick() {
       // alert("test");
       $("#loginForm").submit();
-   };
-</script>
+    }
+  </script>
 
-<!-- 로그인 실패 후 alert 창 띄우기 -->
-<script>
-$(document).ready(function(){
-   
-   if ( "${param.login}" === "fail" ) {
-      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-   };
-   
-});
-</script>
+  <script>
+    $(document).ready(function () {
+      if ("${param.change}" === "success") {
+        alert("비밀번호가 성공적으로 변경되었습니다.");
+      }
+    });
+  </script>
 
-<!-- 이거 추가 갱신 된거다.  -->
-<!-- 비밀번호 변경 성공 시 alert 창 띄우기 -->
-<script>
-$(document).ready(function(){
-   
-   if ( "${param.changeLogin}" === "goChangeLogin" ) {
-      alert("비밀번호가 성공적으로 변경되었습니다.");
-   };
-   
-});
-</script>
+  <script>
+    $(document).ready(function () {
+      if ("${param.change}" === "fail") {
+        alert("비밀번호 변경이 실패했습니다.");
+      }
+    });
+  </script>
 
-<!-- 이거 추가 갱신 된거다.  -->
-<!-- loginCheckFilter 로 로그인이 안될 시 alert 창 띄우기 -->
-<script>
-$(document).ready(function(){
-   
-   if ( "${param.loginCheck}" === "fail" ) {
-      alert("로그인 후 이용 가능한 페이지입니다.");
-   };
-   
-});
-</script>
+  <!-- 로그인 실패 후 alert 창 띄우기 -->
+  <script>
+    $(document).ready(function () {
+      if ("${param.login}" === "fail") {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      }
+    });
+  </script>
 
+  <!-- 이거 추가 갱신 된거다.  -->
+  <!-- 비밀번호 변경 성공 시 alert 창 띄우기 -->
+  <script>
+    $(document).ready(function () {
+      if ("${param.changeLogin}" === "goChangeLogin") {
+        alert("비밀번호가 성공적으로 변경되었습니다.");
+      }
+    });
+  </script>
+
+  <!-- 이거 추가 갱신 된거다.  -->
+  <!-- loginCheckFilter 로 로그인이 안될 시 alert 창 띄우기 -->
+  <script>
+    $(document).ready(function () {
+      if ("${param.loginCheck}" === "fail") {
+        alert("로그인 후 이용 가능한 페이지입니다.");
+      }
+    });
+    
+    $(document).ready(function() {
+        // ID와 비밀번호 입력 필드에 keypress 이벤트 추가
+        $("#member_id, #member_passwd").on("keypress", function(e) {
+            // 엔터키의 keyCode는 13
+            if (e.keyCode === 13) {
+                // 기본 이벤트(form submit) 방지
+                e.preventDefault();
+                // 로그인 함수 호출
+                loginClick();
+            }
+        });
+    });
+  </script>
 </html>

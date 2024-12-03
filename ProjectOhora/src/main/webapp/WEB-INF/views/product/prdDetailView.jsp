@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <%@ page import="kr.ohora.www.domain.product.ProductDTO" %>
 <%@ page import="kr.ohora.www.domain.product.OptionDTO" %>
@@ -11,8 +12,6 @@
     
     // product 객체를 명시적으로 선언하고 가져오기
     ProductDTO product = (ProductDTO) request.getAttribute("product"); 
-    
-	String contextPath = request.getContextPath();
 %>
 
 <!DOCTYPE html>
@@ -54,14 +53,14 @@
   <div class="SP_detailThumbnail_wrap">
     <!-- 큰 이미지 -->
     <div class="SP_thumbnail">
-        <img id="mainImage" src="${product.pdtImgUrl }" alt="${product.pdtName }" class="BigImage">
+        <img id="mainImage" src="/resources/images/product_image/${product.pdtImgUrl }" alt="${product.pdtName }" class="BigImage">
     </div>
 
     <!-- 작은 이미지 목록 -->
     <div class="SP_listImg">
         <ul>
-            <li><img src="${product.pdtImgUrl }" alt="Thumb 1" onmouseover="changeImage('${product.pdtImgUrl }')"></li>
-            <li><img src="${product.pdtImgUrl2 }" alt="Thumb 2" onmouseover="changeImage('${product.pdtImgUrl2 }')"></li>
+            <li><img src="/resources/images/product_image/${product.pdtImgUrl }" alt="Thumb 1" onmouseover="changeImage('${product.pdtImgUrl }')"></li>
+            <li><img src="/resources/images/product_image/${product.pdtImgUrl2 }" alt="Thumb 2" onmouseover="changeImage('${product.pdtImgUrl2 }')"></li>
             <!-- <li><img src="https://www.ohora.kr/web/product/extra/small/202410/20ea938442221e7f2d275a865172a656.jpg" alt="Thumb 3" onmouseover="changeImage('image/prd_image/마롱네일4.jpg')"></li>
             <li><img src="https://www.ohora.kr/web/product/extra/small/202410/7ad8d1c56f1046c160fa9395f443c187.jpg" alt="Thumb 4" onmouseover="changeImage('image/prd_image/마롱네일1.jpg')"></li> -->
         </ul>
@@ -69,10 +68,18 @@
 </div>
 
 <script>
-    // 큰 이미지를 변경하는 function
-    function changeImage(imageSrc) {
-        document.getElementById('mainImage').src = imageSrc;
-    }
+	//큰 이미지를 변경하는 함수
+	function changeImage(imageSrc) {
+	    document.getElementById('mainImage').src = imageSrc;
+	}
+	
+	// 썸네일에 이벤트 등록
+	const thumbnails = document.querySelectorAll('.SP_listImg ul li img');
+	thumbnails.forEach((thumbnail) => {
+	    thumbnail.addEventListener('mouseover', (event) => {
+	        changeImage(event.target.src);
+	    });
+	});
 </script>
 
 
@@ -101,7 +108,7 @@
 	  </li><li class="xans-record- review_count"><span class="SP_detail_content">리뷰 ${product.pdtReviewCount}</span></li>
 		
 	  <li class="display_가격 xans-record- SP_dfList_price strike" style="display: list-item;">
-	  <span class="title" style="">가격</span><span class="SP_detail_content" style=""><span style=""><strong id="span_product_price_text" style="text-decoration: line-through;">${product.pdtAmount}</strong><input id="product_price" name="product_price" value="" type="hidden" style=""></span><span class="salesPrice">${product.pdtDiscountAmount}</span><span class="dcPercent">${product.pdtDiscountRate}%</span></span>
+	  <span class="title" style="">가격</span><span class="SP_detail_content" style=""><span style=""><strong id="span_product_price_text" style="text-decoration: line-through;">${product.pdtAmount}원</strong><input id="product_price" name="product_price" value="" type="hidden" style=""></span><span class="salesPrice">${product.pdtDiscountAmount}원</span><span class="dcPercent">${product.pdtDiscountRate}%</span></span>
 	  </li>
 		
 	  
@@ -279,7 +286,7 @@
 				                    <!-- 상품 썸네일 -->
 				                    <div class="SP_addSetThumb">
 				                        <a href="/product/${product.pdtName}/${product.pdtId}/">
-				                            <img src="${product.pdtImgUrl != null ? product.pdtImgUrl : '../resources/images/prd_img/마롱네일1.jpg'}" 
+				                            <img src="/resources/images/product_image/${product.pdtImgUrl}" 
 				                                 alt="${product.pdtName}" 
 				                                 id="ec-add-product-composed-product-${product.pdtId}">
 				                        </a>
@@ -603,17 +610,13 @@ function removeProduct(productId) {
 								id="btnBuy">바로 구매</span></a>
 							<!-- //바로 구매 버튼 -->
 							<!-- 장바구니 버튼 -->
-							<c:choose>
-                        <c:when test="${userId != null}">
-                           <a href="#none" class="SP_cm_btn SP_cartBtn " id="addCartBtn"
-                           onclick="addtoCart();">장바구니 담기</a>
-                        </c:when>
-                        <c:otherwise>
-                           <a href="#none" class="SP_cm_btn SP_cartBtn ">장바구니 담기</a>                        
-                           <!-- //장바구니 버튼 -->
-                        </c:otherwise>
-                        </c:choose>
-							<!-- //장바구니 버튼 -->
+							<sec:authorize access="isAnonymous()"> <!-- 비회원 -->
+	                            <a href="#none" class="SP_cm_btn SP_cartBtn ">장바구니 담기</a>
+							</sec:authorize>
+							<sec:authorize access="isAuthenticated()"> <!-- 회원 -->
+								<a href="#none" class="SP_cm_btn SP_cartBtn " id="userAddCartBtn" onclick="addtoCart();">장바구니 담기</a>
+							</sec:authorize>
+							<!-- // 장바구니 버튼 -->
 						</div>
 						<div id="appPaymentButtonBox"
 							style="margin: 20px auto 0; display: inline-flex; flex-wrap: wrap; gap: 10px;">
@@ -771,9 +774,9 @@ function removeProduct(productId) {
           <div class="RV_wrap" style="margin-top: 32px; margin-bottom: 32px; ">
           	<div class="RV_box">
           	
-          	<iframe src="<%=contextPath %>/review.htm?pdt_id=${product.pdtId}" style="    display: block; visibility: visible; height: 1407px; width: 100%; iframe::-webkit-scrollbar{ }"  >
+          	<iframe src="/review.htm?pdt_id=${product.pdtId}" style="    display: block; visibility: visible; height: 1407px; width: 100%; iframe::-webkit-scrollbar{ }"  >
           	</iframe>
-          	
+          	 
           	</div>
           </div>
       </div>
@@ -1226,12 +1229,14 @@ function removeProduct(productId) {
       }
     });
   </script>
-  
-  <script>
-// 장바구니 버튼
-$("#addCartBtn").on("click", function(){
-   
-   event.preventDefault(); // 기본 링크 동작을 막음
+
+<!-- 회원 장바구니 버튼 -->
+<script>
+$("#userAddCartBtn").on("click", function(){
+    
+	// alert("test");
+	
+	event.preventDefault(); // 기본 링크 동작을 막음
     
     if ($("#option_main_quantity").length > 0) {
        const mainValue = $("#option_main_quantity").val();
@@ -1259,7 +1264,7 @@ $("#addCartBtn").on("click", function(){
         console.log(queryParams);
          
         // 동적으로 href 속성 설정
-        const fullUrl = `/projectOhora/product/addcartbtn.do?\${queryParams}`;
+        const fullUrl = `/userCart/addCartBtn.htm?\${queryParams}`;
         $(this).attr('href', fullUrl);
 
         // 기본 링크 동작을 막았기 때문에 원래 동작을 실행시켜 주기
@@ -1291,7 +1296,7 @@ $("#addCartBtn").on("click", function(){
 
         
         // 동적으로 href 속성 설정
-        const fullUrl = `/projectOhora/product/addcartbtn.do?\${queryParams}`;
+        const fullUrl = `/userCart/addCartBtn.htm?\${queryParams}`;
         $(this).attr('href', fullUrl);
 
         // 기본 링크 동작을 막았기 때문에 원래 동작을 실행시켜 주기
@@ -1301,9 +1306,10 @@ $("#addCartBtn").on("click", function(){
    
 });
 </script>
+
 <script src="/projectOhora/resources/js/oho_main.js"></script>
 
-<script>
+<!-- <script>
 // 쿠키 설정 함수
 function setCookie(name, value, days) {
     let expires = '';
@@ -1396,7 +1402,7 @@ $(document).ready(function() {
     // 초기 계산 실행
     lastPriceFunc();
 });
-</script>
+</script> -->
 
 
 </body>

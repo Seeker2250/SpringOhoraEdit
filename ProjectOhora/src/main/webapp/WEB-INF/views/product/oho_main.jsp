@@ -1,12 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="kr.ohora.www.domain.product.ProductDTO" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%
     ArrayList<ProductDTO> productList = (ArrayList<ProductDTO>) request.getAttribute("productList");
-	String contextPath = request.getContextPath();
+    String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +29,8 @@
 <script type="text/javascript">
     window.hasProductCountSession = ${not empty sessionScope.userId};
 </script>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" /> <!-- 스프링 추가 -->
 <%-- <%@include file="header.jsp" %> --%>
 </head>
 <body>
@@ -91,78 +93,67 @@
            </div>
 
            <div class="common_list_box">
-                              <div class="swiper-container swiper mySwiper2">
-             <ul class="items-swiper-wrapper2 swiper-wrapper">
-                 <c:forEach var="product" items="${products}" varStatus="status">
-                     <c:if test="${status.index >= 1 && status.index < 8}">
-                         <li id="item${product.pdtId}" class="item-swiper-slide swiper-slide">
-                             <div class="container-complete" data-prd-num="${product.pdtId}">
-                                 <dl>
-                                     <a href="prdDetailView.htm?productId=${product.pdtId}" class="viewlink"></a>
-                                     <div class="base-img">
-                                         <div class="thumb">
-                                             <img loading="lazy" alt="" class="thumb_img" width="800" height="800" src="${product.pdtImgUrl}">
-                                         </div>
-                                         <span class="soldout-img" style="display: none">
-                                             <a href="prdDetailView.htm?productId=${product.pdtId}">
-                                                 <span>coming<br>soon</span>
-                                             </a>
-                                         </span>
-                                     </div>
-                                     <div class="base-mask">
-                                         <dd class="name-container">
-                                             <p class="name"><span>${product.pdtName}</span></p>
-                                         </dd>
-                                         <dd class="price-container">
-                                             <p class="normal-price">${product.pdtAmount}</p>
-                                             <p class="sale-price">${product.pdtDiscountAmount}</p>
-                                             <p class="discount">${product.pdtDiscountRate}%</p>
-                                         </dd>
-                                         <dd class="prdRegiDate">등록일</dd>
-                                         <div class="prdInfoBot">
-                                             <div class="rvCount">
-                                                 <div class="rvWrap">
-                                                     <p class="rv_count_wrap">
-                                                         <span class="rv_count_value">${product.pdtReviewCount}</span>
-                                                     </p>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <%-- <c:choose>
-                                             <c:when test="${hasProductCountSession}">
-                                                 <div class="into_cart" data-pdtid="${product.pdtId}" onclick="addCart(this);">
-                                                     <img class="cart_icon" src="https://img.echosting.cafe24.com/design/skin/admin/ko_KR/btn_list_cart.gif" alt="카트 아이콘">
-                                                 </div>
-                                             </c:when>
-                                             <c:otherwise>
-                                                 <div class="into_cart" data-pdtid="${product.pdtId}">
-                                                     <img class="cart_icon" src="https://img.echosting.cafe24.com/design/skin/admin/ko_KR/btn_list_cart.gif" alt="카트 아이콘">
-                                                 </div>
-                                             </c:otherwise>
-                                         </c:choose> --%>
-                                         	<sec:authorize access="isAnonymous()">
-												<div class="cart_icon">
-													<img src="../resources/images/btn_list_cart.gif" data-pdt_id="${product.pdtId}" alt="Add to cart" onclick="noUserCart(this);" />
-												</div>
-											</sec:authorize>
-											<sec:authorize access="isAuthenticated()">
-												<div class="cart_icon">
-													<img src="../resources/images/btn_list_cart.gif" data-pdt_id="${product.pdtId}" alt="Add to cart" onclick="userCartAdd(this);" />
-												</div>
-											</sec:authorize>
-                                         <div class="only_info_dispNone">
-                                             <span style="font-size:12px;color:#555555;">#네일 #젤스트립 #핑크 #프렌치 #자석 #글리터 #골드</span>
-                                         </div>
-                                     </div>
-                                 </dl>
-                             </div>
-                         </li>
-                     </c:if>
-                 </c:forEach>
-             </ul>
-         
-             <div class="swiper-scrollbar"></div>
-         </div>
+               <div class="swiper-container swiper mySwiper2">
+			    <ul class="items-swiper-wrapper2 swiper-wrapper">
+			        <c:forEach var="product" items="${products}" varStatus="status">
+			            <c:if test="${status.index >= 0 && status.index < 7}">
+			                <li id="item${product.pdtId}" class="item-swiper-slide swiper-slide">
+			                    <div class="container-complete" data-prd-num="${product.pdtId}">
+			                        <dl>
+			                            <a href="prdDetailView.htm?productId=${product.pdtId}" class="viewlink"></a>
+			                            <div class="base-img">
+			                                <div class="thumb">
+			                                    <img loading="lazy" alt="" class="thumb_img" width="800" height="800" src="/resources/images/product_image/${product.pdtImgUrl}">
+			                                </div>
+			                                <span class="soldout-img" style="display: none">
+			                                    <a href="prdDetailView.htm?productId=${product.pdtId}">
+			                                        <span>coming<br>soon</span>
+			                                    </a>
+			                                </span>
+			                            </div>
+			                            <div class="base-mask">
+			                                <dd class="name-container">
+			                                    <p class="name"><span>${product.pdtName}</span></p>
+			                                </dd>
+			                                <dd class="price-container">
+			                                    <p class="normal-price">${product.pdtAmount}</p>
+			                                    <p class="sale-price">${product.pdtDiscountAmount}</p>
+			                                    <p class="discount">${product.pdtDiscountRate}%</p>
+			                                </dd>
+			                                <dd class="prdRegiDate">등록일</dd>
+			                                <div class="prdInfoBot">
+			                                    <div class="rvCount">
+			                                        <div class="rvWrap">
+			                                            <p class="rv_count_wrap">
+			                                                <span class="rv_count_value">${product.pdtReviewCount}</span>
+			                                            </p>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                                <sec:authorize access="isAnonymous()">
+			                                			<div class="into_cart" data-pdt_id="${product.pdtId}">
+			                                            	<img class="cart_icon" src="" alt="카트 아이콘">
+			                                        	</div>
+										            </sec:authorize>
+										            <sec:authorize access="isAuthenticated()">
+														<div class="into_cart" data-pdt_id="${product.pdtId}" onclick="userCartAdd(this);">
+			                                            	<img class="cart_icon" src="" alt="카트 아이콘">
+			                                        	</div>
+										    </sec:authorize>
+			                                <div class="only_info_dispNone">
+			                                    <span style="font-size:12px;color:#555555;">#네일 #젤스트립 #핑크 #프렌치 #자석 #글리터 #골드</span>
+			                                </div>
+			                            </div>
+			                        </dl>
+			                    </div>
+			                </li>
+			            </c:if>
+			        </c:forEach>
+			    </ul>
+			
+			    <div class="swiper-scrollbar"></div>
+			</div>
+
                <!-- 스와이퍼 컨테이너 -->
                <div class="swiper-button-next"></div>
                <div class="swiper-button-prev"></div>
@@ -201,7 +192,7 @@ function createMonthlyProductItem(product) {
 	        : `<div class="into_cart" data-pdtid="\${product.id}">
 	             <img class="cart_icon" src="https://img.echosting.cafe24.com/design/skin/admin/ko_KR/btn_list_cart.gif" alt="카트 아이콘">
 	           </div>`;
-	           
+	
 	    return `
 	        <li id="item\${product.id}" class="item-swiper-slide swiper-slide">
 	            <div class="container-complete" data-prd-num="\${product.id}">
@@ -284,13 +275,57 @@ function createMonthlyProductItem(product) {
 
            <div class="common_list_box2">
                <div class="swiper-container swiper mySwiper3">
-                   <ul class="items-swiper-wrapper3 swiper-wrapper">
-  
-                   </ul>
-                   <div class="swiper-scrollbar"></div>
- 
+			    <ul class="items-swiper-wrapper3 swiper-wrapper">
+			        <c:forEach var="product" items="${weeklyBestProducts}" varStatus="status">
+			        	<c:if test="${status.index >= 0 && status.index < 7}">
+			            <li id="item${product.pdtId}" class="item-swiper-slide swiper-slide">
+			                <div class="container-complete" data-prd-num="${product.pdtId}">
+			                    <dl>
+			                        <a href="prdDetailView.htm?productId=${product.pdtId}" class="viewlink"></a>
+			                        <div class="base-img">
+			                            <div class="thumb">
+			                                <img loading="lazy" alt="" class="thumb_img" width="800" height="800" src="/resources/images/product_image/${product.pdtImgUrl}">
+			                            </div>
+			                            <span class="soldout-img" style="display: none">
+			                                <a href="prdDetailView.htm?productId=${product.pdtId}">
+			                                    <span>coming<br>soon</span>
+			                                </a>
+			                            </span>
+			                        </div>
+			                        <div class="base-mask">
+			                            <dd class="name-container">
+			                                <p class="name"><span>${product.pdtName}</span></p>
+			                            </dd>
+			                            <dd class="price-container">
+			                                <p class="normal-price">${product.pdtAmount}</p>
+			                                <p class="sale-price">${product.pdtDiscountAmount}</p>
+			                                <p class="discount">${product.pdtDiscountRate}%</p>
+			                            </dd>
+			                            <div class="prdInfoBot">
+			                                <div class="rvCount">
+			                                    <div class="rvWrap">
+			                                        <p class="rv_count_wrap">
+			                                            <span class="rv_count_value">${product.pdtReviewCount}</span>
+			                                        </p>
+			                                    </div>
+			                                </div>
+			                                <div class="into_cart" data-pdtid="${product.pdtId}">
+			                                    <img class="cart_icon" src="https://img.echosting.cafe24.com/design/skin/admin/ko_KR/btn_list_cart.gif" alt="카트 아이콘">
+			                                </div>
+			                                <div class="only_info_dispNone">
+			                                    <span style="font-size:12px;color:#555555;">#네일 #젤스트립 #핑크 #프렌치 #자석 #글리터 #골드</span>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </dl>
+			                </div>
+			            </li>
+			          </c:if>
+			        </c:forEach>
+			    </ul>
+			    <div class="swiper-scrollbar"></div>
+			</div>
 
-                </div>
 
                 <div class="swiper-button-next2"></div>
                 <div class="swiper-button-prev2"></div>
@@ -303,8 +338,98 @@ function createMonthlyProductItem(product) {
 
        </div>
        
+     <script>
+     $(document).ready(function () {
+    	    // 카테고리 탭 클릭 이벤트
+    	    $(".cate_tab span").on("click", function () {
+    	        const categoryNumber = $(this).data("cate"); // 카테고리 번호
+    	        $(".cate_tab span").removeClass("on");
+    	        $(this).addClass("on"); // 선택된 탭 강조
+
+    	        // AJAX 요청으로 데이터 갱신
+    	        $.ajax({
+    	            url: "/fetchProducts.ajax",
+    	            type: "GET",
+    	            data: { categoryNumber: categoryNumber },
+    	            dataType: "json",
+    	            success: function (data) {
+    	                console.log("Fetched Data:", data); // 디버깅
+    	                updateProductList(data); // 상품 리스트 갱신
+    	            },
+    	            error: function (xhr, status, error) {
+    	                console.error("Error fetching products:", error);
+    	            },
+    	        });
+    	    });
+
+    	    // 상품 리스트 갱신
+    	    function updateProductList(products) {
+			    const $productContainer = $(".items-swiper-wrapper3");
+			    if ($productContainer.length === 0) {
+			        console.error("Error: .items-swiper-wrapper3 요소를 찾을 수 없습니다.");
+			        return;
+			    }
+			
+			    $productContainer.empty(); // 기존 콘텐츠 제거
+			
+			    // 첫 8개 데이터만 처리
+			    const limitedProducts = products.slice(0, 8); // 최대 8개 가져오기
+			
+			    limitedProducts.forEach((product) => {
+			        const productItem = `
+			            <li id="item\${product.pdtId}" class="item-swiper-slide swiper-slide">
+			                <div class="container-complete" data-prd-num="\${product.pdtId}">
+			                    <dl>
+			                        <a href="prdDetailView.htm?productId=\${product.pdtId}" class="viewlink"></a>
+			                        <div class="base-img">
+			                            <div class="thumb">
+			                                <img loading="lazy" alt="" class="thumb_img" width="800" height="800" src="/resources/images/product_image/\${product.pdtImgUrl}">
+			                            </div>
+			                            <span class="soldout-img" style="display: none">
+			                                <a href="prdDetailView.htm?productId=\${product.pdtId}">
+			                                    <span>coming<br>soon</span>
+			                                </a>
+			                            </span>
+			                        </div>
+			                        <div class="base-mask">
+			                            <dd class="name-container">
+			                                <p class="name"><span>\${product.pdtName}</span></p>
+			                            </dd>
+			                            <dd class="price-container">
+			                                <p class="normal-price">\${product.pdtAmount}</p>
+			                                <p class="sale-price">\${product.pdtDiscountAmount}</p>
+			                                <p class="discount">\${product.pdtDiscountRate}%</p>
+			                            </dd>
+			                            <div class="prdInfoBot">
+			                                <div class="rvCount">
+			                                    <div class="rvWrap">
+			                                        <p class="rv_count_wrap">
+			                                            <span class="rv_count_value">\${product.pdtReviewCount}</span>
+			                                        </p>
+			                                    </div>
+			                                </div>
+			                                <div class="into_cart" data-pdtid="\${product.pdtId}">
+			                                    <img class="cart_icon" src="https://img.echosting.cafe24.com/design/skin/admin/ko_KR/btn_list_cart.gif" alt="카트 아이콘">
+			                                </div>
+			                                <div class="only_info_dispNone">
+			                                    <span style="font-size:12px;color:#555555;">#네일 #젤스트립 #핑크 #프렌치 #자석 #글리터 #골드</span>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </dl>
+			                </div>
+			            </li>
+			        `;
+			        $productContainer.append(productItem);
+			    });
+			}
+    	});
+
+     </script>
+     
+     
        
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
         // 초기 로드: 전체 카테고리(0) 데이터 가져오기
         fetchProducts(0);
@@ -406,7 +531,7 @@ function createMonthlyProductItem(product) {
             });
         }
     });
-</script>
+</script> -->
        
        
        
@@ -658,52 +783,55 @@ function createMonthlyProductItem(product) {
       }
     });
   </script>
+  
+<!-- 장바구니 버튼 ajax 처리 -->
+<script>
+    function userCartAdd(element) {
+        const productId = $(element).data("pdt_id");
+        // alert(productId);
+    
+        // 확인창 표시
+        if (confirm("장바구니에 추가하시겠습니까?")) {
+            $.ajax({
+                url: "<%= contextPath %>/userCart/addCart.ajax",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    pdt_id: productId
+                },
+                beforeSend: function(xhr) {
+                    // CSRF 토큰 설정
+                    xhr.setRequestHeader($('meta[name="_csrf_header"]').attr("content"), 
+                                         $('meta[name="_csrf"]').attr("content"));
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // 장바구니 수량 업데이트
+                        $(".EC-Layout-Basket-count").text(response.newCartCount);
+                        // 성공 메시지 표시
+                        alert(response.message);
+                    } else {
+                        // 실패 메시지 표시
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert("요청 처리 중 오류가 발생했습니다.");
+                }
+            });
+        } else {
+            // 사용자가 취소를 선택했을 때 추가 동작이 필요하다면 여기에 작성
+            console.log("장바구니 추가가 취소되었습니다.");
+        }
+    }
+</script>
 
 <!-- 세션 체크 -->
+<!-- 
 <script type="text/javascript">
     window.hasProductCountSession = ${not empty sessionScope.productCount};
 </script>
-
-<!-- 장바구니 버튼 ajax 처리 -->
-<script>
-function userCartAdd(element) {
-    const productId = $(element).data("pdt_id");
-
-    // 확인창 표시
-    if (confirm("장바구니에 추가하시겠습니까?")) {
-        $.ajax({
-            url: "<%= contextPath %>/userCart/addCart.ajax",
-            type: "POST",
-            dataType: "json",
-            data: {
-                pdt_id: productId
-            },
-            beforeSend: function(xhr) {
-                // CSRF 토큰 설정
-                xhr.setRequestHeader($('meta[name="_csrf_header"]').attr("content"), 
-                                     $('meta[name="_csrf"]').attr("content"));
-            },
-            success: function(response) {
-                if (response.success) {
-                    // 장바구니 수량 업데이트
-                    $(".EC-Layout-Basket-count").text(response.newCartCount);
-                    // 성공 메시지 표시
-                    alert(response.message);
-                } else {
-                    // 실패 메시지 표시
-                    alert(response.message);
-                }
-            },
-            error: function() {
-                alert("요청 처리 중 오류가 발생했습니다.");
-            }
-        });
-    } else {
-        // 사용자가 취소를 선택했을 때 추가 동작이 필요하다면 여기에 작성
-        console.log("장바구니 추가가 취소되었습니다.");
-    }
-}
-</script>
+ -->
 
 <!-- 장바구니 쿠키 처리 -->
 <!-- 

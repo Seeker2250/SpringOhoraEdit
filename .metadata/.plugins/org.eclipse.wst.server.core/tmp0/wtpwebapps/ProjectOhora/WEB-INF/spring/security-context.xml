@@ -12,13 +12,35 @@
    
    <security:http use-expressions="true">
    
-    <!-- 관리자 페이지 따로 설정 필요함 -->
+    <security:intercept-url pattern="/outlet.htm" access="hasRole('ROLE_USER')" />
+    <security:intercept-url pattern="/outlet.htm" access="hasRole('ROLE_ADMIN')" />
+    <!-- ROLE_ADMIN -->
+    <!-- 관리자 페이지 접근 -->
+    <security:intercept-url pattern="/auth.htm" access="hasRole('ROLE_ADMIN')" />
+    
+	<!-- 관리자 상품등록 -->
+    <security:intercept-url pattern="/prdAdd.htm" access="hasRole('ROLE_ADMIN')" />
+    <security:intercept-url pattern="/prdManageList.htm" access="hasRole('ROLE_ADMIN')" />
+    
+
+    
+    <!-- ROLE_USER -->
+    <!-- 유저 페이지 접근 -->
+    <security:intercept-url pattern="/user/mypage.htm" access="hasRole('ROLE_USER')" />
+    
+    
+    <!-- permitAll(전체접근) -->
    	<security:intercept-url pattern="/**" access="permitAll" />
+   	
+   	
+   	<!-- 접근 거부 -->
+    <security:access-denied-handler error-page="/main.htm" />
+   	 
    	
    	<!-- 페이지 설정 따로 필요하다. -->
    	<security:form-login
-   		login-page="/goLogin.htm"
-   		default-target-url=""
+   		login-page="/login.htm"
+   		default-target-url="/main.htm"
    		authentication-failure-url="/login.htm?login=fail"
    		authentication-success-handler-ref="customLoginSuccessHandler"
    	/>

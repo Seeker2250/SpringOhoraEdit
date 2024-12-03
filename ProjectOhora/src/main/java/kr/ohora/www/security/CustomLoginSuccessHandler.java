@@ -31,10 +31,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		});
 		
 		if (roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/auth.htm");
+			response.sendRedirect("/main.htm");
 			return;
 		} else if (roleNames.contains("ROLE_USER")) {
-			response.sendRedirect("/pdtCount.htm"); // 메인페이지로 바꿔야된다.
+			response.sendRedirect("/pdtCount.htm");
 			return;
 		} // if
 		

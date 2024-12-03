@@ -8,12 +8,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.ohora.www.domain.review.CommentDTO;
 //import net.sf.json.JSONObject;
 import kr.ohora.www.domain.review.RevMedia;
 import kr.ohora.www.domain.review.ReviewDTO;
 import kr.ohora.www.domain.review.ReviewRating;
+import kr.ohora.www.domain.review.WritingReviewDTO;
 
 public interface ReviewMapper {
 
@@ -53,6 +55,31 @@ public interface ReviewMapper {
 	//전체 리뷰 갯수
 	Integer getTotalRevCnt(int pdtId);
 
+	//리뷰 작성
+	int reviewWrite(WritingReviewDTO rvm);
+	
+	//리뷰 이미지 DB 이름 저장
+	int reviewImgUpload(String filePath);
+
+	//리뷰 삭제
+	int deleteReview(int opdtId);
+
+	//리뷰 이미지 삭제
+	int deleteReviewUrl(int opdtId);
+
+	//리뷰 댓글 삭제
+	int deleteReviewComment(int opdtId);
+
+	//리뷰 삭제 시 삭제할 파일명들 가져오기
+	List<String> selectDelFiles(int opdtId);
+
+	//리뷰 삭제시 카운트 -1
+	int deleteReviewCount(int opdtId);
+	
+	//리뷰 작성시 카운트 +1
+	void productRevUp(WritingReviewDTO rvm);
+
+	
 
 	
 	

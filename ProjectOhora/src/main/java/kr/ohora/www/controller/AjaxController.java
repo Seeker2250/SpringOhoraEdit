@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ohora.www.domain.product.ProductDTO;
 import kr.ohora.www.domain.security.CustomerUser;
-import kr.ohora.www.persistence.AjaxMapper;
-import kr.ohora.www.persistence.ProductMapper;
+import kr.ohora.www.service.ProductService;
 import kr.ohora.www.service.UserCartService;
 import lombok.extern.log4j.Log4j;
 
@@ -84,13 +82,16 @@ public class AjaxController {
 	    return response;
 	}
 
-	   @Autowired
-	   private ProductMapper productMapper;
+	@Autowired
+    private ProductService productService;
 
-	   @GetMapping(value="/fetchProducts.ajax" , produces = "application/json")
-	   public List<ProductDTO> fetchProducts(@RequestParam(defaultValue = "0") int categoryNumber) {
-	       return productMapper.selectAllProducts(categoryNumber, "sales");
-	   }
+    @GetMapping(value = "/fetchProducts.ajax", produces = "application/json")
+    public List<ProductDTO> fetchProducts(
+            @RequestParam(defaultValue = "0") int categoryNumber,
+            @RequestParam(defaultValue = "sales") String sortBy) {
+        // 요청된 카테고리와 정렬 기준에 따라 상품 목록 반환
+        return productService.getProductsByCategory(categoryNumber, sortBy);
+    }
 	
 	
 	

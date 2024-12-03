@@ -441,7 +441,7 @@ img {
   min-width: 1050px; padding: 25px 0 2px; width: 1200px;
 }
 
-.SP_top_wrap .layout_Top, .SP_top_wrap .layout_Top, .SP_top_wrap .layout_Top {
+.SP_top_wrap .layout_Tsop, .SP_top_wrap .layout_Top, .SP_top_wrap .layout_Top {
    margin: 0 auto; min-width: 1200px; padding-right: 180px; padding: 0; text-align: right; width: 100%;
 }
 
@@ -449,7 +449,7 @@ img {
   display: inline-block; font-size: 0; text-align: right; vertical-align: top;
 }
 
-#fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a {
+#fix_position .SP_gnb_inr > a, #fix_position .SP_gnb_inr > a {
   color: #000; display: inline-block; font-size: 12px; letter-spacing: -0.25px; padding: 0px; position: relative; vertical-align: top;
 }
 

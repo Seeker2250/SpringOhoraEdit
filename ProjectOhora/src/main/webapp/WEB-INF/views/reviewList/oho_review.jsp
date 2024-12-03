@@ -77,13 +77,7 @@ if (sortType == null) {
                     <div>
                         <span class="hd-title">
                             <strong>REVIEW 
-                            
-                            <sec:authorize access="isAnonymous()">
-						 	</sec:authorize>
-						 	<sec:authorize access="isAuthenticated()">
-						 		<sec:authentication property="principal.user.userId"/> 
-						 	</sec:authorize>
-						 	
+
                             </strong>
                         </span>
                     </div>
@@ -109,17 +103,32 @@ if (sortType == null) {
                                                     </svg>
                                                 </div>
                                         </span>
-                                        <span class="review-score">
+                                        <span class="review-score" id="avgRating">
                                             ${rating.avgRating}
 
                                             <!-- 동적 처리 필요 -->
                                         </span>
                                     </div>
                                     <div class="like-percent-wrap">
-                                        <b>
+                                        <b id="likeRate">
+											
 											${ (rating.count5 + rating.count4 + rating.count3)/ (rating.count2 + rating.count1 + rating.count5 + rating.count4 + rating.count3) * 100 }%
                                         	
                                         </b>
+                                         <script type="text/javascript">
+                                        let rating = ${ (rating.count5 + rating.count4 + rating.count3)/ (rating.count2 + rating.count1 + rating.count5 + rating.count4 + rating.count3) * 100 } ; 
+                                        let roundedRating = Math.ceil(rating * 10) / 10; 
+                                        $("#likeRate").text(roundedRating+"%"  )
+                                        
+                                              let avgRating = parseFloat("${rating.avgRating}");
+                                      if (!isNaN(avgRating)) {
+                                          let roundedAvgRating = Math.ceil(avgRating * 10) / 10;
+                                          $("#avgRating").text(roundedAvgRating);
+                                      } else {
+                                          $("#avgRating").text("0"); // NaN일 경우 기본값 설정
+                                      }
+                                        
+                                        </script>
                                         의 구매자가 이 상품을 좋아합니다.
                                     </div>
                                 </div>

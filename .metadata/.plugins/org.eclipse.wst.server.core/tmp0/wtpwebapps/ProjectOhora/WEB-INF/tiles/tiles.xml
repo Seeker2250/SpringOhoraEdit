@@ -25,4 +25,38 @@
         <put-attribute name="title" value="오호라 리뷰"/>
     </definition>
     
+    
+    <!-- 아이디 찾기 -->
+	<definition name="user.oho_findId1" template="/WEB-INF/views/inc/idlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/user/oho_findId1.jsp" />
+        <put-attribute name="css" value="/resources/css/findId/oho_findId1.css"/>
+        <put-attribute name="title" value="오호라 아이디 찾기"/>
+    </definition>
+    
+    <definition name="user.oho_findId2" template="/WEB-INF/views/inc/idlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/user/oho_findId2.jsp" />
+        <put-attribute name="css" value="/resources/css/findId/oho_findId2.css"/>
+        <put-attribute name="title" value="오호라 아이디 찾기 완료"/>
+    </definition>
+    
+	 <!-- 비밀번호 찾기 -->
+	 <definition name="user.oho_findPwd1" template="/WEB-INF/views/inc/idlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/user/oho_findPwd1.jsp" />
+        <put-attribute name="css" value="/resources/css/findPwd/oho_findPwd1.css"/>
+        <put-attribute name="title" value="오호라 비밀번호 찾기"/>
+    </definition>
+    
+    <definition name="user.oho_findPwd2" template="/WEB-INF/views/inc/idlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/user/oho_findPwd2.jsp" />
+        <put-attribute name="css" value="/resources/css/findPwd/oho_findPwd2.css"/>
+        <put-attribute name="title" value="오호라 본인확인"/>
+    </definition>
+    
+    <definition name="user.oho_findPwd3" template="/WEB-INF/views/inc/idlayout.jsp">
+        <put-attribute name="content" value="/WEB-INF/views/user/oho_findPwd3.jsp" />
+        <put-attribute name="css" value="/resources/css/findPwd/oho_findPwd3.css"/>
+        <put-attribute name="title" value="오호라 비밀번호 변경 완료"/>
+    </definition>
+	 
+    
 </tiles-definitions>

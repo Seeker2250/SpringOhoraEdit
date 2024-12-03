@@ -31,4 +31,7 @@ public interface UserCartService {
 	// 회원 장바구니 CountUp
 	public int userCartAddCartCountUp(@Param("userId") int userId, @Param("pdtId") int pdtId);
 	
+		// 회원 상세 페이지 장바구니 담기
+		public Integer addCartBtn(@Param("userId") int userId, @Param("pdtId") List<Integer> pdtId, @Param("pdtCount") List<Integer> pdtCount);
+	
 } // interface

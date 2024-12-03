@@ -200,6 +200,68 @@
 		pdt_id = #{pdtId}
 	</select>
 
+<!-- 리뷰 작성  -->
+<insert id="reviewWrite">
+
+INSERT INTO o_review (rev_id, user_id, ord_pk, opdt_id, rev_content, rev_writedate, rev_rating,  rev_good_count, rev_bad_count,rev_comment_count, rev_isrecommend, rev_isphoto, rev_age_group, rev_option, pdt_id)
+SELECT o_review_seq.NEXTVAL, #{userId}, #{ordPk}, #{opdtId}, #{revContent}, SYSDATE, #{revRating}, 0, 0, 0, 'N', #{revIsphoto}, '', '', pdt_id
+from o_product p join o_orddetail d on d.opdt_name = p.pdt_name
+where opdt_id = #{opdtId}
+
+</insert>
+
+
+<!-- 이미지 파일 경로 입력 -->
+<insert id="reviewImgUpload">
+
+insert into o_revurl values(o_revurl_seq.NEXTVAL ,o_review_seq.CURRVAL,#{filePath}, '', '' )
+
+</insert>
+
+
+<!-- 리뷰 사진(DB) 삭제 -->
+<delete id="deleteReviewUrl">
+    DELETE FROM o_revurl
+    WHERE rev_id IN (
+        SELECT rev_id FROM o_review WHERE opdt_id = #{opdtId}
+    )
+</delete>
+
+<!-- 리뷰 글 삭제 -->
+<delete id="deleteReview">
+  DELETE FROM o_review WHERE opdt_id=#{opdtId}
+</delete>
+
+
+<!-- 리뷰 삭제 시 댓글 삭제 -->
+<delete id="deleteReviewComment">
+  DELETE FROM o_comment WHERE rev_id IN ( SELECT rev_id FROM o_review WHERE opdt_id = #{opdtId} )
+</delete>
+
+<!-- 리뷰 삭제시 삭제할 파일명들-->
+<select id="selectDelFiles" resultType="String">
+select filesystemname from o_revurl where  rev_id IN ( SELECT rev_id FROM o_review WHERE opdt_id = #{opdtId} )
+</select>
+
+<!-- 리뷰 작성시 제품의 리뷰 수 업데이트 -->
+<update id="productRevUp">
+UPDATE o_product  SET pdt_review_count = pdt_review_count+1 WHERE pdt_id IN(
+SELECT  pdt_id
+from o_product p join o_orddetail d on d.opdt_name = p.pdt_name
+where opdt_id =#{opdtId}
+)
+</update>
+
+<!-- 리뷰 삭제시 제품의 리뷰 수 업데이트 -->
+<update id="deleteReviewCount">
+UPDATE o_product  SET pdt_review_count = pdt_review_count-1 WHERE pdt_id IN(
+SELECT  pdt_id
+from o_product p join o_orddetail d on d.opdt_name = p.pdt_name
+where opdt_id =#{opdtId}
+)
+</update>
+
+
 
 
 </mapper>

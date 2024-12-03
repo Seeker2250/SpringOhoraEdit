@@ -27,22 +27,9 @@
 
 <form action="/order/result.htm" id="order_form" method="post">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-<c:forEach items="${pdtList}" var="pdt" varStatus="status">
-    <!-- 데이터 출력해보기 -->
-    상품가격: ${pdt.pdtAmount}<br>
-    할인가격: ${pdt.pdtDiscountAmount}<br>
-    수량: ${pdtCounts[status.index]}<br>
-
-</c:forEach>
-<c:forEach items="${pdtList}" var="pdt" varStatus="status">
-    <input type="hidden" name="pdtId[${status.index}]" value="${pdt.pdtId}">
-    <input type="hidden" name="pdtName[${status.index}]" value="${pdt.pdtName}">
-    <input type="hidden" name="pdtCount[${status.index}]" value="${pdtCounts[status.index]}">
-    <input type="hidden" name="pdtAmount[${status.index}]" value="${pdt.pdtAmount * pdtCounts[status.index]}">
-    <input type="hidden" name="pdtDcAmount[${status.index}]" value="${pdt.pdtDiscountAmount * pdtCounts[status.index]}">
-</c:forEach>
-<input type="hidden" name="pdtId" value="1"/>
-<input type="hidden" name="pdtCounts" value="2"/>
+	
+ <input type="hidden" id="pdtId"name="pdtId" value="${pdt.pdtId}"/>
+<input type="hidden" id="pdtCounts" name="pdtCount" value="${pdtCounts[status.index]}"/> 
     <div class="order-container" id="wrap"> <!--mCafe24Order-->
 
         <div class="first-container">  <!--billingNshipping-->
@@ -412,19 +399,19 @@
                     <c:set var="totalSum" value="0"></c:set>
                     <c:forEach items="${ pdtList }" var="pdt" varStatus="status">
                     
-         <div class="orderPrd">
+         <div class="orderPrd${pdt.pdtId}">
                         <div class="prdInfoBox">
                             <div class="thumbnail">
-                            <input type="hidden" id="pdtId" name="pdtId" value="${pdt.pdtId}">
+                            <input type="hidden" name="products[${status.index}].pdtId" value="${pdt.pdtId}" id="pdtId">
                                 <a href="#">
-                                    <img src="${ pdt.pdtImgUrl  }" alt="상품썸네일" width="90" height="90">
+                                    <img src="/resources/images/product_image/${pdt.pdtImgUrl}" alt="상품썸네일" width="90" height="90">
                                 </a>
                             </div>
                             <div class="description">
 
                                 <strong class="prdName" title="상품명">
                                     <a href="#">${pdt.pdtName}</a>
-                                    <input type="hidden" name="pdtName" value="${pdt.pdtName}">
+                                     <input type="hidden" name="products[${status.index}].pdtName" value="${pdt.pdtName}">
                                 </strong>
 
                                 <ul class="prdInfo">
@@ -434,40 +421,74 @@
                                     </li>
                                     <li>
                                         수량: ${pdtCounts[status.index]}개
-                                        <input type="hidden" id="pdtCounts" name="pdtCounts" value="${pdtCounts[status.index]}">
+                                         <input type="hidden" name="products[${status.index}].pdtCount" value="${pdtCounts[status.index]}" id="pdtCounts"> 
                                     </li>
                                     <li>
                                         할인금액: 
                                         <span class="wranTxt">
                                             -
                                             <span>
-                                            <fmt:formatNumber value="${(pdt.pdtAmount - pdt.pdtDiscountAmount) * pdtCounts[status.index]}"
-                                            type="number" pattern="#,##0" />
+                                            <fmt:formatNumber value="${(pdt.pdtAmount - pdt.pdtDiscountAmount) * pdtCounts[status.index]}" type="number" pattern="#,##0" />	
                                             </span>
                                         </span>
                                     </li>
                                 </ul>
 
                                 <div class="prdPrice">
-                                    <span><fmt:formatNumber value="${pdt.pdtDiscountAmount * pdtCounts[status.index]}" type="number" pattern="#,##0" /></span>
-                                    <input type="hidden" name="pdtDcAmount[${status.index}]" value="${pdt.pdtDiscountAmount * pdtCounts[status.index]}">
-                                    <!-- <span class="originPrice"> -->
-                                        <span><fmt:formatNumber value="${pdt.pdtAmount * pdtCounts[status.index]}" type="number" pattern="#,##0" />
-                                        <input type="hidden" name="pdtAmount[${status.index}]"value="${pdt.pdtAmount * pdtCounts[status.index]}">
-                                    </span>
-                                </div>
-                     <c:set var="discountSum" value="${ discountSum + ((pdt.pdtAmount -pdt.pdtDiscountAmount) * pdtCounts[status.index])}"></c:set>
-                     <c:set var="amountSum" value="${ amountSum + (pdt.pdtAmount * pdtCounts[status.index])}"></c:set>
+							    <span>
+							        <fmt:formatNumber value="${pdt.pdtDiscountAmount * pdtCounts[status.index]}" type="number" pattern="#,##0" />
+							    </span>
+							    <input type="hidden" name="products[${status.index}].pdtDiscountAmount" value="${pdt.pdtDiscountAmount * pdtCounts[status.index]}">
+							    <!-- <span class="originPrice"> -->
+							    <span>
+							        <fmt:formatNumber value="${pdt.pdtAmount * pdtCounts[status.index]}" type="number" pattern="#,##0" />
+							        <input type="hidden" name="products[${status.index}].pdtAmount" value="${pdt.pdtAmount * pdtCounts[status.index]}">
+							    </span>
+							</div>
+							<c:set var="discountSum" value="${discountSum + ((pdt.pdtAmount - pdt.pdtDiscountAmount) * pdtCounts[status.index])}" />
+							<c:set var="amountSum" value="${amountSum + (pdt.pdtAmount * pdtCounts[status.index])}" />
                             </div>
                             <!-- description -->
-                            <button type="button" class="btnRemove" id="btrRm">
+                            <button type="button" class="btnRemove"onclick="removeProduct(${pdt.pdtId})">
                                 <!-- 비포 애프터 각각 걸려서 X 표시 구현 -->
                                  삭제
                             </button>
-                            
+
                         </div>
                     </div>
 </c:forEach>
+
+
+
+                            <script>
+ 
+                            function removeProduct(pdtId) {
+  			  					if (confirm("선택하신 상품을 삭제하시겠습니까?")){
+                            		$(".orderPrd${pdt.pdtId}").remove();
+                            		let path = "/order/page.htm?";
+                            		const productInputs = document.querySelectorAll("input[name^='products'][name$='].pdtId']");
+                                    const countInputs = document.querySelectorAll("input[name^='products'][name$='].pdtCount']");
+                                    
+                                    for (let i = 0; i < productInputs.length; i++) {
+                                        const currentId = productInputs[i].value;
+                                        const currentCount = countInputs[i].value;
+                                        
+                                        // 값이 있는 경우에만 URL에 추가
+                                        if (currentId && currentId != pdtId) {
+                                            path += `pdtId=\${currentId}&pdtCounts=\${currentCount}&`;
+                                        }
+                                    }
+                                    
+                                    // 마지막 & 제거
+                                    if (path.endsWith('&')) {
+                                        path = path.slice(0, -1);
+                                    }
+                                    
+                                    console.log("최종 URL:", path);
+                                    location.href = path;
+                                }
+                            }
+   </script>
 
                 </div>
                 <!-- 상품 나열 끝  -->
@@ -1056,7 +1077,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-	alert("test");
     // JSP에서 userId 값을 JavaScript로 전달
     
    <% System.out.println("유저 아이디는@@@@@");%>
@@ -1083,5 +1103,26 @@ document.addEventListener('DOMContentLoaded', function () {
    	 $("#order_form").submit();
    	});
 });
+
 </script>
+<script>
+$(document).ready(function() {
+    $('#preaddr').click(function(event) {
+        event.preventDefault();
+        $('#addrinput1').addClass('selected');
+        $('#addrinput2').removeClass('selected');
+        $('#recent-addr-info').show();
+        $('#selfInputAddr-form').hide();
+    });
+
+    $('#selfaddr').click(function(event) {
+        event.preventDefault();
+        $('#addrinput2').addClass('selected');
+        $('#addrinput1').removeClass('selected');
+        $('#recent-addr-info').hide();
+        $('#selfInputAddr-form').show();
+    });
+});
+</script>
+
 </html>

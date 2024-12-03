@@ -20,7 +20,7 @@ function myAddrUpdate() {
 	
 	if( allinputCk() ) {
 		
-	alert("배송지 등록되었습니다")
+	alert("배송지가 등록되었습니다.")
 	$("#frmAddr").submit();
 		
 	} else {

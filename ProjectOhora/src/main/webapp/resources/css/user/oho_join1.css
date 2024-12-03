@@ -200,7 +200,7 @@ body input[type="password"] {
     margin: 0;
     position: absolute;
 
-    top: 48%;
+    top: 32%;
     transform: translateY(-10%);
 }
 

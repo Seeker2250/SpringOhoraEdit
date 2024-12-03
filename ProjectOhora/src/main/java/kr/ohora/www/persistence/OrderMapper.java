@@ -25,7 +25,7 @@ public interface OrderMapper {
 	 * <!-- 구매
 	 */
 	int insertOrderDetail(
-			OrderDTO order
+			ProductDTO order
     );//주문 상세를 orddetail에 넣어
 	
 	int deleteCart(

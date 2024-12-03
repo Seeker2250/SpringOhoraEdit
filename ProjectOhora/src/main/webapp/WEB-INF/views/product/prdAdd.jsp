@@ -10,9 +10,9 @@
 </head>
 <body>
 
-	<%-- <form action="/prdAddDone.htm?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data"> --%>
-	<form action="" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	<form action="/prdAdd.htm?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+	<!-- <form action="" method="post" enctype="multipart/form-data"> -->
+		<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
 		
 	    <table border="1" style="border-collapse: collapse; width: 50%; margin: auto;">
 	        <thead>
@@ -24,7 +24,7 @@
 	            <tr>
 	                <td style="padding: 10px; text-align: right;">상품명:</td>
 	                <td style="padding: 10px;">
-	                    <input type="text" id="pdtName" name="pdtName" required style="width: 100%;" value="뽀롱뽀롱">
+	                    <input type="text" id="pdtName" name="pdtName" required style="width: 100%;">
 	                </td>
 	            </tr>
 	            <tr>
@@ -41,19 +41,19 @@
 	            <tr>
 	                <td style="padding: 10px; text-align: right;">상품 가격:</td>
 	                <td style="padding: 10px;">
-	                    <input type="number" id="pdtAmount" name="pdtAmount" style="width: 100%;" value="5000">
+	                    <input type="number" id="pdtAmount" name="pdtAmount" style="width: 100%;">
 	                </td>
 	            </tr>
 	            <tr>
 	                <td style="padding: 10px; text-align: right;">할인율:</td>
 	                <td style="padding: 10px;">
-	                    <input type="number" id="pdtDiscountRate" name="pdtDiscountRate" style="width: 100%;" value="10">
+	                    <input type="number" id="pdtDiscountRate" name="pdtDiscountRate" style="width: 100%;">
 	                </td>
 	            </tr>
 	            <tr>
 	                <td style="padding: 10px; text-align: right;">재고량:</td>
 	                <td style="padding: 10px;">
-	                    <input type="number" id="pdtCount" name="pdtCount" style="width: 100%;" value="50">
+	                    <input type="number" id="pdtCount" name="pdtCount" style="width: 100%;">
 	                </td>
 	            </tr>
 	            <tr>

@@ -15,7 +15,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google" content="notranslate">
-<script src="oho_join.js"></script>
 <style>
 span.material-symbols-outlined {
 	vertical-align: text-bottom;
@@ -27,8 +26,7 @@ span.material-symbols-outlined {
 		<div id="memberJoin-container-contents">
 			<div class="table-container">
 				<div class="layout-fix">
-					<form action="" id="joinForm"
-						name="joinForm" method="post" target="_self">
+					<form action="/join2.htm" id="joinForm" name="joinForm" method="post" target="_self">
 						<!-- 대량의 hidden 인풋으로 email-auth-use 같은 것들을 가져가는데 일단 생략 중복 체크하나? -->
 						<div class="memberJoin-wrap">
 
@@ -2282,7 +2280,7 @@ span.material-symbols-outlined {
 											<p>선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지
 												수신여부를 변경하실 수 있습니다.</p>
 										</div>
-										<ul class="check-list">
+										<ul class="check-list"  style="padding-top: 20px">
 											<li><span>SMS, 카카오톡 수신동의</span> <input type="checkbox"
 												id="smsAgree" name="userSmsAgree" class="termCK"
 												onclick="updateSelectAll()" value="Y"> 
@@ -4340,11 +4338,12 @@ span.material-symbols-outlined {
 												<tr class="checked-vali">
 													<th scope="row"><span class="SP_th_Title">아이디</span> <span
 														class="SP_required">*</span></th>
-													<td><input type="text" id="user_login_id" value="Spring1234" data-checked="false"
+													<td><input type="text" id="user_login_id" value="spring1234" data-checked="false"
 														name="userLoginId"
 														style="max-width: calc(100% - 130px); height: 50px !important; line-height: 50px; width: 100% !important; margin: 0 !important; font-size: 16px; border: 1px solid #bababa;">
-														<button type="button" onclick="info_jungbok( 'userLoginId' , 'idMsg' )"
-															style="padding: 0; width: 120px; text-align: center; height: 50px; line-height: 48px; background: #fff; font-size: 17px; margin-left: 10px; display: inline-block; box-sizing: border-box; border: 1px solid #000; font-weight: normal; text-decoration: none; vertical-align: middle; word-spacing: -0.5px; white-space: nowrap; color: #222;">중복
+														<button type="button" onclick="info_jungbok( 'user_login_id' , 'idMsg' )"
+															style="padding: 0; width: 120px; text-align: center; height: 50px; line-height: 48px; background: #fff; font-size: 17px; margin-left: 10px; display: inline-block; box-sizing: border-box; border: 1px solid #000; font-weight: normal; text-decoration: none; vertical-align: middle; word-spacing: -0.5px; white-space: nowrap; color: #222;">
+															중복
 															확인</button> <!-- 중복확인 -> 온클릭 함수 --> <span id="idMsg"
 														class="txtOK"></span> <!-- 중복 검사 완료시 뜨는 메시지 error뜨면 해당 상황에 맞게 오류메시지 뜸-->
 
@@ -4382,7 +4381,7 @@ span.material-symbols-outlined {
 													<th scope="row"><span class="SP_th_Title">이메일</span> <span
 														class="SP_required">*</span></th>
 													<td><input type="text" id="email" name="userEmail" value="asd@naver.com" data-checked="false">
-														<button type="button" onclick="info_jungbok( 'userEmail' , 'emailMsg' )" >중복
+														<button type="button" onclick="info_jungbok( 'email' , 'emailMsg' )" >중복
 															확인</button> <!-- 중복확인은 온클릭 함수 -->
 														<p id="emailMsg" class="Dupl">사용 가능한 이메일입니다.</p> <!-- 클래스 error 뜨면서 유효성 검사함 -->
 													</td>
@@ -4391,11 +4390,11 @@ span.material-symbols-outlined {
 												<tr class="checked-vali">
 													<th scope="row"><span class="SP_th_Title">휴대폰</span> <span
 														class="SP_required">*</span></th>
-													<td><input type="text" id="phone" name="userTel" value="01022223333" data-checked="false">
-														<button type="button" onclick="info_jungbok('userTel' , 'phoneMsg' )">휴대폰
+													<td><input type="text" id="phone" name="userTel" value="010-4321-4321" data-checked="false">
+														<button type="button" onclick="info_jungbok('phone' , 'phoneMsg' )">휴대폰
 															인증</button> <!-- 폰인증은 온클릭 함수 - 그냥 중복검사 정도하자-->
-														<div class="phoneMsg"></div></td>
-
+														<div class="phoneMsg"></div>
+													</td>
 												</tr>
 
 
@@ -4456,7 +4455,7 @@ span.material-symbols-outlined {
 
 <%-- <script src="/projectOhora/resources/js/oho-signUpForm.js?v=<%=System.currentTimeMillis() %>"> </script>  --%>
 
-<script>
+<script type="text/javascript">
 function pwdError() {
     let pwdAlert = $(".pwGuide");
     pwdAlert.text("");
@@ -4610,7 +4609,6 @@ function updateSelectAll() {
 
 function copy_join_btn(event) {
 
-	/*
 	if( $("#email").attr('data-checked')=="false"  ) {
 		alert("이메일 중복체크하세요")
 		return;
@@ -4623,8 +4621,6 @@ function copy_join_btn(event) {
 		alert("아이디 중복체크하세요")
 		return;
 	}
-	*/
-	
 	let email = $("#email").val();
     let emailAlert = $("#emailMsg");
     if (!email) {
@@ -4702,7 +4698,7 @@ function copy_join_btn(event) {
 		} else {alert("필수 항목을 입력하세요") 
 					return;}
 		
-	if( userbirthyO >= 1900 && userbirthmO>=1 && userbirthmO<=12 &&  userbirthdO>=1 && userbirthdO<=31 ) {
+	if( userbirthyO >= 1950 && userbirthmO>=1 && userbirthmO<=12 &&  userbirthdO>=1 && userbirthdO<=31 ) {
 		//alert("생일 입력 완료")	
 	} else {alert("유효한 생일 형식이 아닙니다") 
 				return;}
@@ -4770,7 +4766,7 @@ $('#phone').on('focus', function() {
 
 
 // 중복 체크
-/*
+
 function info_jungbok( id, msg ) {
 		//$("#pwGuide").removeClass("error");
 
@@ -4782,9 +4778,6 @@ function info_jungbok( id, msg ) {
 			//폰도 있어야댐
 		//alert(pwvalue)
 		//alert(isValidPasswd(pwvalue))
-		
-		
-
 if(isValidId(idvalue)) {
 		
 		if(isValidPasswd(passwd)){
@@ -4800,7 +4793,7 @@ if(isValidId(idvalue)) {
 				//alert( msgTag )
 			     
 				 $.ajax({
-					 url:"/projectOhora/board/idcheck.ajax" , 
+					 url:"/ajax/jungbokCK.ajax" , 
 					 dataType:"json",
 					 type:"GET",
 					 data: { msgTag : msgTag , val : value },
@@ -4810,34 +4803,34 @@ if(isValidId(idvalue)) {
 	                // textSatus
 					 success: function ( data,  textStatus, jqXHR ){
 						 // { "result":"true" }			
-						if ( data.result == true && msgTag=="idMsg" ) {
+						if ( data > 0 && msgTag=="idMsg" ) {
 							//alert( data.result );	
 							//$("#idMsg").addClass("Dupl")
 							idMsg();
-						} else if( data.result == false && msgTag=="idMsg" ) {
+						} else if( data == 0 && msgTag=="idMsg" ) {
 							//중복 아닐떄
 							$("#user_login_id").attr('data-checked', true)
 							$("#idMsg").text("사용 가능한 아이디입니다.")
 						}
 						
-						 else if( data.result == true && msgTag=="emailMsg" ){
+						 else if( data > 0 && msgTag=="emailMsg" ){
 							//$("#emailMsg").addClass("Dupl")
 							emailMsg();
 							//alert( data.result );	
 						} 
-						 else if( data.result == false && msgTag=="emailMsg" ){
+						 else if( data == 0 && msgTag=="emailMsg" ){
 							//중복 아닐떄
 							$("#email").attr('data-checked', true)
 							$("#emailMsg").text("사용 가능한 이메일입니다")
 						} 
 						
 						
-						else if( data.result == true && msgTag=="phoneMsg" ){
+						else if( data > 0 && msgTag=="phoneMsg" ){
 							//$(".phoneMsg").addClass("Dupl")
 							phoneMsg();
 							//alert( data.result );	
 						}
-						 else if( data.result == false && msgTag=="phoneMsg" ){
+						 else if( data == 0 && msgTag=="phoneMsg" ){
 							$("#phone").attr("data-checked", true)
 							$(".phoneMsg").text("사용 가능한 번호입니다.")
 						} 
@@ -4864,10 +4857,8 @@ if(isValidId(idvalue)) {
 		
 		
 	}
-*/
-
-
-
+		
+		
 //info_ jungbok
 
 
@@ -4884,7 +4875,6 @@ $('#email').on('input', function() {
 $('#phone').on('input', function() {
         $('#phone').attr('data-checked', 'false');
     });
-    
 </script>
 
 </html>

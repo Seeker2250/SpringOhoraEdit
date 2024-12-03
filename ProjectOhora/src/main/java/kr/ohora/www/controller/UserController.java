@@ -2,6 +2,8 @@ package kr.ohora.www.controller;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,10 +36,6 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@GetMapping("/login.htm")
-	public String goLogin() {
-		return "user.oho_login";
-	}
 
 	// 관리자 페이지 요청
 	@GetMapping("/auth.htm")
@@ -118,66 +116,194 @@ public class UserController {
 	}
 
 	// orderDetail select
-	// ordPk=${orderDetail.ordPk}&opdtName=${orderDetail.opdtName}&opdtId=${orderDetail.opdtId}"
-	@GetMapping("/user/orderDetail.htm")
-	public String orderDetail(Principal principal, Model model
-			, @RequestParam("ordPk") int ordPk
-			, @RequestParam("opdtName") String opdtName
-			, @RequestParam("opdtId") int opdtId) {
-		CustomerUser customUser = (CustomerUser) ((Authentication) principal).getPrincipal();
-		log.info("userId : " + customUser.getUser().getUserId());
-		int userId = customUser.getUser().getUserId();
-		log.info("@@@@@@@@@@@@@@@@@@@@@@@@" + ordPk + opdtName + opdtId);
-		// topList
-		List<OrderDetailDTO> topList = null;
-		topList = this.userService.topList(userId, ordPk);
-		model.addAttribute("topList", topList);
-		// orderList
-		List<OrderDetailDTO> orderList = null;
-		orderList = this.userService.orderList(userId, opdtId);
-		model.addAttribute("orderList", orderList);
-		// orderList2
-		List<OrderDetailDTO> orderList2 = null;
-		orderList2 = this.userService.orderList2(opdtName);
-		model.addAttribute("orderList2", orderList2);
-		// addrList
-		List<OrderDetailDTO> addrList = null;
-		addrList = this.userService.addrList(userId);
-		model.addAttribute("addrList", addrList);
-		return "user.oho_orderDetail";
-	}
+		// ordPk=${orderDetail.ordPk}&opdtName=${orderDetail.opdtName}&opdtId=${orderDetail.opdtId}"
+		@GetMapping("/user/orderDetail.htm")
+		public String orderDetail(Principal principal, Model model
+				, @RequestParam("ordPk") int ordPk
+				, @RequestParam("opdtName") String opdtName
+				, @RequestParam("opdtId") int opdtId) {
+			CustomerUser customUser = (CustomerUser) ((Authentication) principal).getPrincipal();
+			log.info("userId : " + customUser.getUser().getUserId());
+			int userId = customUser.getUser().getUserId();
+			log.info("@@@@@@@@@@@@@@@@@@@@@@@@" + ordPk + opdtName + opdtId);
+			//리뷰 썼는지 여부 CHECK
+			int rvck = this.userService.rvck(opdtId);
+			model.addAttribute("rvck" , rvck);
+			//opdtId
+			model.addAttribute("opdtId", opdtId);
+			model.addAttribute("ordPk", ordPk);
+			// topList
+			List<OrderDetailDTO> topList = null;
+			topList = this.userService.topList(userId, ordPk);
+			model.addAttribute("topList", topList);
+			// orderList
+			List<OrderDetailDTO> orderList = null;
+			orderList = this.userService.orderList(userId, opdtId);
+			model.addAttribute("orderList", orderList);
+			// orderList2
+			List<OrderDetailDTO> orderList2 = null;
+			orderList2 = this.userService.orderList2(opdtName);
+			model.addAttribute("orderList2", orderList2);
+			// addrList
+			List<OrderDetailDTO> addrList = null;
+			addrList = this.userService.addrList(userId);
+			model.addAttribute("addrList", addrList);
+			return "user.oho_orderDetail";
+		}
 
+
+	// 로그인 창
+	@GetMapping("/login.htm")
+	public String goLogin() {
+		return "user.oho_login";
+	}
+	
 	// 회원가입 창 /user/join.htm -> /user/oho_join.jsp
-	@GetMapping("/join.htm")
-	public String join() {
-		log.info("JoinController test");
-		return "user.oho_join";
-	}
+	   @GetMapping("/goJoin1.htm")
+	    public String join() {
+	       log.info("test");
+	        return "user.oho_join1"; // 일단 로그인으로 수정함
+	    }
+	   
+	   // 회원가입 창 /user/join.htm + POST  -> oho_join2 회원가입 완료 페이지로 응답
+	    @PostMapping("/join2.htm")
+	      public String join( Model model, UserDTO dto, @RequestParam("birth-year") String bYear,
+	    		  @RequestParam("birth-month") String bMonth, @RequestParam("birth-day") String bDay ) 
+	    		 throws Exception{
+	       log.info("test1");
+	       
+	       String StrbirthDay = bYear + "-" + bMonth + "-" + bDay; 
+		    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		    Date userBirth = format.parse(StrbirthDay);
+	       
+		    dto.setUserBirth(userBirth);
+		    
+	       String encryptedPassword = passwordEncoder.encode(dto.getUserPassword());
+	       dto.setUserPassword(encryptedPassword); 
+	       log.info("@@@@@@@@@@@@@" + encryptedPassword);
+	       
+	         Integer successJoin = this.userService.join(dto);
+	         
+	         if (successJoin > 0) {
+	            model.addAttribute("user", dto); 
+	            return "user.oho_join2";
+	         } else {
+	            return "redirect:/goJoin1.htm?fail=true";
+	         } // if else
+	      } // join
+	    
+	    
+	    
+	    
+	    
+	    // 아이디 찾기 창 /user/findId.htm -> /user/oho_findId1.jsp
+	    @GetMapping("/goFindId1.htm")
+	     public String findId() {
+	        log.info("test");
+	         return "user.oho_findId1"; // 일단 로그인으로 수정함
+	     }
+	    
+	    // 아이디 찾기 창 /user/findId.htm + POST  -> oho_findId2.jsp 회원가입 완료 페이지로 응답
+	    @PostMapping("/findId2.htm")
+	      public String findId( Model model, UserDTO dto) throws Exception{
+	       log.info("test");
+	       
+	       UserDTO findId = this.userService.findUser(dto);
+	       
+	         if (findId != null) {
+	            model.addAttribute("user", findId); 
+	            return "user.oho_findId2";
+	         } else {
+	            return "redirect:/goFindId1.htm?fail=true";
+	         } // if else
+	      } // join
+	    
+	    
+	    
+	    
+	    
+	    // 비밀번호 찾기 창 /user/findPwd.htm -> /user/oho_findPwd1.jsp
+	    @GetMapping("/goPasswd1.htm")
+	     public String findPwd() {
+	        log.info("test");
+	         return "user.oho_findPwd1"; 
+	     }
+	    
+	    
+	    // 본인확인
+	    @PostMapping("/findPwd2.htm")
+	    public String findPwd(Model model, UserDTO dto, @RequestParam("contact_method") String contactMethod) throws Exception {
+	        log.info("Selected contact method: " + contactMethod);
 
+	        UserDTO findPwd = this.userService.findPwd(dto);
+	        
+	        if (findPwd != null) {
+	        	model.addAttribute("userID", findPwd);  // 유저 정보 전달
+	        	 log.info("Selected contact method: @@@@@" + dto.getUserLoginId());
+	        	if ("email".equals(contactMethod)) {
+	                model.addAttribute("contactMethod", "email");
+	                log.info("Selected contact method: @@@@@" + dto.getUserEmail());
+	                model.addAttribute("email", dto.getUserEmail()); // 이메일 정보 전달
+	                model.addAttribute("userID", dto.getUserLoginId());
+	                return "user.oho_findPwd2";
+	            } else if ("phone".equals(contactMethod)) {
+	                model.addAttribute("contactMethod", "phone");
+	                log.info("Selected contact method: @@@@@" + dto.getUserTel());
+	                model.addAttribute("phone", dto.getUserTel()); // 전화번호 정보 전달
+	                model.addAttribute("userID", dto.getUserLoginId());
+	                return "user.oho_findPwd2";
+	            }
+	        	
+	        } else {
+	        	return "redirect:/goPasswd1.htm?fail=true";
+	        }
+	        
+	        return "";
 
-	// 회원가입 창 /user/join.htm + POST  -> home2 응답
-	@PostMapping("/join.htm")
-	public String join( Model model, UserDTO dto) throws Exception{
-		log.info("JoinController test1");
+	    }
 
-		String encryptedPassword = passwordEncoder.encode(dto.getUserPassword());
-		dto.setUserPassword(encryptedPassword); 
-		log.info("@@@@@@@@@@@@@" + encryptedPassword);
-
-		log.info("JoinController test2");
-		Integer successJoin = this.userService.join(dto);
-		log.info("JoinController test3");
-		if (successJoin  > 0) {
-		} // if
-		if (successJoin > 0) {
-			model.addAttribute("successJoin", successJoin);
-			return "user.oho_joinOk";
-		} else {
-			return "user.oho_joinError";
-		} // if else
-	} // join
-
-
+	    
+	    
+	    // 비밀번호 변경 창 
+	    @PostMapping("/findPwd3.htm")
+	    public String changePwd(Model model, UserDTO dto, @RequestParam("userID") String userID) throws Exception{
+	       log.info("findPwd33333333Controller test");
+	       log.info("@@@@@@@@@@@@@@"+userID);
+	       model.addAttribute("userID", userID);
+	       return "user.oho_findPwd3";
+	    }
+	  
+	    
+	    
+	    // 비밀번호 변경
+	    @PostMapping("/findPwd4.htm")
+	    public String changePwd(Model model, @RequestParam("userID") String userID, 
+	                            @RequestParam("new_password") String newPassword, 
+	                            @RequestParam("confirm_password") String confirmPassword) throws Exception {
+	        
+	        log.info("Password change request for UserID: " + userID);
+	        
+	        // 비밀번호 암호화 (비밀번호를 평문으로 저장하지 않도록 암호화)
+	        String encryptedPassword = passwordEncoder.encode(newPassword);
+	        
+	        // 비밀번호 변경 서비스 호출 (UserService)
+	        UserDTO dto = new UserDTO();
+	        dto.setUserLoginId(userID);
+	        dto.setUserPassword(encryptedPassword);
+	        log.info("Password change request for UserID: " + userID);
+	        log.info("Password change request for UserID: " + encryptedPassword);
+	        
+	        Integer successChange = userService.changePwd(dto);
+	        
+	        log.info("Password change request for UserID: " + dto);
+	        
+	        // 비밀번호 변경 성공 여부 체크
+	        if (successChange > 0) {     
+	            return "redirect:/login.htm?change=success";  // 로그인 페이지로 리디렉션
+	        } else {
+	            return "redirect:/login.htm?change=fail";  // 에러 메시지와 함께 다시 비밀번호 변경 페이지를 반환
+	        }
+	    }
 	
 	
 	

@@ -5,6 +5,26 @@
   
 <mapper namespace="kr.ohora.www.persistence.UserCartMapper">
   
+  <!-- 회원 상세 페이지 장바구니 담기 check -->
+  <select id="addBtnCheck" resultType="Integer">
+  	SELECT clist_pdt_count as clistPdtCount
+  	FROM o_cartlist
+  	WHERE user_id = #{userId} AND pdt_id = #{pdtId}
+  </select>
+  
+  <!-- 회원 상세 페이지 장바구니 담기 insert -->
+  <insert id="addBtnInsert">
+  	INSERT INTO o_cartlist (clist_id, user_id, pdt_id, opt_id, clist_pdt_count, clist_adddate, clist_select)
+  	VALUES (o_addcart_seq.NEXTVAL, #{userId}, #{pdtId}, 0, #{pdtCount}, SYSDATE, 'Y')
+  </insert>
+  
+  <!-- 회원 상세 페이지 장바구니 담기 update -->
+  <update id="addBtnUpdate">
+  	UPDATE o_cartlist
+  	SET clist_pdt_count = clist_pdt_count + #{pdtCount}
+  	WHERE user_id = #{userId} AND pdt_id = #{pdtId}
+  </update>
+  
   <!-- 회원 장바구니 select -->
   <select id="UserCartSelect" resultType="kr.ohora.www.domain.UserCartDTO">
   	SELECT b.pdt_name, b.pdt_amount, a.clist_pdt_count, a.clist_select, a.pdt_id,

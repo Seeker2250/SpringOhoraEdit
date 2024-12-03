@@ -40,32 +40,97 @@
 	<!-- 로그인 시큐리티 끝 -->
 
 	<!-- 회원가입 -->
-	<!-- INSERT INTO o_user ( user_id, mem_id, auth_id, user_login_id, user_password, 
-		user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, 
-		user_emailagree ) VALUES ( O_USER_SEQ.NEXTVAL , ? , ? , ? , ? , ?, ? , ?, 
-		? ,? ,? ,? ,? ) -->
+   <insert id="join">
+   <!--
+   <selectKey keyProperty="userId" resultType="int" order="AFTER">
+        SELECT O_USER_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    -->
+    INSERT INTO o_user
+    (user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email, user_tel, user_birth, user_point, user_smsagree, user_joindate, user_emailagree)
+    VALUES (O_USER_SEQ.NEXTVAL, 1, 2, #{userLoginId}, #{userPassword}, #{userName}, #{userEmail}, #{userTel}, 
+   <!-- userBirth가 null이면 NULL 삽입 -->
+     <if test="userBirth != null">
+        #{userBirth}
+     </if>
+     <if test="userBirth == null">
+        NULL
+     </if>,
+    #{userPoint}, #{userSmsAgree}, 
+    SYSDATE,
+       #{userEmailAgree})
+  </insert>
 
-	<insert id="join">
-		<!-- <selectKey keyProperty="userId" resultType="int" order="AFTER"> SELECT 
-			O_USER_SEQ.NEXTVAL FROM DUAL </selectKey> -->
-		INSERT INTO o_user
-		(user_id, mem_id, auth_id, user_login_id, user_password, user_name, user_email,
-		user_tel, user_birth, user_point, user_smsagree, user_joindate,
-		user_emailagree)
-		VALUES (O_USER_SEQ.NEXTVAL, 1, 2, #{userLoginId}, #{userPassword},
-		#{userName}, #{userEmail}, #{userTel},
-		<!-- userBirth가 null이면 NULL 삽입 -->
-		<if test="userBirth != null">
-			#{userBirth}
-		</if>
-		<if test="userBirth == null">
-			NULL
-		</if>
-		,
-		#{userPoint}, #{userSmsAgree},
-		SYSDATE,
-		#{userEmailAgree})
-	</insert>
+ 
+  <!-- 중복검사 -->
+  <select id="jungbokCK" resultType="Integer">
+        SELECT COUNT (user_id) as userId
+        FROM o_user
+         WHERE 
+	    <choose>
+	        <when test="userLoginId != null">
+	            user_login_id = #{userLoginId}
+	        </when>
+	        <when test="userTel != null">
+	            user_tel = #{userTel}
+	        </when>
+	        <when test="userEmail != null">
+	            user_email = #{userEmail}
+	        </when>
+	    </choose>
+	</select>
+
+  
+  <!-- 아이디 찾기 -->
+   <select id="findUser" resultType="kr.ohora.www.domain.UserDTO">
+        SELECT user_login_id as userLoginId, 
+        			user_name as userName, 
+        <choose>
+            <when test="userTel == null or userTel == ''">
+                user_email as userEmail
+            </when>
+            <otherwise>
+                user_tel as userTel
+            </otherwise>
+        </choose>
+        FROM o_user
+        WHERE user_name = #{userName}
+        <choose>
+            <when test="userTel == null or userTel == ''">
+                AND user_email = #{userEmail}
+            </when>
+            <otherwise>
+                AND user_tel = #{userTel}
+            </otherwise>
+        </choose>
+    </select>
+  
+  
+  
+  
+    <!-- 비밀번호 찾기 -->
+    <select id="findPwd" resultType="kr.ohora.www.domain.UserDTO">
+    SELECT user_password as userPassword
+    FROM o_user
+    WHERE user_login_id = #{userLoginId}
+      AND user_name = #{userName}
+		<if test="userEmail != null and userEmail != ''">
+      AND user_email = #{userEmail}
+	  </if>
+	  <if test="(userEmail == null or userEmail == '') and userTel != null and userTel != ''">
+	      AND user_tel = #{userTel}
+	  </if>
+
+	</select>
+    
+   
+   <!-- 비밀번호 변경 -->
+   <update id="changePwd">
+	  update o_user 
+	  set user_password = #{userPassword}
+	  where user_login_id = #{userLoginId}
+	</update>
+  
 
 
 	<!-- 회원 장바구니 수 -->
@@ -193,6 +258,12 @@
 		VALUES ( o_addr_seq.nextval , #{userId}, #{locationName}, #{receiverName},
 		'' , #{mobile}, #{addr1}, #{addr2}, #{zipCode}, 'N')
 	</insert>
-
+	
+	<!-- 리뷰 썼는지 체크 (준용) -->
+	<select id="rvCheck" resultType="Integer">
+		select COUNT(rev_id)
+		from o_review
+		where opdt_id = #{opdtId}
+	</select>
 
 </mapper>

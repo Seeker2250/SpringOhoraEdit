@@ -6,14 +6,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.ohora.www.domain.review.CommentDTO;
 import kr.ohora.www.domain.review.RevMedia;
 import kr.ohora.www.domain.review.ReviewDTO;
 import kr.ohora.www.domain.review.ReviewRating;
+import kr.ohora.www.domain.review.WritingReviewDTO;
 import kr.ohora.www.persistence.ReviewMapper; 
 
 public interface ReviewService {
@@ -49,7 +53,11 @@ public interface ReviewService {
 	int allRevCnt(int pdtId) throws SQLException;
 
 	//리뷰작성
-	void reviewWrite(String ordNo);
+	int reviewWrite(WritingReviewDTO rvm);
+
+	//리뷰 삭제
+	int deleteReview(int opdtId);
+
 	
 }
 

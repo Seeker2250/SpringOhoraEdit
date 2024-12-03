@@ -1,6 +1,7 @@
 package kr.ohora.www.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,45 @@ public class UserCartServiceImpl implements UserCartService{
 		log.info("userCartAddCartCountUp test");
 		return this.userCartMapper.userCartAddCartCountUp(userId, pdtId);
 	}
+	
+		// 회원 상세 페이지 장바구니 담기
+		@Override
+		public Integer addCartBtn(int userId, List<Integer> pdtId, List<Integer> pdtCount) {
+		    log.info("addCartBtn test");
+
+		    // 빈 리스트로 초기화
+		    List<Integer> AllCheck = new ArrayList<>();
+		    
+		    // 각 제품 ID와 수량에 대해 처리
+		    for (int i = 0; i < pdtId.size(); i++) {
+		        Integer pdtId1 = pdtId.get(i);
+		        Integer pdtCount1 = pdtCount.get(i);
+
+		        // 장바구니에 해당 제품이 있는지 확인
+		        Integer check = this.userCartMapper.addBtnCheck(userId, pdtId1);
+		        AllCheck.add(check != null ? check : 0); // null을 0으로 대체
+
+		        log.info("@@@@@@@@@@@@@@@@@@@@ AllCheck: " + AllCheck);
+		    }
+
+		    int totalRowCount = 0;  // 전체 인서트된 수를 추적하는 변수
+		    
+		    // AllCheck 리스트를 순회하면서 처리
+		    for (int i = 0; i < AllCheck.size(); i++) {
+		        if (AllCheck.get(i) == 0) {
+		            // 장바구니에 없는 경우, 새로운 제품을 추가
+		            Integer rowCount = this.userCartMapper.addBtnInsert(userId, pdtId.get(i), pdtCount.get(i));
+		            if (rowCount == 1) {
+		                totalRowCount += 1;  // 성공적으로 추가된 인서트 수를 누적
+		            }
+		        } else {
+		            // 장바구니에 이미 있는 경우, 수량을 업데이트
+		            this.userCartMapper.addBtnUpdate(userId, pdtId.get(i), pdtCount.get(i));
+		        }
+		    }
+
+		    // 하나 이상의 인서트가 되었으면 누적된 totalRowCount 반환
+		    return totalRowCount > 0 ? totalRowCount : null;  // 0이면 null을 반환 (업데이트만 한 경우)
+		}
 	
 } // class

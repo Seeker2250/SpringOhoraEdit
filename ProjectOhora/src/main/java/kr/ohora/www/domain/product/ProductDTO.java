@@ -17,14 +17,14 @@ import lombok.NoArgsConstructor;
 @Component
 public class ProductDTO {
 
-	private int pdtId; // Integer로 변경 -> 기본값 null
+	private Integer pdtId; // Integer로 변경 -> 기본값 null
     private String pdtName; // 필수 입력 필드
     private Integer pdtAmount; // Integer로 변경 -> 기본값 null
-    private int pdtDiscountRate; // Integer로 변경 -> 기본값 null
+    private int pdtDiscountRate; 
     private String pdtImgUrl = ""; // 빈 문자열 유지
     private String pdtImgUrl2 = ""; // 빈 문자열 유지
-    private int pdtReviewCount; // Integer로 변경 -> 기본값 null
-    private int pdtSalesCount; // Integer로 변경 -> 기본값 null
+    private int pdtReviewCount; 
+    private int pdtSalesCount; 
     private Integer catId; // Integer로 변경 -> 기본값 null
     private String pdtDescription = ""; // 빈 문자열 유지
     private Integer pdtDiscountAmount; // Integer로 변경 -> 기본값 null
@@ -37,8 +37,9 @@ public class ProductDTO {
     }
 
     private Integer scatId; // Integer로 변경 -> 기본값 null
+    private Long ordPk;// pk 넣어
     private Integer pdtNumber; // Integer로 변경 -> 기본값 null
-    private Integer pdtCount; // Integer로 변경 -> 기본값 null
+    private int pdtCount; 
 
     private Date pdtAdddate = new Date(); // 기본값 현재 날짜
 
@@ -52,5 +53,8 @@ public class ProductDTO {
     
     //private CommonsMultipartFile file1; // 이미지 파일1
     //private CommonsMultipartFile file2; // 이미지 파일2
-
+    
+    public int getProductId() {
+        return this.pdtId;
+    }
 }
